@@ -1,5 +1,5 @@
 {
-    "name": "crs/frameworc-plugin",
+    "name": "crs-company/frameworc-plugin",
     "type": "october-plugin",
     "description": "An opinionated website builder for OctoberCMS",
     "license": "MIT",
