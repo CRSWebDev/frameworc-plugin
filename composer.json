@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "composer/installers": "~1.0",
-        "crs/frameworc-theme": "~0.1",
+        "crs-company/frameworc-theme": "~0.1",
         "october/rain": "~v3.4.14"
     }
 }
