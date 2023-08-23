@@ -2,6 +2,7 @@
     "name": "crs/frameworc-plugin",
     "type": "october-plugin",
     "description": "An opinionated website builder for OctoberCMS",
+    "license": "MIT",
     "require": {
         "composer/installers": "~1.0",
         "crs/frameworc-theme": "~0.1",
