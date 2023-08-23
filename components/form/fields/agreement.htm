@@ -1,0 +1,13 @@
+<div class="Form-moreInfo" id="more-{{ field.fieldId }}">{{ field.text | content }}</div>
+
+<div class="Form-fields">
+    <label class="Form-checkboxWrapper">
+        <input class="Form-field Form-field--checkbox" type="checkbox" name="{{ field.name }}" id="{{ field.fieldId }}" value="Ano">
+        <span class="Form-checkbox">
+            <svg class="Form-checkboxIcon" viewBox="0 0 24 24">
+                <path d="M9.5 16.17l-3.59-3.59L4 14l5 5 10-10-1.41-1.42L9.5 16.17z"></path>
+            </svg>
+        </span>
+        <span class="">{{ field.label }} <a href="#more-{{ field.fieldId }}" class="Form-moreInfoLink">Více informací</a></span>
+    </label>
+</div>

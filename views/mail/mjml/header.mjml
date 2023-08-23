@@ -1,0 +1,9 @@
+<mj-section>
+
+  <mj-column>
+    <mj-text>
+      <h2>{{ header }}</h2>
+    </mj-text>
+  </mj-column>
+
+</mj-section>

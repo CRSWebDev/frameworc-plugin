@@ -1,0 +1,60 @@
+@import "./variables.scss";
+
+body, html {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-bg-base);
+}
+
+body {
+    padding-top: var(--spacing-navbar);
+}
+
+a {
+    color: var(--color-primary);
+
+    &:hover, &:focus, &:active {
+        color: var(--color-primary-accent);
+    }
+}
+
+img {
+    max-width: 100%;
+    border-radius: var(--border-radius-img);
+    box-shadow: var(--shadow-base);
+
+    &.no-shadow {
+        box-shadow: none;
+    }
+}
+
+iframe {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+}
+
+.oc-progress-bar {
+    z-index: 9999;
+}
+
+.Body--transparentNav {
+    padding-top: 0;
+}
+
+//#fwc-main-content {
+//    transform: translateY(20px);
+//    opacity: 0;
+//    transition: transform ease .3s, opacity ease .3s;
+//
+//    &.isLoaded {
+//        transform: translateY(0);
+//        opacity: 1;
+//    }
+//}
+
+@import "./Flex.scss";
+@import "./Button.scss";
+@import "./Headline.scss";
+@import "./Content.scss";
+@import "./Section.scss";
+@import "./Alert.scss";

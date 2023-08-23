@@ -1,0 +1,312 @@
+@mixin solidNav {
+    background-color: var(--color-bg-base);
+    box-shadow: var(--shadow-base);
+
+    .Navigation-item {
+        color: var(--color-text-base);
+
+        &:hover, &:focus, &:active {
+            color: var(--color-primary);
+        }
+    }
+
+    .Navigation-itemWrapper {
+        &:hover, &:focus, &:active {
+            background-color: var(--color-primary-transparent);
+        }
+    }
+
+    .Navigation-item--child {
+        &:hover, &:focus, &:active {
+            background-color: var(--color-primary-transparent);
+        }
+    }
+
+    .Navigation-itemIcon {
+        svg {
+            path {
+                fill: var(--color-muted);
+            }
+        }
+    }
+
+    .Navigation-subNav {
+        background-color: var(--color-white);
+    }
+}
+
+@mixin transparentNav {
+    background-color: transparent;
+    box-shadow: none;
+
+    .Navigation-item {
+        color: var(--color-white);
+    }
+
+    .Navigation-itemWrapper {
+        &:hover, &:focus, &:active {
+            background-color: var(--color-white-transparent);
+        }
+    }
+
+    .Navigation-item--child {
+        &:hover, &:focus, &:active {
+            background-color: var(--color-white-transparent);
+        }
+    }
+
+    .Navigation-itemIcon {
+        svg {
+            path {
+                fill: var(--color-white);
+            }
+        }
+    }
+
+    .Navigation-subNav {
+        background-color: var(--color-white-transparent);
+    }
+
+    .Navigation-toggle {
+        svg {
+            path {
+                fill: var(--color-white);
+            }
+        }
+    }
+}
+
+.Navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9998;
+    transition: background-color ease .3s, box-shadow ease .3s;
+
+    &.isOpen {
+        background-color: var(--color-bg-base);
+
+        .Navigation-toggle {
+            svg {
+                path {
+                    fill: var(--color-text-base);
+                }
+            }
+        }
+    }
+
+    &-brand {
+        flex: 0 0 300px;
+        padding: 1rem 0;
+    }
+
+    &-logo {
+        box-shadow: none;
+        height: 40px;
+        border-radius: 0;
+    }
+
+    &-menu {
+        display: flex;
+        align-items: stretch;
+    }
+
+    &-menu--mobile {
+        position: fixed;
+        top: var(--spacing-navbar);
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: var(--color-bg-base);
+        z-index: 9999;
+        flex-direction: column;
+        padding: 0;
+        overflow-y: hidden;
+        transition: height ease .3s, padding ease .3s;
+
+        &.isActive {
+            visibility: visible;
+            opacity: 1;
+            height: calc(100vh - var(--spacing-navbar));
+            overflow-y: auto;
+            padding: 1rem 0;
+        }
+
+        .Navigation-item {
+            color: var(--color-text-base) !important;
+        }
+    }
+
+    &-itemWrapper {
+        position: relative;
+
+        &:hover {
+            background-color: var(--color-primary-transparent);
+        }
+    }
+
+    &-item {
+        display: inline-flex;
+        align-items: center;
+        font-weight: bold;
+        color: var(--color-primary);
+        text-decoration: none;
+        transition: all ease .3s;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 0 1rem;
+
+        &:hover, &:focus, &:active {
+            color: var(--color-primary-accent);
+
+            & + .Navigation-subNavWrapper {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+
+    &-itemIcon {
+        transform: rotate(90deg);
+        margin-left: .5rem;
+
+        svg {
+            width: .7rem;
+            height: .7rem;
+
+            path {
+                fill: var(--color-muted);
+            }
+        }
+    }
+
+    &-item--child {
+        border-radius: var(--border-radius-btn);
+        padding: .5rem .8rem;
+        white-space: nowrap;
+        margin: 2px;
+
+        &:hover, &:focus, &:active {
+            background-color: var(--color-primary-transparent);
+        }
+    }
+
+    &-subNavWrapper {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        min-width: 200px;
+        visibility: hidden;
+        opacity: 0;
+        transition: all ease .3s;
+        padding-top: 5px;
+
+        &:hover {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    &-subNav {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-bg-base);
+        box-shadow: var(--shadow-base);
+        z-index: 9999;
+        border-radius: var(--border-radius-btn);
+        text-align: right;
+    }
+
+    &-toggle {
+        display: none;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        svg {
+            width: 2rem;
+            height: 2rem;
+
+            path {
+                transition: fill ease .3s;
+            }
+        }
+
+        &:hover, &:focus, &:active {
+            background-color: transparent;
+            outline: none !important;
+
+            svg {
+                path {
+                    fill: var(--color-primary-accent);
+                }
+            }
+        }
+    }
+}
+
+.Navigation--transparent {
+    @include transparentNav;
+
+    &.isScrolled {
+        @include solidNav;
+    }
+}
+
+.Navigation--solid {
+    @include solidNav;
+}
+
+@media (max-width: 768px) {
+    .Navigation {
+        &-menu--desktop {
+            display: none;
+        }
+
+        &-toggle {
+            display: inline-block;
+        }
+
+        &-itemWrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &-item {
+            padding: 1rem;
+            font-size: 1.4rem;
+            width: 100%;
+            background-color: transparent;
+        }
+
+        &-item--child {
+            font-size: 1.2rem;
+        }
+
+        &-subNavToggle {
+            border: none;
+            background-color: var(--color-accent);
+            padding: 0 1rem;
+
+            svg {
+                transform: rotate(90deg);
+            }
+        }
+
+        &-subNavWrapper {
+            position: static;
+            visibility: visible;
+            opacity: 1;
+            padding-top: 0;
+            background-color: var(--color-primary-transparent);
+            height: 0;
+            overflow: hidden;
+        }
+
+        &-subNav {
+            box-shadow: none;
+            background-color: transparent !important;
+        }
+     }
+}

@@ -1,0 +1,26 @@
+<div>
+    {% set data = value | json_decode %}
+
+    <div class="control-list">
+        <table class="table data">
+            <thead>
+            <tr>
+                <th><span>Pole</span></th>
+                <th><span>Hodnota</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, val in data %}
+                {% if val is iterable %}
+                    {{ val | json_encode }}
+                {% else %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ val }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

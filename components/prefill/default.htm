@@ -1,0 +1,7 @@
+{% set data = __SELF__.property('data').content %}
+
+{% for block in data.block.builder %}
+    <div id="{{ block.blockId }}">
+        {% component block.content_group ~ 'Prefill' ~ data.id ~ 'Block' ~ loop.index0 data=block %}
+    </div>
+{% endfor %}

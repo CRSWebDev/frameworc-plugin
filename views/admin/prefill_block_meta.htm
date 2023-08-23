@@ -1,0 +1,19 @@
+<div class="callout fade in callout-info no-subheader">
+    <div class="header">
+        <i class="icon-info"></i>
+        <h3>Nápověda k předvyplněným blokům</h3>
+    </div>
+    <div class="content">
+        <p>
+            Předvyplněné bloky můžete vytvářet v administraci v sekci <a href="{{ url('admin/tailor/entries/prefill') }}" target="_blank">Předvyplněné Bloky</a>.
+        </p>
+        {% if model.block.id %}
+            <p>
+                Pro úpravu vybraného bloku <strong>{{ model.block.title }}</strong> <a href="{{ url('admin/tailor/entries/prefill/' ~ model.block.id) }}" target="_blank">klikněte sem</a>
+            </p>
+        {% endif %}
+        <p>
+            Po vytvoření můžete vybrat blok, který chcete vložit do obsahu stránky níže.<br>
+        </p>
+    </div>
+</div>

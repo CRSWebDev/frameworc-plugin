@@ -1,0 +1,9 @@
+<select class="Form-field Form-field--select" name="{{ field.name }}" id="{{ field.fieldId }}">
+    {% if field.placeholder %}
+        <option value="" selected disabled>{{ field.placeholder }}</option>
+    {% endif %}
+    {% for option in field.options %}
+        <option value="{{ option.value }}">{{ option.label }}</option>
+    {% endfor %}
+</select>
+<label class="Form-label" for="{{ field.fieldId }}">{{ field.label }} {% if field.required %}<span class="Form-required">*</span>{% endif %}</label>

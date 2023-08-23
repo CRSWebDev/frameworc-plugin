@@ -1,0 +1,18 @@
+
+{% set data = __SELF__.property('data').content %}
+
+<section class="Flex">
+    <div class="Flex-container Flex-container--columns">
+        <div class="Section"></div>
+        {% for column in data.columns %}
+            <div class="Flex-col">
+                {% set c = loop.index0 %}
+                {% for block in column.builder %}
+                    <div id="{{ block.blockId }}">
+                        {% component block.content_group ~ 'Column' ~ c ~ 'Block' ~ loop.index0 data=block %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+</section>

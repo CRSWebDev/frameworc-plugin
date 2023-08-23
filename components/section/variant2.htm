@@ -1,0 +1,33 @@
+{% set colClass = 'Flex-col Flex-col70' %}
+
+<div class="Section {{ data | moduleMods('Section', ['accent', 'contrast', 'narrow']) }}">
+    <div class="Flex {{ data.reverse ? 'Flex--reverse' : '' }}">
+        <div class="Flex-container">
+            {% if not data.noText %}
+                <div class="Flex-col">
+                    <p class="Headline Headline--sub Headline--primary">{{ data.subheadline }}</p>
+                    <h2 class="Headline">{{ data.headline }}</h2>
+                    <div class="Content">{{ data.text | content }}</div>
+                    {% if data.buttons %}
+                        <div class="Buttons">
+                            {% for button in data.buttons %}
+                                <a href="{{ button.link | link }}" class="Button {{ button | moduleMods('Button', ['contrast', 'outline']) }} {{ data.contrast ? 'Button--inverse' : '' }}">
+                                    {{ button.label }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+            {% if not data.noImage %}
+                <div class="Flex-col {{ data.noText ? '' : 'Flex-col70' }}">
+                    {% if data.noText %}
+                        <h2 class="Headline Headline--primary">{{ data.headline }}</h2>
+                        <p class="Headline Headline--sub">{{ data.subheadline }}</p>
+                    {% endif %}
+                    <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'crop'}) }}" alt="{{ data.headline }}" />
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

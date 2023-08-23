@@ -1,0 +1,43 @@
+{% set data = __SELF__.property('data').content %}
+
+{% set options = {
+    someOptions: 'someValue'
+} | json_encode %}
+
+<div class="Section" data-control="form" data-options='{{ options | escape() | raw }}'>
+    <div class="Flex">
+        <div class="Flex-container">
+            <div class="Flex-col">
+                {% set formClass = 'Form Form--' ~ data.variant %}
+                {% set formId = 'frameworc-form-' ~ data.id %}
+                {{ form_ajax(__SELF__ ~ '::onSubmit', {flash: true, validate: true, class: formClass, id: formId, files: true, novalidate: true}) }}
+                    <div class="Form-headline">
+                        <h2 class="Headline">{{ data.form.headline }}</h2>
+                    </div>
+                    <div id="frameworc-form-error-{{ data.id }}"></div>
+                    <input type="hidden" name="_form_id" value="{{ data.id }}">
+                    <input type="hidden" name="_form_true_id" value="{{ data.form.id }}">
+
+                    <div class="Form-group">
+                        {% for field in data.form.fwcFields %}
+                            {% set template = '@fields/' ~ field.content_group %}
+
+                            <div class="Form-control Form-control--{{ field.width }}" data-form-field="{{ field.name }}">
+                                {% partial template %}
+                                <div class="Form-error" data-validate-for="{{ field.name }}"></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="Form-group">
+                        {% if data.variant == 'outline' %}
+                            <button type="submit" class="Button Button--outline" data-attach-loading></button>
+                        {% else %}
+                            <button type="submit" class="Button Button--contrast" data-attach-loading></button>
+                        {% endif %}
+                    </div>
+                {{ form_close() }}
+            </div>
+        </div>
+    </div>
+</div>

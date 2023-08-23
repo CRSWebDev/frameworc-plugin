@@ -1,0 +1,13 @@
+<div class="Form-fields">
+    {% for option in field.options %}
+        <label class="Form-radioWrapper">
+            <input class="Form-field Form-field--radio" type="radio" name="{{ field.name }}" id="{{ field.fieldId }}" value="{{ option.value }}">
+            <span class="Form-radio"></span>
+            <span class="Form-label">{{ option.label }}</span>
+        </label>
+    {% endfor %}
+</div>
+
+<div class="Form-label">
+    {{ field.label }} {% if field.required %}<span class="Form-required">*</span>{% endif %}
+</div>

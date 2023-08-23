@@ -1,0 +1,85 @@
+/*
+Buttons Wrapper
+*/
+.Buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.Buttons--center {
+    justify-content: center;
+}
+/*
+Buttons Wrapper
+*/
+
+.Button {
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    background-color: var(--color-button-bg-base);
+    transition: all ease .3s;
+    color: var(--color-text-base);
+    font-weight: bold;
+    border-radius: var(--border-radius-btn);
+    box-shadow: var(--shadow-base);
+    border: 0;
+
+    &:hover, &:focus, &:active {
+        background-color: var(--color-button-bg-base-hover);
+        color: var(--color-text-base);
+        box-shadow: none;
+    }
+}
+
+.Button--contrast {
+    background-color: var(--color-button-bg-base);
+    color: var(--color-text-contrast);
+
+    &:hover, &:focus, &:active {
+        background-color: var(--color-button-bg-base-hover);
+        color: var(--color-text-contrast);
+    }
+}
+
+.Button--outline {
+    background-color: transparent;
+    color: var(--color-button-bg-base);
+    border: 2px solid var(--color-button-bg-base);
+    box-shadow: none;
+
+    &:hover, &:focus, &:active {
+        background-color: var(--color-button-bg-outline-hover);
+        border-color: var(--color-button-bg-base-hover);
+        color: var(--color-button-bg-base-hover);
+    }
+
+    &.Button--inverse {
+        background-color: transparent;
+        border-color: var(--color-white);
+        color: var(--color-white);
+
+        &:hover, &:focus, &:active {
+            background-color: var(--color-button-bg-outline-hover-inverse);
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+    }
+}
+
+.Button--inverse {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+
+    &:hover, &:focus, &:active {
+        background-color: var(--color-accent);
+        color: var(--color-primary);
+    }
+}

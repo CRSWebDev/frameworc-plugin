@@ -1,0 +1,15 @@
+{% set nav = __SELF__.getNav() %}
+
+<div class="Navigation Navigation--{{ record.menuStyle }} Navigation--desktop" data-control="navigation">
+    <div class="Flex">
+        <div class="Flex-container Flex-container--justifyBetween Flex-container--stretch">
+            <div class="Navigation-brand">
+                <img src="{{ nav.logo | media }}" alt="" class="Navigation-logo">
+            </div>
+            {% partial '@desktop' %}
+            {% partial '@hamburger' %}
+        </div>
+    </div>
+    {% partial '@mobile' %}
+</div>
+

@@ -1,0 +1,145 @@
+.Tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: var(--spacing-grid-gap);
+
+    &--columns2 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &--columns3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    &--columns4 {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    &-tile {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        transition: all ease .3s;
+        border-radius: var(--border-radius-btn);
+        box-shadow: var(--shadow-base);
+        background-color: var(--color-bg-base);
+        text-decoration: none;
+        height: 100%;
+        box-sizing: border-box;
+        border: 2px solid transparent;
+    }
+
+    &-tile--outline {
+        border: 2px solid var(--color-accent);
+        box-shadow: none;
+    }
+
+    &-tile--borderless {
+        box-shadow: none;
+
+        .Tiles-image {
+            border-radius: 0;
+            margin: 0 2rem;
+        }
+    }
+
+    a.Tiles-tile {
+        color: var(--color-text-base);
+
+        &:hover, &:focus, &:active {
+            transform: translateY(-5px);
+        }
+
+        &.Tiles-tile--contrastHover {
+            &:hover, &:focus, &:active {
+                background-color: var(--color-bg-contrast);
+                color: var(--color-text-contrast);
+                transform: translateY(0);
+
+                svg path {
+                    fill: var(--color-text-contrast);
+                }
+            }
+        }
+
+        &.Tiles-tile--contrastBorderHover {
+            &:hover, &:focus, &:active {
+                border-color: var(--color-primary);
+                transform: translateY(0);
+
+                svg path {
+                    fill: var(--color-primary);
+                }
+            }
+        }
+    }
+
+    &-image {
+        padding-top: 50%;
+        background-position: center;
+        background-size: cover;
+        border-radius: var(--border-radius-btn) var(--border-radius-btn) 0 0;
+    }
+
+    &-icon {
+        padding: 3rem 2rem 0 2rem;
+
+        img, svg {
+            height: 5rem;
+            width: 5rem;
+            box-shadow: none;
+
+            path {
+                transition: all ease .3s;
+            }
+        }
+    }
+
+    &-body {
+        padding: 2rem;
+
+        p:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    &-button {
+        padding: 0 2rem 2rem 2rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .Tiles {
+        grid-template-columns: 1fr;
+
+        &--columns2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        &--columns3 {
+            grid-template-columns: 1fr;
+        }
+
+        &--columns4 {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .Tiles {
+        grid-template-columns: 1fr;
+
+        &--columns2 {
+            grid-template-columns: 1fr;
+        }
+
+        &--columns3 {
+            grid-template-columns: 1fr;
+        }
+
+        &--columns4 {
+            grid-template-columns: 1fr;
+        }
+    }
+}

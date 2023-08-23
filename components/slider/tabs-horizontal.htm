@@ -1,0 +1,67 @@
+{% set options = {
+    perView: data.perView ? data.perView : 1,
+    gap: data.gap ? data.gap : 30,
+    startIndex: data.startIndex ? data.startIndex : 0,
+    loop: data.loop ? true : false,
+    autoplay: data.autoplay ? data.autoplay : false,
+    arrows: false,
+    mode: 'fade',
+    disableDrag: true,
+    syncWith: data.syncWith ? data.syncWith : '',
+} %}
+
+<div class="Section" data-control="slider" data-options="{{ options | json_encode | escape() | raw }}">
+    <div class="Flex">
+        <div class="Flex-container">
+            <div class="Slider Slider--tabs Slider--tabsHorizontal" id="frameworc-slider-{{ data.id }}" data-slider-id="{{ data.id }}">
+                <div class="Slider-dots">
+                    {% for slide in data.slides %}
+                        <button class="Slider-dot" data-slide="{{ loop.index0 }}">
+                            {{ slide.headline }}
+                        </button>
+                    {% endfor %}
+                </div>
+                <div class="Slider-container">
+                    <div class="Slider-track">
+                        {% for slide in data.slides %}
+                            <div class="Slider-slide">
+                                <div class="Slider-image">
+                                    <img src="{{ slide.image | media | resize(null, 400) }}" alt="{{ slide.headline }}" draggable="false" />
+                                </div>
+                                <div class="Slider-content">
+                                    <h3 class="Headline">
+                                        {{ slide.headline }}
+                                    </h3>
+                                    <div class="Content">
+                                        {{ slide.text | content }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.fwcSliderIds = window.fwcSliderIds || [];
+
+    window.fwcSliderIds.push({
+        id: 'frameworc-slider-{{ data.id }}',
+        options: {
+            perView: {{ data.perView ? data.perView : 1 }},
+            gap: {{ data.gap ? data.gap : 30 }},
+            startIndex: {{ data.startIndex ? data.startIndex : 0 }},
+            focusedSlidePosition: "{{ data.focusedSlidePosition ? data.focusedSlidePosition : 'left' }}",
+            syncWith: "{{ data.syncWith ? data.syncWith : '' }}",
+            syncTranslate: {{ data.syncTranslate ? 'true' : 'false' }},
+            loop: {{ data.loop ? 'true' : 'false' }},
+            autoplay: {{ data.autoplay ? data.autoplay : 'false' }},
+            arrows: false,
+            mode: 'fade',
+            disableDrag: true
+        }
+    });
+</script>

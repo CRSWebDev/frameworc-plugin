@@ -1,0 +1,146 @@
+.Accordion {
+    &-container {
+        height: 0;
+        overflow: hidden;
+        transition: height ease .3s;
+        border-bottom: 1px solid var(--color-accent);
+    }
+
+    &-headline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 1rem;
+        transition: color ease .3s;
+        border: none;
+        background-color: transparent;
+        width: 100%;
+        text-align: left;
+
+        h2 {
+            margin: 0;
+            font-size: 2rem;
+            color: var(--color-muted);
+            transition: color ease .3s;
+        }
+
+        &:hover {
+            h2 {
+                color: var(--color-text-base);
+            }
+
+            .Accordion-icon {
+                svg {
+                    path {
+                        fill: var(--color-primary-accent);
+                    }
+                }
+            }
+        }
+    }
+
+    &-icon {
+        transition: transform ease .3s;
+
+        svg {
+            transform: rotate(-90deg);
+
+            path {
+                transition: fill ease .3s;
+                fill: var(--color-muted);
+            }
+        }
+    }
+
+    &-content {
+        padding: 1rem;
+        transition: transform ease .4s;
+        transform: translateY(10px);
+        font-size: 1.2rem;
+        line-height: 1.5;
+
+        p:first-child {
+            margin-top: 0;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &-item {
+        &.isActive {
+            .Accordion-container {
+                height: auto;
+            }
+
+            .Accordion-content {
+                transform: translateY(0);
+            }
+
+            .Accordion-headline {
+                h2 {
+                    color: var(--color-text-base);
+                }
+            }
+
+            .Accordion-icon {
+                transform: rotateX(180deg);
+
+                svg {
+                    path {
+                        fill: var(--color-primary);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.Accordion--outline {
+    border: 2px solid var(--color-accent);
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+
+    .Accordion-container {
+        border-bottom-width: 2px;
+    }
+
+    .Accordion-item {
+        &:last-child {
+            .Accordion-container {
+                border-bottom-width: 0;
+            }
+        }
+    }
+}
+
+.Accordion--shadow {
+    .Accordion-container {
+        border-bottom-width: 0;
+    }
+
+    .Accordion-item {
+        transition: box-shadow ease .3s, margin ease .3s, padding ease .3s;
+        margin: 0 2rem;
+        padding: 0 1rem;
+        border-radius: var(--border-radius-img);
+
+        &.isActive {
+            box-shadow: var(--shadow-base);
+            margin: 0 0 1rem 0;
+            padding: 1rem;
+
+            .Accordion-container {
+                border-bottom-width: 0;
+            }
+
+            .Accordion-headline {
+                h2 {
+                    color: var(--color-primary);
+                }
+            }
+        }
+    }
+}

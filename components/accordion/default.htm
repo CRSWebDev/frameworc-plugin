@@ -1,0 +1,30 @@
+{% set data = __SELF__.property('data').content %}
+
+{% set options = {
+    singleMode: data.singleMode ? true : false,
+    activeItem: data.firstItemOpen ? 0 : -1
+} | json_encode %}
+
+<div class="Section" data-control="accordion" data-options='{{ options | escape() | raw }}'>
+    <div class="Flex">
+        <div class="Flex-container">
+            <div class="Accordion Accordion--{{ data.variant }}" id="frameworc-accordion-{{ data.id }}">
+                {% for item in data.items %}
+                    <div class="Accordion-item {{ data.firstItemOpen and loop.index0 == 0 ? 'isActive' : '' }}" id="frameworc-accordion-{{ data.id }}-item-{{ loop.index0 }}">
+                        <button class="Accordion-headline" type="button">
+                            <h2 class="Headline">{{ item.headline }}</h2>
+                            <span class="Accordion-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>
+                            </span>
+                        </button>
+                        <div class="Accordion-container">
+                            <div class="Accordion-content">
+                                {{ item.text | content }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

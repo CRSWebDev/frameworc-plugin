@@ -1,0 +1,10 @@
+{
+    "name": "crs/frameworc-plugin",
+    "type": "october-plugin",
+    "description": "An opinionated website builder for OctoberCMS",
+    "require": {
+        "composer/installers": "~1.0",
+        "crs/frameworc-theme": "~0.1",
+        "october/rain": "~v3.4.14"
+    }
+}

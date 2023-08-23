@@ -1,0 +1,20 @@
+{% set data = __SELF__.property('data').content %}
+{% set variant = '@' ~ data.variant %}
+
+{%
+    set vars = {
+        '@variant1': {
+            imgDimensions: {w: 560, h: 450},
+        },
+        '@variant2': {
+            imgDimensions: {w: 820, h: 600},
+        }
+    }
+%}
+
+{% set imgDimensions = vars[variant].imgDimensions %}
+{% if data.noText %}
+    {% set imgDimensions = {w: 1200, h: 600} %}
+{% endif %}
+
+{% partial variant %}

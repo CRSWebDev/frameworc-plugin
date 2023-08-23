@@ -1,0 +1,19 @@
+{% set data = __SELF__.property('data').content %}
+
+<div class="Section">
+    <div class="Flex">
+        <div class="Flex-container">
+            <div class="Flex-col">
+                <div class="Tiles Tiles--columns{{ data.count }}">
+                    {% for tile in data.tiles %}
+                        {% if data.tileLink %}
+                            {% partial '@link-tile' %}
+                        {% else %}
+                            {% partial '@tile' %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

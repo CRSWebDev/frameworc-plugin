@@ -1,0 +1,26 @@
+<div class="Navigation-menu Navigation-menu--mobile">
+    {% for item in nav.nav %}
+        {% set itemLoop = loop.index0 %}
+        <div class="Navigation-itemWrapper">
+            <a href="{{ item.link | link }}" class="Navigation-item">
+                {{ item.label }}
+            </a>
+            {% if item.children %}
+                <button type="button" class="Navigation-subNavToggle" data-target="nav-parent-item-{{ itemLoop }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
+                </button>
+            {% endif %}
+        </div>
+        {% if item.children %}
+            <div class="Navigation-subNavWrapper" id="nav-parent-item-{{ itemLoop }}">
+                <div class="Navigation-subNav">
+                    {% for child in item.children %}
+                        <a href="{{ child.link | link }}" class="Navigation-item Navigation-item--child">
+                            {{ child.label }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

@@ -1,0 +1,5 @@
+{% for block in record.builder %}
+    <div id="{{ block.blockId }}">
+        {% component block.content_group ~ loop.index0 data=block %}
+    </div>
+{% endfor %}

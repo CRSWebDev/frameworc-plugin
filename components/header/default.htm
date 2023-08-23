@@ -1,0 +1,20 @@
+{% set data = __SELF__.property('data').content %}
+
+<div class="Header {{ data | moduleMods('Header', ['fullHeight', 'contrast']) }}" style="background-image: url({{ data.image | media }});">
+    {% if data.overlay %}
+        <div class="Header-overlay"></div>
+    {% endif %}
+    <div class="Header-container">
+        <div class="Header-content">
+            <h1 class="Headline">{{ data.headline }}</h1>
+            <p class="Headline Headline--sub">{{ data.subheadline }}</p>
+            <div class="Buttons">
+                {% for button in data.buttons %}
+                    <a href="{{ button.link | link }}" class="Button {{ button | moduleMods('Button', ['contrast', 'outline']) }}">
+                        {{ button.label }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
