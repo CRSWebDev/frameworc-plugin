@@ -1,4 +1,4 @@
-<?php namespace CRS\FrameworC;
+<?php namespace CRSCompany\FrameworC;
 
 use Backend;
 use Cms\Classes\Page;
@@ -57,18 +57,18 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'CRS\FrameworC\Components\Navigation' => 'Navigation',
-            'CRS\FrameworC\Components\Footer' => 'Footer',
-            'CRS\FrameworC\Components\Builder' => 'Builder',
-            'CRS\FrameworC\Components\Header' => 'Header',
-            'CRS\FrameworC\Components\Section' => 'Section',
-            'CRS\FrameworC\Components\Tiles' => 'Tiles',
-            'CRS\FrameworC\Components\Slider' => 'Slider',
-            'CRS\FrameworC\Components\Accordion' => 'Accordion',
-            'CRS\FrameworC\Components\Form' => 'Form',
-            'CRS\FrameworC\Components\Columns' => 'Columns',
-            'CRS\FrameworC\Components\Prefill' => 'Prefill',
-            'CRS\FrameworC\Components\Meta' => 'Meta',
+            'CRSCompany\FrameworC\Components\Navigation' => 'Navigation',
+            'CRSCompany\FrameworC\Components\Footer' => 'Footer',
+            'CRSCompany\FrameworC\Components\Builder' => 'Builder',
+            'CRSCompany\FrameworC\Components\Header' => 'Header',
+            'CRSCompany\FrameworC\Components\Section' => 'Section',
+            'CRSCompany\FrameworC\Components\Tiles' => 'Tiles',
+            'CRSCompany\FrameworC\Components\Slider' => 'Slider',
+            'CRSCompany\FrameworC\Components\Accordion' => 'Accordion',
+            'CRSCompany\FrameworC\Components\Form' => 'Form',
+            'CRSCompany\FrameworC\Components\Columns' => 'Columns',
+            'CRSCompany\FrameworC\Components\Prefill' => 'Prefill',
+            'CRSCompany\FrameworC\Components\Meta' => 'Meta',
         ];
     }
 

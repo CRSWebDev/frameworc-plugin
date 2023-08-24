@@ -1,4 +1,4 @@
-<?php namespace CRS\Frameworc\Components;
+<?php namespace CRSCompany\FrameworC\Components;
 
 use Cms\Classes\ComponentBase;
 

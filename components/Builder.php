@@ -1,4 +1,4 @@
-<?php namespace CRS\FrameworC\Components;
+<?php namespace CRSCompany\FrameworC\Components;
 
 use Cms\Classes\ComponentBase;
 use Redirect;
