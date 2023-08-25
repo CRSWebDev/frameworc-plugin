@@ -1,4 +1,5 @@
-{% set data = __SELF__.property('data').content %}
+{% set block = __SELF__.property('data') %}
+{% set data = block.content %}
 {% set blockId = __SELF__.property('data').blockId %}
 
 {% set variant = '@' ~ data.variant %}

@@ -1,9 +1,17 @@
-
-{% set data = __SELF__.property('data').content %}
+{% set block = __SELF__.property('data') %}
+{% set data = block.content %}
 
 <section class="Flex">
+    {% if block.headline %}
+        <div class="Flex-container">
+            <div class="Flex-col">
+                <div class="Headline">
+                    {{ block.headline | content }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="Flex-container Flex-container--columns">
-        <div class="Section"></div>
         {% for column in data.columns %}
             <div class="Flex-col">
                 {% set c = loop.index0 %}

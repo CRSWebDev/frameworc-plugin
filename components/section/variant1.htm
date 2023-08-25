@@ -8,9 +8,11 @@
         <div class="Flex-container">
             {% if not data.noText %}
                 <div class="{{ colClass }}">
-                    <h2 class="Headline Headline--primary">{{ data.headline }}</h2>
-                    <p class="Headline Headline--sub">{{ data.subheadline }}</p>
-                    <div class="Content">{{ data.text | content }}</div>
+                    {% if block.headline %}
+                        <div class="Headline">
+                            {{ block.headline | content }}
+                        </div>
+                    {% endif %}
                     {% if data.buttons %}
                         <div class="Buttons">
                             {% for button in data.buttons %}
@@ -25,10 +27,11 @@
             {% if not data.noImage %}
                 <div class="{{ colClass }}">
                     {% if data.noText %}
-                        <h2 class="Headline Headline--primary">{{ data.headline }}</h2>
-                        <p class="Headline Headline--sub">{{ data.subheadline }}</p>
+                        <div class="Headline">
+                            {{ block.headline | content }}
+                        </div>
                     {% endif %}
-                    <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'crop'}) }}" alt="{{ data.headline }}" />
+                    <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'landscape'}) }}" alt="{{ data.headline }}" />
                 </div>
             {% endif %}
         </div>

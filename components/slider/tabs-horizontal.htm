@@ -12,6 +12,15 @@
 
 <div class="Section" data-control="slider" data-options="{{ options | json_encode | escape() | raw }}">
     <div class="Flex">
+        {% if block.headline %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="Headline">
+                        {{ block.headline | content }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div class="Flex-container">
             <div class="Slider Slider--tabs Slider--tabsHorizontal" id="frameworc-slider-{{ data.id }}" data-slider-id="{{ data.id }}">
                 <div class="Slider-dots">

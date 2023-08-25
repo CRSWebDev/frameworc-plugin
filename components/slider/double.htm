@@ -29,6 +29,15 @@
 
 <div class="Section">
         <div class="Flex">
+            {% if block.headline %}
+                <div class="Flex-container">
+                    <div class="Flex-col">
+                        <div class="Headline">
+                            {{ block.headline | content }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
             <div class="Flex-container Flex-container--sliderDouble">
                 <div class="Flex-col Flex-col50" id="{{ sliderId1 }}" data-control="slider" data-options='{{ options1 | json_encode | escape | raw }}'>
                     <div class="Slider Slider--double Slider--doubleImage">

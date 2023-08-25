@@ -1,4 +1,5 @@
-{% set data = __SELF__.property('data').content %}
+{% set block = __SELF__.property('data') %}
+{% set data = block.content %}
 
 {% set options = {
     someOptions: 'someValue'
@@ -11,9 +12,11 @@
                 {% set formClass = 'Form Form--' ~ data.variant %}
                 {% set formId = 'frameworc-form-' ~ data.id %}
                 {{ form_ajax(__SELF__ ~ '::onSubmit', {flash: true, validate: true, class: formClass, id: formId, files: true, novalidate: true}) }}
-                    <div class="Form-headline">
-                        <h2 class="Headline">{{ data.form.headline }}</h2>
-                    </div>
+                    {% if block.headline %}
+                        <div class="Headline">
+                            {{ block.headline | content }}
+                        </div>
+                    {% endif %}
                     <div id="frameworc-form-error-{{ data.id }}"></div>
                     <input type="hidden" name="_form_id" value="{{ data.id }}">
                     <input type="hidden" name="_form_true_id" value="{{ data.form.id }}">

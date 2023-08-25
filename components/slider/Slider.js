@@ -151,7 +151,7 @@ oc.registerControl('slider', class extends oc.ControlBase {
 
         this.track.style.gap = `${this.options.gap}px`;
         this.track.style.transitionDuration = this.options.transitionDuration;
-        this.slideWidth = (this.el.offsetWidth - this.options.gap * this.options.perView) / this.options.perView;
+        this.slideWidth = (this.track.offsetWidth - this.options.gap * this.options.perView) / this.options.perView;
         this.moveAmount = this.slideWidth + this.options.gap;
 
         this.slides.forEach((slide) => {
@@ -309,9 +309,21 @@ oc.registerControl('slider', class extends oc.ControlBase {
 
         this.slides.forEach((slide) => {
             slide.classList.remove('isActive');
+            slide.classList.remove('isVisible');
         });
 
         this.slides[this.currentSlide].classList.add('isActive');
+
+        if (this.options.perView > 1) {
+            for (let i = 0; i < this.options.perView; i++) {
+                const visibleSlide = this.slides[this.currentSlide + i];
+                if (visibleSlide) {
+                    visibleSlide.classList.add('isVisible');
+                }
+            }
+        } else {
+            this.slides[this.currentSlide].classList.add('isVisible');
+        }
 
         if (this.options.mode === 'fade') {
             const slideHeight = `${this.slides[this.currentSlide].offsetHeight}px`;

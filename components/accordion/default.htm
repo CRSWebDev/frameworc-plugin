@@ -1,4 +1,5 @@
-{% set data = __SELF__.property('data').content %}
+{% set block = __SELF__.property('data') %}
+{% set data = block.content %}
 
 {% set options = {
     singleMode: data.singleMode ? true : false,
@@ -7,6 +8,15 @@
 
 <div class="Section" data-control="accordion" data-options='{{ options | escape() | raw }}'>
     <div class="Flex">
+        {% if block.headline %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="Headline">
+                        {{ block.headline | content }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div class="Flex-container">
             <div class="Accordion Accordion--{{ data.variant }}" id="frameworc-accordion-{{ data.id }}">
                 {% for item in data.items %}

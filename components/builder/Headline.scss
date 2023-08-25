@@ -1,17 +1,30 @@
 .Headline {
-    font-size: 2.4rem;
-    font-weight: bold;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
+    h1 {
+        font-size: 2.4rem;
+        font-weight: bold;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
 
-.Headline--primary {
-    color: var(--color-text-primary);
-}
+    h2 {
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
 
-.Headline--sub {
-    font-size: 1.2rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    font-weight: bold;
+    h3 {
+        font-size: 1.3rem;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        font-weight: bold;
+    }
+
+    strong {
+        color: var(--color-text-primary);
+    }
+
+    p {
+        line-height: 1.5;
+    }
 }

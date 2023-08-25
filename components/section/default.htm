@@ -1,13 +1,14 @@
-{% set data = __SELF__.property('data').content %}
+{% set block = __SELF__.property('data') %}
+{% set data = block.content %}
 {% set variant = '@' ~ data.variant %}
 
 {%
     set vars = {
         '@variant1': {
-            imgDimensions: {w: 560, h: 450},
+            imgDimensions: {w: 800, h: 600},
         },
         '@variant2': {
-            imgDimensions: {w: 820, h: 600},
+            imgDimensions: {w: 1200, h: 800},
         }
     }
 %}

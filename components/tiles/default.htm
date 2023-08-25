@@ -1,7 +1,17 @@
-{% set data = __SELF__.property('data').content %}
+{% set block = __SELF__.property('data') %}
+{% set data = block.content %}
 
 <div class="Section">
     <div class="Flex">
+        {% if block.headline %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="Headline">
+                        {{ block.headline | content }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div class="Flex-container">
             <div class="Flex-col">
                 <div class="Tiles Tiles--columns{{ data.count }}">
