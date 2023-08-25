@@ -23,6 +23,7 @@
 
     &-col {
         flex: 1 1 auto;
+        box-sizing: border-box;
 
         &20 {
             flex: 0 0 calc(20% - var(--spacing-gap) / 2);
