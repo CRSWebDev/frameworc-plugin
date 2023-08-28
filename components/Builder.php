@@ -42,7 +42,9 @@ class Builder extends ComponentBase
         $this->page['record'] = $section;
 
         foreach ($section->builder as $i => $block) {
-            $this->addComponent("\\CRSCompany\\FrameworC\\Components\\" . $block->content_group, $block->content_group . $i, [
+            $alias = !empty($block->aliasOverride) ? $block->aliasOverride : $block->content_group . $i;
+
+            $this->addComponent("\\CRSCompany\\FrameworC\\Components\\" . $block->content_group, $alias, [
                 'block' => $block,
             ]);
         }

@@ -22,7 +22,9 @@ class Prefill extends ComponentBase
         $blocks = $this->properties['block']->content->block->builder;
 
         foreach ($blocks as $b => $block) {
-            $this->addComponent("\\CRSCompany\\FrameworC\\Components\\" . $block->content_group, $block->content_group . 'Prefill' . $id . 'Block' . $b, [
+            $alias = !empty($block->aliasOverride) ? $block->aliasOverride : $block->content_group . 'Prefill' . $id . 'Block' . $b;
+
+            $this->addComponent("\\CRSCompany\\FrameworC\\Components\\" . $block->content_group, $alias, [
                 'block' => $block,
             ]);
         }

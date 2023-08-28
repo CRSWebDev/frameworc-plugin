@@ -30,7 +30,9 @@ class Columns extends ComponentBase
 
         foreach ($columns as $c => $column) {
             foreach ($column->builder as $i => $block) {
-                $this->addComponent("\\CRSCompany\\FrameworC\\Components\\" . $block->content_group, $block->content_group . 'Column' . $c . 'Block' . $i, [
+                $alias = !empty($block->aliasOverride) ? $block->aliasOverride : $block->content_group . 'Column' . $c . 'Block' . $i;
+
+                $this->addComponent("\\CRSCompany\\FrameworC\\Components\\" . $block->content_group, $alias, [
                     'block' => $block,
                 ]);
             }
