@@ -25,7 +25,7 @@
                         {% for field in data.form.fwcFields %}
                             {% set template = '@fields/' ~ field.content_group %}
 
-                            <div class="Form-control Form-control--{{ field.width }}" data-form-field="{{ field.name }}">
+                            <div class="Form-control Form-control--{{ field.width ? field.width : 'full' }}" data-form-field="{{ field.name }}">
                                 {% partial template %}
                                 <div class="Form-error" data-validate-for="{{ field.name }}"></div>
                             </div>

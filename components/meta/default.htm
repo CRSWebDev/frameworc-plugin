@@ -1,9 +1,11 @@
 <title>{{ record.title }} | {{ meta.metaTitle }}</title>
 
-<link rel="icon" type="image/png" href="{{ meta.favicon | media }}">
+{{ meta.faviconHtml | raw }}
 
 <meta name="description" content="{{ meta.description }}">
 
 <meta property="og:title" content="{{ meta.ogTitle ? meta.ogTitle : record.title ~ ' | ' ~ meta.metaTitle }}" />
 <meta property="og:description" content="{{ meta.ogDescription ? meta.ogDescription : meta.description }}" />
 <meta property="og:image" content="{{ meta.ogImage | media }}" />
+
+{{ meta.headerHtml | raw }}

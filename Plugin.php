@@ -111,6 +111,7 @@ class Plugin extends PluginBase
                 'moduleMods' => [$this, 'moduleModsFilter'],
                 'svg' => [$this, 'svgFilter'],
                 'json_decode' => [$this, 'jsonDecodeFilter'],
+                'base64_encode' => [$this, 'getBase64'],
             ],
         ];
     }
@@ -133,5 +134,11 @@ class Plugin extends PluginBase
 
     public function jsonDecodeFilter($json) {
         return json_decode($json, true);
+    }
+
+    public function getBase64($url) {
+        $file = file_get_contents($url);
+        $base64 = base64_encode($file);
+        return $base64;
     }
 }

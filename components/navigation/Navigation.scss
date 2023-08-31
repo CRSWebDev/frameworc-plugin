@@ -146,6 +146,24 @@
         }
     }
 
+    &-itemWrapper--sitePicker {
+        .Navigation-subNavWrapper {
+            min-width: 100%;
+        }
+
+        .Navigation-item--child {
+            justify-content: center;
+            padding: 1rem 2rem;
+            gap: 1rem;
+        }
+    }
+
+    &-flag {
+        width: 30px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
     &-item {
         display: inline-flex;
         align-items: center;
