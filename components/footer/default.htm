@@ -1,0 +1,30 @@
+{% set nav = Footer.getNav() %}
+
+<footer class="Footer">
+    <div class="Flex">
+        <div class="Flex-container">
+            <div class="Flex-col">
+                <img src="{{ nav.logo | media }}" alt="ASIDO">
+            </div>
+            <div class="Flex-col">
+                <div class="Footer-navWrapper">
+                    {% for item in nav.nav %}
+                        <div class="Footer-nav">
+                            <a href="{{ item.link | link }}" class="Footer-item">{{ item.label }}</a>
+                            {% if item.children | length > 0 %}
+                                {% for child in item.children %}
+                                    <a href="{{ child.link | link }}" class="Footer-item Footer-item--child">{{ child.label }}</a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="Flex-col">
+                <div class="Footer-content">
+                    {{ nav.text | content }}
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -69,6 +69,7 @@ class Plugin extends PluginBase
             'CRSCompany\FrameworC\Components\Columns' => 'Columns',
             'CRSCompany\FrameworC\Components\Prefill' => 'Prefill',
             'CRSCompany\FrameworC\Components\Meta' => 'Meta',
+            'CRSCompany\FrameworC\Components\ImageStrip' => 'ImageStrip',
         ];
     }
 

@@ -1,0 +1,14 @@
+{% set block = __SELF__.property('data') %}
+{% set data = block.content %}
+
+<div class="Section">
+    <div class="Flex">
+        <div class="Flex-container Flex-container--nowrap Flex-container--justifyCenter Flex-container--smallGap">
+            {% for image in data.images %}
+                <div class="Flex-col Flex-col--auto">
+                    <img src="{{ image|media }}" alt="" class="ImageStrip-image">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
