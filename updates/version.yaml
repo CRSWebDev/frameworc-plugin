@@ -5,3 +5,4 @@ v0.3.0: New options for block settings
 v0.4.0: Major rework of headlines and block settings
 v0.4.1: Fixed buttons, added alias overrid for blocks, custom svg icon for accordion
 v1.0.0: First stable version
+v1.0.1: Bumped OctoberCMS version
