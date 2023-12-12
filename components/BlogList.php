@@ -1,18 +1,19 @@
 <?php namespace CRSCompany\FrameworC\Components;
 
 use Cms\Classes\ComponentBase;
+use Tailor\Models\EntryRecord;
 
 /**
- * ImageStrip Component
+ * BlogList Component
  *
  * @link https://docs.octobercms.com/3.x/extend/cms-components.html
  */
-class ImageStrip extends ComponentBase
+class BlogList extends ComponentBase
 {
     public function componentDetails()
     {
         return [
-            'name' => 'ImageStrip Component',
+            'name' => 'BlogList Component',
             'description' => 'No description provided yet...'
         ];
     }
@@ -27,7 +28,11 @@ class ImageStrip extends ComponentBase
 
     public function onRun()
     {
-        $this->addCss(['components/imagestrip/ImageStrip.scss']);
-        $this->addJs(['components/imagestrip/ImageStrip.js']);
+        $this->addCss(['components/bloglist/BlogList.scss']);
+    }
+
+    public function posts($perPage = 5)
+    {
+        return EntryRecord::inSection('BlogPost')->paginate($perPage);
     }
 }

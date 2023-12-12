@@ -1,13 +1,14 @@
 <div>
     {% set data = value | json_decode %}
+    {% set faviconPath = model.favicon | media %}
 
     {% set rfgBaseUrl = 'https://realfavicongenerator.net/api/favicon_generator' %}
     {% set query = {
         "favicon_generation": {
             "api_key": env('RFG_API_KEY'),
             "master_picture": {
-                "type": "url",
-                "url": "https://hub.mathemi.de/themes/mathemi/assets/media/favicon.png",
+                "type": "no_picture",
+                "url": faviconPath,
                 "demo": "false"
             },
             "files_location": {
@@ -25,19 +26,21 @@
     } | json_encode %}
 
     <div class="control-list">
-        <div class="alert alert-info">
-            Před generováním faviconů prosím nejdříve nahrajte obrázek, který se má použít pro generování a poté <strong>!ULOŽTE!</strong><br>
-            Po vygenerování faviconů je potřeba je <strong>!ULOŽIT!</strong> znovu.
-        </div>
-
         <a href="{{ rfgBaseUrl }}?json_params={{ query | url_encode }}" type="button" class="btn btn-primary">Generovat</a>
     </div>
 </div>
 
 <script>
     setTimeout(() => {
-        const faviconHtml = document.querySelector('#Form-field-EntryRecord-faviconHtml');
+        const params = new URL(window.location.href).searchParams;
 
-        faviconHtml.value = decodeURI(new URL(window.location.href).searchParams.get('html_code'));
+        if (params.has('html_code')) {
+            const faviconHtml = document.querySelector('[name="EntryRecord[faviconHtml]"]');
+
+            faviconHtml.value = decodeURI(new URL(window.location.href).searchParams.get('html_code'));
+
+            oc.ajax('onSave');
+        }
+
     }, 1000);
 </script>

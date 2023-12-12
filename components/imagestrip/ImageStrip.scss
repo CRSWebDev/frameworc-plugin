@@ -1,6 +1,46 @@
 .ImageStrip {
+    &-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &-container--centered {
+        justify-content: center;
+    }
+
+    &-wrapper {
+        overflow-x: hidden;
+        position: relative;
+        height: var(--imageStrip-height);
+        margin: 0 -1rem;
+
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            display: block;
+            top: 0;
+            height: var(--imageStrip-height);
+            width: 3rem;
+            z-index: 5;
+        }
+
+        &::before {
+            left: 0;
+            background: linear-gradient(to right, var(--color-bg-base), transparent);
+        }
+
+        &::after {
+            right: 0;
+            background: linear-gradient(to left, var(--color-bg-base), transparent);
+        }
+    }
+
     &-image {
-        height: 80px;
+        height: var(--imageStrip-height);
         width: auto;
+        box-shadow: none;
+        border-radius: 0;
     }
 }

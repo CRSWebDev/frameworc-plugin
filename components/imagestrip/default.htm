@@ -1,14 +1,23 @@
 {% set block = __SELF__.property('data') %}
 {% set data = block.content %}
 
-<div class="Section">
+{% set options = {
+    intervalDelay: data.intervalDelay,
+    stopOnHover: data.stopOnHover,
+} | json_encode %}
+
+<div class="Section" {% if data.autoScroll %}data-control="imageStrip" data-options='{{ options | escape() | raw }}'{% endif %}>
     <div class="Flex">
-        <div class="Flex-container Flex-container--nowrap Flex-container--justifyCenter Flex-container--smallGap">
-            {% for image in data.images %}
-                <div class="Flex-col Flex-col--auto">
-                    <img src="{{ image|media }}" alt="" class="ImageStrip-image">
+        <div class="Flex-container">
+            <div class="Flex-col">
+                <div class="ImageStrip-wrapper">
+                    <div class="ImageStrip-container ImageStrip-container--{{ data.centered ? 'centered' : 'basic' }}">
+                        {% for image in data.images %}
+                            <img src="{{ image | media | resize(null, 80) }}" alt="" class="ImageStrip-image">
+                        {% endfor %}
+                    </div>
                 </div>
-            {% endfor %}
+            </div>
         </div>
     </div>
 </div>

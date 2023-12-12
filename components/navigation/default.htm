@@ -1,7 +1,13 @@
 {% set nav = __SELF__.getNav() %}
 {% set availableSites = sitePicker.sites %}
 
-<div class="Navigation Navigation--{{ record.menuStyle }} Navigation--desktop" data-control="navigation">
+{% set menuStyle = record.menuStyle %}
+
+{% if not record.menuStyle %}
+    {% set menuStyle = 'solid' %}
+{% endif %}
+
+<div class="Navigation Navigation--{{ menuStyle }} Navigation--desktop" data-control="navigation">
     <div class="Flex">
         <div class="Flex-container Flex-container--justifyBetween Flex-container--stretch">
             <div class="Navigation-brand">

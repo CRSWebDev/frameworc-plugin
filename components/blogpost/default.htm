@@ -1,0 +1,18 @@
+{% set post = __SELF__.post()  %}
+
+<div class="Section">
+    <div class="Flex">
+        <div class="Flex-container">
+            <div class="BlogPost">
+                <div class="BlogPost-header">
+                    <img src="{{ post.image | media | resize(1200,600, {mode: 'crop'}) }}" alt="">
+                    <h1 class="Headline">{{ post.title }}</h1>
+                    <p class="BlogPost-date">{{ post.published_at|date('M d, Y') }}</p>
+                </div>
+                <div class="Content">
+                    {{ post.content | raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

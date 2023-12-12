@@ -1,0 +1,107 @@
+.BlogList {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: var(--spacing-grid-gap);
+
+    &--columns2 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &--columns3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    &--columns4 {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    &-item {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-grid-gap);
+        text-decoration: none;
+    }
+
+    &-itemContent {
+        color: var(--color-text-base);
+    }
+
+    &-itemDate {
+        color: var(--color-primary);
+        margin-bottom: .5rem;
+    }
+
+    &-itemExcerpt {
+        color: var(--color-text-base);
+        margin-top: 1rem;
+    }
+
+    &-itemTags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+    }
+
+    &-itemTag {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        padding: .25rem .5rem;
+        border-radius: var(--border-radius-btn);
+        transition: all .3s ease;
+        text-decoration: none;
+
+        &:hover {
+            background-color: var(--color-primary-transparent);
+            color: var(--color-primary);
+        }
+    }
+
+    &-pagination {
+        .pagination, .page-item {
+            list-style-type: none;
+            list-style-image: none;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .page-link {
+            text-decoration: none;
+            display: inline-block;
+            padding: .5rem .75rem;
+            color: var(--color-primary);
+            transition: all .3s ease;
+            border-radius: var(--border-radius-btn);
+
+            &:hover {
+                background-color: var(--color-primary-transparent);
+            }
+        }
+
+        .page-item {
+            &.active {
+                .page-link {
+                    background-color: var(--color-primary);
+                    color: var(--color-white);
+
+                    &:hover {
+                        background-color: var(--color-primary-transparent);
+                        color: var(--color-primary);
+                    }
+                }
+            }
+
+            &.disabled {
+                .page-link {
+                    pointer-events: none;
+                    background-color: var(--color-gray);
+                    color: var(--color-white);
+                }
+            }
+        }
+    }
+}

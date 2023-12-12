@@ -8,6 +8,7 @@ use Media\Widgets\MediaManager;
 use October\Rain\Support\Facades\Event;
 use October\Rain\Support\Facades\File;
 use System\Classes\PluginBase;
+use System\Models\SiteDefinition;
 
 /**
  * Plugin Information File
@@ -70,6 +71,8 @@ class Plugin extends PluginBase
             'CRSCompany\FrameworC\Components\Prefill' => 'Prefill',
             'CRSCompany\FrameworC\Components\Meta' => 'Meta',
             'CRSCompany\FrameworC\Components\ImageStrip' => 'ImageStrip',
+            'CRSCompany\FrameworC\Components\BlogPost' => 'BlogPost',
+            'CRSCompany\FrameworC\Components\BlogList' => 'BlogList',
         ];
     }
 
@@ -114,6 +117,10 @@ class Plugin extends PluginBase
                 'json_decode' => [$this, 'jsonDecodeFilter'],
                 'base64_encode' => [$this, 'getBase64'],
             ],
+            'functions' => [
+                'isBlogPost' => [$this, 'isBlogPost'],
+                'getBlogPath' => [$this, 'getBlogPath'],
+            ]
         ];
     }
 
@@ -141,5 +148,27 @@ class Plugin extends PluginBase
         $file = file_get_contents($url);
         $base64 = base64_encode($file);
         return $base64;
+    }
+
+    public function isBlogPost($meta) {
+        $url = request()->path();
+
+        if (str_contains($url, $meta->blogBasePath . '/')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getBlogPath($meta, $slug) {
+        $path = '/';
+
+        if (!empty($meta->blogBasePath)) {
+            $path .= $meta->blogBasePath . '/';
+        }
+
+        $path .= $slug;
+
+        return $path;
     }
 }
