@@ -26,11 +26,6 @@ class BlogPost extends ComponentBase
         return [];
     }
 
-    public function onRun()
-    {
-        $this->addCss(['components/blogpost/BlogPost.scss']);
-    }
-
     public function post()
     {
         $slug = $this->getPostSlug($this->param('fullslug'));

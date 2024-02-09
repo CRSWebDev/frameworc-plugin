@@ -33,12 +33,6 @@ class Form extends ComponentBase
         return [];
     }
 
-    public function onRun()
-    {
-        $this->addCss(['components/form/Form.scss']);
-        $this->addJs(['components/form/Form.js']);
-    }
-
     public function onSubmit() {
         $data = Input::all();
 
@@ -113,7 +107,7 @@ class Form extends ComponentBase
             'formItems' => $data,
         ];
 
-        Mail::send('crs.frameworc::mail.templates.form-backend', $emailVars, function($message) use ($file) {
+        Mail::send('crscompany.frameworc::mail.templates.form-backend', $emailVars, function($message) use ($file) {
             $message->to('vojta.klos@gmail.com', 'FrameworC email');
 
             if (!empty($file)) {
@@ -125,7 +119,7 @@ class Form extends ComponentBase
         });
 
         if (!empty($data['email'])) {
-            Mail::send('crs.frameworc::mail.templates.form-client', $emailVars, function($message) use ($data) {
+            Mail::send('crscompany.frameworc::mail.templates.form-client', $emailVars, function($message) use ($data) {
                 $message->to($data['email'], 'FrameworC email');
             });
         }

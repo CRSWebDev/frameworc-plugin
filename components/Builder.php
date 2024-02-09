@@ -54,5 +54,12 @@ class Builder extends ComponentBase
     {
         $this->addCss(['components/builder/normalize.scss']);
         $this->addCss(['components/builder/base.scss']);
+
+        $this->addJs([
+            'components/accordion/Accordion.js',
+            'components/form/Form.js',
+            'components/imagestrip/ImageStrip.js',
+            'components/slider/Slider.js',
+        ]);
     }
 }

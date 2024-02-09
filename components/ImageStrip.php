@@ -24,10 +24,4 @@ class ImageStrip extends ComponentBase
     {
         return [];
     }
-
-    public function onRun()
-    {
-        $this->addCss(['components/imagestrip/ImageStrip.scss']);
-        $this->addJs(['components/imagestrip/ImageStrip.js']);
-    }
 }

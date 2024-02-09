@@ -24,9 +24,4 @@ class Tiles extends ComponentBase
     {
         return [];
     }
-
-    public function onRun()
-    {
-        $this->addCss(['components/tiles/Tiles.scss']);
-    }
 }

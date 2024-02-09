@@ -5,11 +5,17 @@
             Builder-container--{{ block.containerWidth ? block.containerWidth : 'defaultWidth' }}
             Builder-container--{{ block.backgroundColor ? block.backgroundColor : 'defaultBg' }}
             Builder-container--{{ block.elevated ? 'elevated' : 'notElevated' }}
+
+            {{ block.customCssClass }}
         "
         {% if block.backgroundImage %}
             style="background-image: url({{ block.backgroundImage | media }});"
         {% endif %}
     >
-        {% component block.content_group ~ loop.index0 data=block %}
+        {% if block.aliasOverride %}
+            {% component block.aliasOverride data=block %}
+        {% else %}
+            {% component block.content_group ~ loop.index0 data=block %}
+        {% endif %}
     </div>
 {% endfor %}

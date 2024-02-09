@@ -26,12 +26,6 @@ class Navigation extends ComponentBase
         return [];
     }
 
-    public function onRun()
-    {
-        $this->addCss(['components/navigation/Navigation.scss']);
-        $this->addJs(['components/navigation/Navigation.js']);
-    }
-
     public function getNav() {
         $nav = EntryRecord::inSection('Navigation')
             ->first();

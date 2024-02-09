@@ -26,11 +26,6 @@ class BlogList extends ComponentBase
         return [];
     }
 
-    public function onRun()
-    {
-        $this->addCss(['components/bloglist/BlogList.scss']);
-    }
-
     public function posts($perPage = 5)
     {
         return EntryRecord::inSection('BlogPost')->paginate($perPage);

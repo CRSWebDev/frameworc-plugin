@@ -7,3 +7,4 @@ v0.4.1: Fixed buttons, added alias overrid for blocks, custom svg icon for accor
 v1.0.0: First stable version
 v1.0.1: Bumped OctoberCMS version
 v1.0.2: Added Blog and ImageStrip components
+v1.0.3: Fixed lots of issues

@@ -10,9 +10,9 @@
 <div class="Navigation Navigation--{{ menuStyle }} Navigation--desktop" data-control="navigation">
     <div class="Flex">
         <div class="Flex-container Flex-container--justifyBetween Flex-container--stretch">
-            <div class="Navigation-brand">
+            <a href="/" class="Navigation-brand">
                 <img src="{{ nav.logo | media }}" alt="" class="Navigation-logo">
-            </div>
+            </a>
             {% partial '@desktop' %}
             {% partial '@hamburger' %}
         </div>

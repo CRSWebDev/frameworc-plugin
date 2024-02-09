@@ -24,10 +24,4 @@ class Accordion extends ComponentBase
     {
         return [];
     }
-
-    public function onRun()
-    {
-        $this->addCss(['components/accordion/Accordion.scss']);
-        $this->addJs(['components/accordion/Accordion.js']);
-    }
 }

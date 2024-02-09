@@ -16,8 +16,12 @@
             <div class="Flex-col">
                 {% set c = loop.index0 %}
                 {% for block in column.builder %}
-                    <div id="{{ block.blockId }}">
-                        {% component block.content_group ~ 'Column' ~ c ~ 'Block' ~ loop.index0 data=block %}
+                    <div id="{{ block.blockId }}" class="{{ block.customCssClass }}">
+                        {% if block.aliasOverride %}
+                            {% component block.aliasOverride data=block %}
+                        {% else %}
+                            {% component block.content_group ~ 'Column' ~ c ~ 'Block' ~ loop.index0 data=block %}
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>

@@ -24,9 +24,4 @@ class Header extends ComponentBase
     {
         return [];
     }
-
-    public function onRun()
-    {
-        $this->addCss(['components/header/Header.scss']);
-    }
 }

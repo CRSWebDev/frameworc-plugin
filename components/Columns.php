@@ -38,9 +38,4 @@ class Columns extends ComponentBase
             }
         }
     }
-
-    public function onRun()
-    {
-        $this->addCss(['components/columns/Columns.scss']);
-    }
 }

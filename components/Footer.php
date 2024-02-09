@@ -26,11 +26,6 @@ class Footer extends ComponentBase
         return [];
     }
 
-    public function onRun()
-    {
-        $this->addCss(['components/footer/Footer.scss']);
-    }
-
     public function getNav() {
         $nav = EntryRecord::inSection('Footer')
             ->first();

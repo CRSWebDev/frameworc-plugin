@@ -24,10 +24,4 @@ class Slider extends ComponentBase
     {
         return [];
     }
-
-    public function onRun()
-    {
-        $this->addCss(['components/slider/Slider.scss']);
-        $this->addJs(['components/slider/Slider.js']);
-    }
 }
