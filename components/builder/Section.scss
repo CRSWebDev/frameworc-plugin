@@ -29,6 +29,17 @@
     }
 }
 
+.Section--backgroundImage {
+    .Flex-container {
+        align-items: stretch;
+    }
+
+    .Flex-col {
+        background-size: cover;
+        background-position: center;
+    }
+}
+
 @media (max-width: 768px) {
     .Section {
         .Flex {

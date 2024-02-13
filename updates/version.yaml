@@ -8,3 +8,4 @@ v1.0.0: First stable version
 v1.0.1: Bumped OctoberCMS version
 v1.0.2: Added Blog and ImageStrip components
 v1.0.3: Fixed lots of issues
+v1.0.4: Added background image to section

@@ -3,7 +3,7 @@
     {% set colClass = 'Flex-col' %}
 {% endif %}
 
-<div class="Section {{ data | moduleMods('Section', ['accent', 'contrast', 'narrow']) }}">
+<div class="Section {{ data | moduleMods('Section', ['accent', 'contrast', 'narrow', 'backgroundImage']) }}">
     <div class="Flex {{ data.reverse ? 'Flex--reverse' : '' }}">
         <div class="Flex-container">
             {% if not data.noText %}
@@ -32,13 +32,15 @@
                 </div>
             {% endif %}
             {% if not data.noImage %}
-                <div class="{{ colClass }}">
+                <div class="{{ colClass }}" {% if data.backgroundImage %}style="background-image: url({{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'landscape'}) }})"{% endif %}>
                     {% if data.noText %}
                         <div class="Headline">
                             {{ block.headline | content }}
                         </div>
                     {% endif %}
-                    <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'landscape'}) }}" alt="{{ data.headline }}" />
+                    {% if not data.backgroundImage %}
+                        <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'landscape'}) }}" alt="{{ data.headline }}" />
+                    {% endif %}
                 </div>
             {% endif %}
         </div>
