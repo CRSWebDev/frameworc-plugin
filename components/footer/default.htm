@@ -1,4 +1,5 @@
 {% set nav = Footer.getNav() %}
+{% set menu = Footer.getMenu(nav.nav.navigation) %}
 
 <footer class="Footer">
     <div class="Flex">
@@ -8,15 +9,17 @@
             </div>
             <div class="Flex-col">
                 <div class="Footer-navWrapper">
-                    {% for item in nav.nav %}
-                        <div class="Footer-nav">
-                            <a href="{{ item.link | link }}" class="Footer-item">{{ item.label }}</a>
-                            {% if item.children | length > 0 %}
-                                {% for child in item.children %}
-                                    <a href="{{ child.link | link }}" class="Footer-item Footer-item--child">{{ child.label }}</a>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
+                    {% for item in menu %}
+                        {% if not item.parent_id %}
+                            <div class="Footer-nav">
+                                <a href="{{ item.url | link }}" class="Footer-item">{{ item.title }}</a>
+                                {% if item.children | length > 0 %}
+                                    {% for child in item.children %}
+                                        <a href="{{ child.url | link }}" class="Footer-item Footer-item--child">{{ child.title }}</a>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

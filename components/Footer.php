@@ -32,4 +32,26 @@ class Footer extends ComponentBase
 
         return $nav;
     }
+
+    public function getMenu($nav) {
+        $menu = [];
+        foreach ($nav as $item) {
+            if ($item['parent_id'] == null) {
+                $menu[$item->id] = [
+                    'title' => $item->title,
+                    'url' => $item->url,
+                    'blank' => $item->blank,
+                    'children' => []
+                ];
+            } else {
+                $menu[$item->parent_id]['children'][] = [
+                    'title' => $item->title,
+                    'url' => $item->url,
+                    'blank' => $item->blank
+                ];
+            }
+        }
+
+        return $menu;
+    }
 }

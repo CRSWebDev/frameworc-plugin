@@ -10,9 +10,16 @@
         border-radius: 0;
     }
 
+    &-navWrapper {
+        display: flex;
+        justify-content: space-around;
+        gap: 2rem;
+    }
+
     &-nav {
         display: flex;
-        gap: 2rem;
+        flex-direction: column;
+        gap: .2rem;
         flex-wrap: wrap;
     }
 

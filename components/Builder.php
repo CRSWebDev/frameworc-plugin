@@ -60,6 +60,7 @@ class Builder extends ComponentBase
             'components/form/Form.js',
             'components/imagestrip/ImageStrip.js',
             'components/slider/Slider.js',
+            'components/navigation/Navigation.js'
         ]);
     }
 }
