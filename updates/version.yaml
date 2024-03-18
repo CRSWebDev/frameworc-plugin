@@ -10,3 +10,4 @@ v1.0.2: Added Blog and ImageStrip components
 v1.0.3: Fixed lots of issues
 v1.0.4: Added background image to section
 v1.0.5: Updated menu system with new October features
+v1.0.6: Removed dependency on Tailor export plugin

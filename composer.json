@@ -6,7 +6,6 @@
     "require": {
         "composer/installers": "~1.0",
         "october/rain": "~v3.5",
-        "ext-zip": "*",
-        "crscompany/tailordataexport-plugin": "~v1.0.1"
+        "ext-zip": "*"
     }
 }
