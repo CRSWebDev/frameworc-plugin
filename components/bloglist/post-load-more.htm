@@ -1,0 +1,13 @@
+{% set hasMore = (posts.nextPage - 1) * posts.perPage < posts.total %}
+
+{% if hasMore %}
+    <button
+        class="Button"
+        type="button"
+        data-request="{{ __SELF__ }}::onLoadMore"
+        data-request-data='{"perPage": {{ posts.perPage }}, "nextPage": {{ posts.nextPage }}, "uniqueId": "{{ posts.uniqueId }}"}'
+        data-request-before-update="oc.visit('{{ this.request.url }}?{{ posts.tag ? 't=' ~ posts.tag ~ '&' }}p={{ posts.nextPage }}', { action: 'swap', scroll: false });"
+    >
+        {{ 'blog.load_more'|_ }}
+    </button>
+{% endif %}

@@ -1,0 +1,46 @@
+.Infobar {
+    background-color: var(--color-primary);
+    display: none;
+
+    h1,h2,h3,h4,h5,p {
+        color: var(--color-white);
+        font-size: 15px;
+        font-weight: bold;
+        margin-top: 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+    &-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    &-close {
+        border: 0;
+        background-color: rgba(0,0,0,.3);
+        border-radius: 8px;
+        padding: 7px 7px 5px 7px;
+        cursor: pointer;
+
+        svg {
+            stroke: var(--color-white);
+            width: 15px;
+            height: 15px;
+        }
+
+        &:hover {
+            background-color: rgba(0,0,0,.1);
+        }
+    }
+}

@@ -12,8 +12,8 @@
 
     &-navWrapper {
         display: flex;
-        justify-content: space-around;
-        gap: 2rem;
+        justify-content: flex-end;
+        gap: 4rem;
     }
 
     &-nav {
@@ -56,6 +56,43 @@
         &:hover {
             color: var(--color-primary-accent);
             text-decoration: none;
+        }
+    }
+
+    &-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &-socials {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &-social {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            width: 30px;
+            height: 30px;
+
+            path {
+                transition: all ease .2s;
+                fill: var(--color-text-base);
+            }
+        }
+
+        &:hover {
+            svg {
+                path {
+                    opacity: .7;
+                }
+            }
         }
     }
 

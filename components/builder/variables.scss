@@ -29,7 +29,7 @@
 
     --spacing-section: 5rem;
     --spacing-gap: 5rem;
-    --spacing-navbar: 50px;
+    --spacing-navbar: 72px;
     --spacing-grid-gap: 1.5rem;
 
     --color-alert-success-bg: #C2F3D6;
@@ -42,6 +42,16 @@
     --color-placeholder: #d0d0d0;
 
     --imageStrip-height: 80px;
+
+    --altcha-border-width: 0;
+    --altcha-border-radius: 3px;
+    --altcha-color-base: #ffffff;
+    --altcha-color-border: #a0a0a0;
+    --altcha-color-text: currentColor;
+    --altcha-color-border-focus: currentColor;
+    --altcha-color-error-text: #f23939;
+    --altcha-color-footer-bg: #f4f4f4;
+    --altcha-max-width: auto;
 }
 
 @media (max-width: 768px) {

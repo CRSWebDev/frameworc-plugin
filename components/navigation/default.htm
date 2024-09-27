@@ -8,11 +8,23 @@
     {% set menuStyle = 'solid' %}
 {% endif %}
 
+{% if this.site.is_prefixed %}
+    {% set code = '/' ~ this.site.code ~ '/' %}
+{% else %}
+    {% set code = '/' %}
+{% endif %}
+
+{% set current = code ~ this.param.fullslug %}
+
 <div class="Navigation Navigation--{{ menuStyle }} Navigation--desktop" data-control="navigation">
-    <div class="Flex">
+    {% if nav.showInfobar %}
+        {% partial '@infobar' %}
+    {% endif %}
+    <div class="Flex Flex--navbar">
         <div class="Flex-container Flex-container--justifyBetween Flex-container--stretch">
-            <a href="/" class="Navigation-brand">
-                <img src="{{ nav.logo | media }}" alt="" class="Navigation-logo">
+            <a href="{{ code }}" class="Navigation-brand">
+                <img src="{{ nav.logoDark | media }}" alt="" class="Navigation-logo Navigation-logo--dark">
+                <img src="{{ nav.logo | media }}" alt="" class="Navigation-logo Navigation-logo--light">
             </a>
             {% partial '@desktop' %}
             {% partial '@hamburger' %}

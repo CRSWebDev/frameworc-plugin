@@ -10,7 +10,7 @@
                 <div class="{{ colClass }}">
                     {% if block.headline %}
                         <div class="Headline">
-                            {{ block.headline | content }}
+                            {{ block.headline | spacer | content }}
                         </div>
                     {% endif %}
                     <div class="Buttons">
@@ -32,14 +32,15 @@
                 </div>
             {% endif %}
             {% if not data.noImage %}
-                <div class="{{ colClass }}" {% if data.backgroundImage %}style="background-image: url({{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'landscape'}) }})"{% endif %}>
+                <div class="{{ colClass }}"
+                     {% if data.backgroundImage %}style="background-image: {{ data.image | imageset(imgDimensions.w, imgDimensions.h, 'landscape') }}"{% endif %}>
                     {% if data.noText %}
                         <div class="Headline">
-                            {{ block.headline | content }}
+                            {{ block.headline | spacer | content }}
                         </div>
                     {% endif %}
                     {% if not data.backgroundImage %}
-                        <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'landscape'}) }}" alt="{{ data.headline }}" />
+                        <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'landscape'}) }}" srcset="{{ data.image | srcset(imgDimensions.w, imgDimensions.h, 'landscape') }}" alt="{{ data.headline }}" />
                     {% endif %}
                 </div>
             {% endif %}

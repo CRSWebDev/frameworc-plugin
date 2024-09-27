@@ -1,0 +1,19 @@
+<div class="callout fade in callout-info no-subheader">
+    <div class="header">
+        <i class="icon-info"></i>
+        <h3>Nápověda ke komponentě "Menu"</h3>
+    </div>
+    <div class="content">
+        <p>
+            "Menu" můžete vytvářet v administraci v sekci <a href="{{ url('admin/tailor/entries/menu') }}" target="_blank">Menus</a>.
+        </p>
+        {% if model.menu.id %}
+            <p>
+                Pro úpravu vybraného Menu <strong>{{ model.menu.title }}</strong> <a href="{{ url('admin/tailor/entries/menu/' ~ model.menu.id) }}" target="_blank">klikněte sem</a>
+            </p>
+        {% endif %}
+        <p>
+            Po vytvoření můžete vybrat Menu, které chcete vložit do obsahu stránky níže.<br>
+        </p>
+    </div>
+</div>

@@ -14,7 +14,7 @@
                 {{ form_ajax(__SELF__ ~ '::onSubmit', {flash: true, validate: true, class: formClass, id: formId, files: true, novalidate: true}) }}
                     {% if block.headline %}
                         <div class="Headline">
-                            {{ block.headline | content }}
+                            {{ block.headline | spacer | content }}
                         </div>
                     {% endif %}
                     <div id="frameworc-form-error-{{ data.id }}"></div>
@@ -38,6 +38,23 @@
                         {% else %}
                             <button type="submit" class="Button Button--contrast" data-attach-loading></button>
                         {% endif %}
+
+                        <altcha-widget
+                            challengeurl="/api/captcha"
+                            auto="onload"
+                            hidefooter
+                            hidelogo
+                            strings='{
+                                "ariaLinkLabel": "{{ 'form.captcha.ariaLinkLabel'|_ }}",
+                                "error": "{{ 'form.captcha.error'|_ }}",
+                                "expired": "{{ 'form.captcha.expired'|_ }}",
+                                "footer": "{{ 'form.captcha.footer'|_ }}",
+                                "label": "{{ 'form.captcha.label'|_ }}",
+                                "verified": "{{ 'form.captcha.verified'|_ }}",
+                                "verifying": "{{ 'form.captcha.verifying'|_ }}",
+                                "waitAlert": "{{ 'form.captcha.waitAlert'|_ }}"
+                            }'
+                        ></altcha-widget>
                     </div>
                 {{ form_close() }}
             </div>

@@ -1,7 +1,7 @@
 {% if sitePicker.sites | length > 1 %}
     <div class="Navigation-itemWrapper Navigation-itemWrapper--sitePicker">
         <a href="#" class="Navigation-item">
-            <img src="/plugins/crscompany/frameworc/components/navigation/flags/{{ this.site.code }}.svg" alt="{{ this.site.code }}" class="Navigation-flag">
+            {{ this.site.name }}
             <span class="Navigation-itemIcon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
             </span>
@@ -11,7 +11,7 @@
                 {% for site in sitePicker.sites %}
                     {% if this.site.code != site.code %}
                         <a href="{{ site.url }}" class="Navigation-item Navigation-item--child" title="{{ site.name }}">
-                            {{ site.name }}<img src="/plugins/crscompany/frameworc/components/navigation/flags/{{ site.code }}.svg" alt="{{ site.code }}" class="Navigation-flag">
+                            {{ site.name }}
                         </a>
                     {% endif %}
                 {% endfor %}

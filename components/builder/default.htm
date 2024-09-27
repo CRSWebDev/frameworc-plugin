@@ -1,6 +1,6 @@
 {% for block in record.builder %}
     <div
-        id="{{ block.blockId }}"
+        id="{{ str_slug(block.blockId) }}"
         class="
             Builder-container--{{ block.containerWidth ? block.containerWidth : 'defaultWidth' }}
             Builder-container--{{ block.backgroundColor ? block.backgroundColor : 'defaultBg' }}

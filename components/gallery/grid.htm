@@ -1,0 +1,24 @@
+{% set columns = data.columns ?: 3 %}
+
+{% set resizeWidth = 768 %}
+
+{% if 1200 / columns > 768 %}
+    {% set resizeWidth = 1200 / columns %}
+{% endif %}
+
+<div class="Flex-container">
+    <div class="Flex-col">
+        <div class="Gallery" data-control="gallery" data-options='{"columns": {{ columns }}}'>
+            <div class="Gallery-imageHolder">
+                {% for item in data.images %}
+                    <img src="{{ item | media | resize(resizeWidth) }}" srcset="{{ item | srcset(resizeWidth, null, 'auto') }}" data-lightbox="{{ item | media | resize(null, 1500) }}" class="Gallery-image">
+                {% endfor %}
+            </div>
+            <div class="Gallery-container" data-gallery>
+                {% for i in 1..columns %}
+                    <div class="Gallery-column" style="flex: 0 0 calc({{ 100 / columns }}%);"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

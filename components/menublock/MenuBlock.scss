@@ -1,0 +1,106 @@
+.MenuBlock {
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+
+    &-itemWrapper {
+        position: relative;
+    }
+
+    &-item {
+        display: inline-flex;
+        align-items: center;
+        padding: 20px 0;
+        border-bottom: 4px solid transparent;
+        margin-right: 20px;
+        transition: all .2s;
+        color: var(--color-nav-items);
+        text-decoration: none;
+        font-weight: bold;
+        gap: 8px;
+        white-space: nowrap;
+
+        &:hover {
+            color: var(--color-text-base);
+            border-bottom-color: var(--color-text-base);
+
+            & + .MenuBlock-subNavWrapper {
+                opacity: 1;
+                height: auto;
+            }
+        }
+
+        &.isActive {
+            border-bottom-color: var(--color-text-base);
+            color: var(--color-text-base);
+        }
+
+        &:has(+ .MenuBlock-subNavWrapper:hover) {
+            border-bottom-color: var(--color-text-base);
+            color: var(--color-text-base);
+        }
+    }
+
+    &-item--child {
+        padding: .8rem 1.2rem;
+        white-space: nowrap;
+        display: block;
+        box-sizing: border-box;
+        margin-right: 0;
+        border-bottom: 0;
+
+        &:hover {
+            border-bottom: 0;
+            background-color: var(--color-primary-transparent);
+            color: var(--color-primary);
+        }
+
+        &:first-child {
+            display: none;
+        }
+    }
+
+    &-itemIcon {
+        transform: rotate(90deg);
+        pointer-events: none;
+
+        svg {
+            width: 10px;
+            height: 10px;
+            fill: var(--color-muted);
+        }
+    }
+
+    &-subNavWrapper {
+        opacity: 0;
+        height: 0;
+        overflow-y: hidden;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        transition: opacity ease .3s, height ease .3s;
+        background-color: var(--color-bg-base);
+        border-radius: 0 0 5px 5px;
+        box-shadow: var(--shadow-base);
+
+        &:hover, &.isActive {
+            opacity: 1;
+            height: auto;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .MenuBlock {
+        &-item--child {
+            &:first-child {
+                display: block;
+            }
+        }
+    }
+}

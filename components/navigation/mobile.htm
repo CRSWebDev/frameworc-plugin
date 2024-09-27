@@ -25,4 +25,23 @@
             {% endif %}
         {% endif %}
     {% endfor %}
+
+    {% if nav.extraNavLabel and nav.extraNavLink %}
+        <div class="Navigation-extraLinkWrapper">
+            <a href="{{ nav.extraNavLink | link }}" class="Navigation-extraLink">{{ nav.extraNavLabel }}</a>
+        </div>
+    {% endif %}
+
+    <div class="Navigation-sitepicker Navigation-sitePicker--mobile">
+        {% for site in sitePicker.sites %}
+            {% set active = false %}
+
+            {% if this.site.code == site.code %}
+                {% set active = true %}
+            {% endif %}
+                <a href="{{ site.url }}" class="Navigation-item Navigation-item--child {{ active ? 'isActive' }}" title="{{ site.name }}">
+                    {{ site.name }}
+                </a>
+        {% endfor %}
+    </div>
 </div>

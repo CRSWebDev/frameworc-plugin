@@ -26,6 +26,12 @@ class BlogPost extends ComponentBase
         return [];
     }
 
+    public function onRun()
+    {
+        $this->addComponent('CRSCompany\FrameworC\Components\Downloads', 'Downloads', []);
+        $this->addComponent('CRSCompany\FrameworC\Components\Gallery', 'Gallery', []);
+    }
+
     public function post()
     {
         $slug = $this->getPostSlug($this->param('fullslug'));

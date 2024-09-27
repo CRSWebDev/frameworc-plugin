@@ -1,7 +1,11 @@
 {% set block = __SELF__.property('data') %}
 {% set data = block.content %}
 
-{% set posts = __SELF__.posts(data.perPage) %}
+{% set uniqueId = str_slug(block.blockId) ~ block.id %}
+
+{% set posts = __SELF__.posts(data.perPage, uniqueId, data.pagination) %}
+
+{% set tags = __SELF__.getTags() %}
 
 <div class="Section">
     <div class="Flex">
@@ -9,46 +13,29 @@
             <div class="Flex-container">
                 <div class="Flex-col">
                     <div class="Headline">
-                        {{ block.headline | content }}
+                        {{ block.headline | spacer | content }}
                     </div>
                 </div>
             </div>
         {% endif %}
         <div class="Flex-container">
             <div class="Flex-col">
-                <div class="BlogList BlogList--columns{{ data.count }}">
-                    {% for post in posts %}
-                        <a href="{{ getBlogPath(meta, post.slug) }}" class="BlogList-item">
-                            <div class="BlogList-itemImage">
-                                <img src="{{ post.image | media | resize(500,300, {mode: 'crop'}) }}" alt="{{ post.title }}" />
-                            </div>
-                            <div class="BlogList-itemContent">
-                                <h2 class="Headline">
-                                    {{ post.title }}
-                                </h2>
-                                <div class="BlogList-itemDate">
-                                    {{ post.published_at|date('d.m.Y') }}
-                                </div>
-                                <div class="BlogList-itemTags">
-                                    {% for tag in post.tags %}
-                                        <span class="BlogList-itemTag">
-                                            {{ tag.title }}
-                                        </span>
-                                    {% endfor %}
-                                </div>
-                                <div class="BlogList-itemExcerpt">
-                                    {{ post.perex }}
-                                </div>
-                            </div>
-                            <div class="BlogList-itemReadMore">
-                                {{ 'Číst více'|_ }}
-                            </div>
-                        </a>
+                <div class="BlogList-categories">
+                    <a href="?">{{ 'blog.all_categories'|_ }}</a>
+                    {% for tag in tags %}
+                        <a href="?t={{ tag.slug }}" class="BlogList-category">{{ tag.title }}</a>
                     {% endfor %}
                 </div>
+            </div>
+        </div>
+        <div class="Flex-container">
+            <div class="Flex-col">
+                <div class="BlogList BlogList--columns{{ data.count }}" id="blog-wrapper-{{ uniqueId }}">
+                    {% partial '@post-items' posts=posts.items %}
+                </div>
                 {% if data.pagination %}
-                    <div class="BlogList-pagination">
-                        {{ pager(posts) }}
+                    <div class="BlogList-pagination" id="blog-load-more-wrapper-{{ uniqueId }}">
+                        {% ajaxPartial '@post-load-more' posts=posts %}
                     </div>
                 {% endif %}
             </div>

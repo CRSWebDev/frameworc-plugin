@@ -10,7 +10,7 @@
                 <div class="{{ colClass }}">
                     {% if block.headline %}
                         <div class="Headline">
-                            {{ block.headline | content }}
+                            {{ block.headline | spacer | content }}
                         </div>
                     {% endif %}
                     {% for i in 1..2 %}
@@ -33,7 +33,7 @@
                 <div class="{{ colClass }}">
                     {% if data.noText %}
                         <div class="Headline">
-                            {{ block.headline | content }}
+                            {{ block.headline | spacer | content }}
                         </div>
                     {% endif %}
                     {{ data.embed | raw }}

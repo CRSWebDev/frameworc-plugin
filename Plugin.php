@@ -2,12 +2,14 @@
 
 use Backend;
 use Cms\Classes\Page;
+use CRSCompany\FrameworC\Classes\Spacer;
 use Illuminate\Support\Facades\Storage;
 use Media\Classes\MediaLibrary;
 use Media\Widgets\MediaManager;
 use October\Rain\Support\Facades\Event;
 use October\Rain\Support\Facades\File;
 use System\Classes\PluginBase;
+use System\Classes\ResizeImages;
 use System\Models\SiteDefinition;
 
 /**
@@ -73,6 +75,9 @@ class Plugin extends PluginBase
             'CRSCompany\FrameworC\Components\ImageStrip' => 'ImageStrip',
             'CRSCompany\FrameworC\Components\BlogPost' => 'BlogPost',
             'CRSCompany\FrameworC\Components\BlogList' => 'BlogList',
+            'CRSCompany\FrameworC\Components\MenuBlock' => 'MenuBlock',
+            'CRSCompany\FrameworC\Components\Gallery' => 'Gallery',
+            'CRSCompany\FrameworC\Components\Downloads' => 'Downloads',
         ];
     }
 
@@ -114,8 +119,12 @@ class Plugin extends PluginBase
             'filters' => [
                 'moduleMods' => [$this, 'moduleModsFilter'],
                 'svg' => [$this, 'svgFilter'],
+                'svgAsset' => [$this, 'svgAssetFilter'],
                 'json_decode' => [$this, 'jsonDecodeFilter'],
                 'base64_encode' => [$this, 'getBase64'],
+                'spacer' => [$this, 'spacerFilter'],
+                'srcset' => [$this, 'srcsetFilter'],
+                'imageset' => [$this, 'imagesetFilter'],
             ],
             'functions' => [
                 'isBlogPost' => [$this, 'isBlogPost'],
@@ -140,6 +149,12 @@ class Plugin extends PluginBase
         return $svg;
     }
 
+    public function svgAssetFilter($url) {
+        $url = $url . '.svg';
+
+        return File::get(base_path($url));
+    }
+
     public function jsonDecodeFilter($json) {
         return json_decode($json, true);
     }
@@ -160,7 +175,7 @@ class Plugin extends PluginBase
         return false;
     }
 
-    public function getBlogPath($meta, $slug) {
+    public function getBlogPath($meta, $slug = '') {
         $path = '/';
 
         if (!empty($meta->blogBasePath)) {
@@ -170,5 +185,45 @@ class Plugin extends PluginBase
         $path .= $slug;
 
         return $path;
+    }
+
+    /*
+     * Spacer filter adds &nbsp; to content based on Czech language rules.
+     */
+    public function spacerFilter($content) {
+        $content = Spacer::addNbsp($content);
+        return $content;
+    }
+
+    public function srcsetFilter($image, $initialWidth = 600, $initialHeight = 400, $mode = 'crop') {
+        $sizes = [1.5, 2, 3];
+
+        $path = MediaLibrary::url($image);
+        $srcset = '';
+        foreach ($sizes as $size) {
+            $srcset .= ResizeImages::resize($path, intval($initialWidth * $size), intval($initialHeight * $size), ['mode' => $mode]) . ' ' . $size . 'x';
+            if ($size !== end($sizes)) {
+                $srcset .= ', ';
+            }
+        }
+
+        return $srcset;
+    }
+
+    public function imagesetFilter($image, $initialWidth = 600, $initialHeight = 400, $mode = 'crop') {
+        $sizes = [1, 1.5, 2, 3];
+
+        $path = MediaLibrary::url($image);
+        $srcset = 'image-set(';
+        foreach ($sizes as $size) {
+            $srcset .= 'url(\'' . ResizeImages::resize($path, intval($initialWidth * $size), intval($initialHeight * $size), ['mode' => $mode]) . '\') ' . $size . 'x';
+            if ($size !== end($sizes)) {
+                $srcset .= ', ';
+            }
+        }
+
+        $srcset .= ')';
+
+        return $srcset;
     }
 }

@@ -16,7 +16,7 @@
             <div class="Flex-container">
                 <div class="Flex-col">
                     <div class="Headline">
-                        {{ block.headline | content }}
+                        {{ block.headline | spacer | content }}
                     </div>
                 </div>
             </div>
@@ -35,14 +35,14 @@
                         {% for slide in data.slides %}
                             <div class="Slider-slide">
                                 <div class="Slider-image">
-                                    <img src="{{ slide.image | media | resize(null, 400) }}" alt="{{ slide.headline }}" draggable="false" />
+                                    <img src="{{ slide.image | media | resize(null, 400) }}" srcset="{{ slide.image | srcset(null, 400, 'auto') }}" alt="{{ slide.headline }}" draggable="false" />
                                 </div>
                                 <div class="Slider-content">
                                     <h3 class="Headline">
                                         {{ slide.headline }}
                                     </h3>
                                     <div class="Content">
-                                        {{ slide.text | content }}
+                                        {{ slide.text | spacer | content }}
                                     </div>
                                 </div>
                             </div>

@@ -1,0 +1,24 @@
+<div class="Flex-container">
+    <div class="Flex-col">
+        <div class="Downloads" id="frameworc-downloads-{{ data.id }}">
+            {% for download in data.files %}
+                <a href="{{ download.file | media }}" class="Downloads-item" target="_blank">
+                    <div class="Downloads-icon">
+                        {% set partialName = 'icons/files/' ~ download.icon %}
+                        {% partial partialName %}
+                    </div>
+                    <div class="Downloads-content">
+                        <div class="Downloads-title">
+                            {{ download.name }}
+                        </div>
+                        {% if download.description %}
+                            <div class="Downloads-description">
+                                {{ download.description | spacer | content }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>

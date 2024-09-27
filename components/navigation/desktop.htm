@@ -1,8 +1,13 @@
 <div class="Navigation-menu Navigation-menu--desktop">
+    <div class="Navigation-underline"></div>
     {% for item in menu %}
         {% if not item.parent_id %}
+            {% set isActive = false %}
+            {% if item.url | link == current | app or (item.url | link == '/' and current == '/home') %}
+                {% set isActive = true %}
+            {% endif %}
             <div class="Navigation-itemWrapper">
-                <a href="{{ item.url | link }}" class="Navigation-item" {% if item.blank %}target="_blank"{% endif %}>
+                <a href="{{ item.url | link }}" class="Navigation-item Navigation-item--level1 {{ isActive ? 'isActive' : '' }}" {% if item.blank %}target="_blank"{% endif %}>
                     {{ item.title }}
                     {% if item.children %}
                         <span class="Navigation-itemIcon">
@@ -24,5 +29,12 @@
             </div>
         {% endif %}
     {% endfor %}
+
+    {% if nav.extraNavLabel and nav.extraNavLink %}
+        <div class="Navigation-extraLinkWrapper">
+            <a href="{{ nav.extraNavLink | link }}" class="Navigation-extraLink">{{ nav.extraNavLabel }}</a>
+        </div>
+    {% endif %}
+
     {% partial '@sitepicker' %}
 </div>

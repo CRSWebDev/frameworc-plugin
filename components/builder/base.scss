@@ -3,6 +3,7 @@
 body, html {
     font-family: 'Inter', sans-serif;
     background-color: var(--color-bg-base);
+    scroll-margin-top: var(--spacing-navbar);
 }
 
 body {
@@ -20,11 +21,6 @@ a {
 img {
     max-width: 100%;
     border-radius: var(--border-radius-img);
-    box-shadow: var(--shadow-base);
-
-    &.no-shadow {
-        box-shadow: none;
-    }
 }
 
 iframe {
@@ -39,6 +35,37 @@ iframe {
 
 .Body--transparentNav {
     padding-top: 0;
+}
+
+.animate {
+    opacity: 0;
+
+    &.isInitialized {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    &.Section--noChildren, &.Section--noChildren.isInitialized {
+        transform: translateY(70px);
+        opacity: 0;
+    }
+
+    &.Section--noChildren.isInitialized.isVisible {
+        transition: all ease .5s;
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .Tiles-tile, .BlogList-item, .Accordion-item, .Gallery-column {
+        opacity: 0;
+        transform: translateY(70px);
+        transition: all ease .5s;
+
+        &.isVisible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 }
 
 //#fwc-main-content {
@@ -59,6 +86,7 @@ iframe {
 @import "./Content.scss";
 @import "./Section.scss";
 @import "./Alert.scss";
+@import "./Lightbox.scss";
 
 // Components
 @import "../navigation/Navigation.scss";
@@ -72,3 +100,7 @@ iframe {
 @import "../imagestrip/ImageStrip.scss";
 @import "../slider/Slider.scss";
 @import "../tiles/Tiles.scss";
+@import "../menublock/MenuBlock.scss";
+@import "../gallery/Gallery.scss";
+@import "../downloads/Downloads.scss";
+@import "../navigation/Infobar.scss";

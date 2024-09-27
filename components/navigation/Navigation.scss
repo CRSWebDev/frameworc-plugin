@@ -1,18 +1,12 @@
 @mixin solidNav {
     background-color: var(--color-bg-base);
-    box-shadow: var(--shadow-base);
+    border-bottom: 1px solid var(--color-muted);
 
     .Navigation-item {
         color: var(--color-text-base);
 
-        &:hover, &:focus, &:active {
+        &.isActive {
             color: var(--color-primary);
-        }
-    }
-
-    .Navigation-itemWrapper {
-        &:hover, &:focus, &:active {
-            background-color: var(--color-primary-transparent);
         }
     }
 
@@ -33,25 +27,35 @@
     .Navigation-subNav {
         background-color: var(--color-white);
     }
+
+    .Navigation-logo--dark {
+        display: block;
+    }
+
+    .Navigation-logo--light {
+        display: none;
+    }
 }
 
 @mixin transparentNav {
     background-color: transparent;
     box-shadow: none;
+    border-bottom: 1px solid var(--color-muted);
 
     .Navigation-item {
         color: var(--color-white);
-    }
 
-    .Navigation-itemWrapper {
-        &:hover, &:focus, &:active {
-            background-color: var(--color-white-transparent);
+        &.isActive {
+            color: var(--color-primary);
         }
     }
 
     .Navigation-item--child {
+        color: var(--color-text-base);
+
         &:hover, &:focus, &:active {
-            background-color: var(--color-white-transparent);
+            color: var(--color-primary);
+            background-color: var(--color-primary-transparent);
         }
     }
 
@@ -64,13 +68,39 @@
     }
 
     .Navigation-subNav {
-        background-color: var(--color-white-transparent);
+        background-color: var(--color-white);
     }
 
     .Navigation-toggle {
         svg {
             path {
                 fill: var(--color-white);
+            }
+        }
+    }
+
+    .Navigation-logo--dark {
+        display: none;
+    }
+
+    .Navigation-logo--light {
+        display: block;
+    }
+
+    &.Navigation.isScrolled {
+        .Navitation-logo--dark {
+            display: block;
+        }
+
+        .Navigation-logo--light {
+            display: none;
+        }
+
+        .Navigation-toggle {
+            svg {
+                path {
+                    fill: var(--color-text-base);
+                }
             }
         }
     }
@@ -82,7 +112,7 @@
     left: 0;
     width: 100%;
     z-index: 9998;
-    transition: background-color ease .3s, box-shadow ease .3s;
+    transition: background-color ease .3s, box-shadow ease .3s, transform ease .3s;
 
     &.isOpen {
         background-color: var(--color-bg-base);
@@ -96,8 +126,12 @@
         }
     }
 
+    &.isHidden {
+        transform: translateY(-100%);
+    }
+
     &-brand {
-        flex: 0 0 300px;
+        flex: 0 1 300px;
         padding: 1rem 0;
     }
 
@@ -110,6 +144,10 @@
     &-menu {
         display: flex;
         align-items: stretch;
+    }
+
+    .Flex--navbar {
+        position: relative;
     }
 
     &-menu--mobile {
@@ -140,10 +178,6 @@
 
     &-itemWrapper {
         position: relative;
-
-        &:hover {
-            background-color: var(--color-primary-transparent);
-        }
     }
 
     &-itemWrapper--sitePicker {
@@ -176,8 +210,6 @@
         padding: 0 1rem;
 
         &:hover, &:focus, &:active {
-            color: var(--color-primary-accent);
-
             & + .Navigation-subNavWrapper {
                 visibility: visible;
                 opacity: 1;
@@ -204,10 +236,6 @@
         padding: .5rem .8rem;
         white-space: nowrap;
         margin: 2px;
-
-        &:hover, &:focus, &:active {
-            background-color: var(--color-primary-transparent);
-        }
     }
 
     &-subNavWrapper {
@@ -261,6 +289,55 @@
                 }
             }
         }
+    }
+
+    &-extraLinkWrapper {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    &-extraLink {
+        padding: 15px 22px;
+        color: var(--color-white);
+        background-color: var(--color-primary);
+        border-radius: var(--border-radius-btn);
+        transition: all ease .3s;
+        font-weight: 700;
+        font-size: 18px;
+        text-decoration: none !important;
+        white-space: nowrap;
+
+        &:hover, &:active, &:focus {
+            background-color: var(--color-primary-accent);
+            color: var(--color-white);
+        }
+    }
+
+    &-sitePicker--mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1rem;
+
+        .Navigation-item {
+            width: auto;
+
+            &.isActive {
+                color: var(--color-primary-transparent);
+            }
+        }
+    }
+
+    &-underline {
+        background-color: var(--color-primary);
+        height: 3px;
+        width: 50px;
+        transition: all ease .3s;
+        position: absolute;
+        top: calc(20px + 50%);
+        opacity: 0;
     }
 }
 
@@ -326,5 +403,15 @@
             box-shadow: none;
             background-color: transparent !important;
         }
-     }
+
+        &-extraLinkWrapper {
+            padding: 15px;
+            height: auto;
+        }
+
+        &-extraLink {
+            width: 100%;
+            text-align: center;
+        }
+    }
 }

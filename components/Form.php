@@ -9,6 +9,8 @@ use October\Rain\Support\Facades\Input;
 use October\Rain\Support\Facades\Mail;
 use Tailor\Models\EntryRecord;
 use Validator;
+use AltchaOrg\Altcha\ChallengeOptions;
+use AltchaOrg\Altcha\Altcha;
 
 /**
  * Form Component
@@ -36,6 +38,12 @@ class Form extends ComponentBase
     public function onSubmit() {
         $data = Input::all();
 
+        $captchaOk = Altcha::verifySolution($data['altcha'], env('ALTCHA_SECRET'));
+
+        if (!$captchaOk) {
+            throw new ValidationException(['altcha' => __('form.captcha.error')]);
+        }
+
         $formId = $data['_form_id'];
         $formTrueId = $data['_form_true_id'];
         $formElement = '#frameworc-form-' . $formId;
@@ -58,12 +66,12 @@ class Form extends ComponentBase
             if ($field->required) {
                 $rules[$field->name] = 'required';
 
-                $messages[$field->name . '.required'] = 'Toto pole je povinné.';
+                $messages[$field->name . '.required'] = __('form.field_is_required');
 
                 if ($field->content_group == 'email') {
                     $rules[$field->name] = 'required|email';
 
-                    $messages[$field->name . '.email'] = 'Zadejte prosím platný email.';
+                    $messages[$field->name . '.email'] = __('form.enter_valid_email');
                 }
             }
 
@@ -102,13 +110,23 @@ class Form extends ComponentBase
         $post->save();
 
         $emailVars = [
-            'header' => 'Nová zpráva z webu',
-            'footer' => 'Jestli vám email došel omylem, neodpovídejte na něj.',
+            'header' => __('form.email_header'),
+            'footer' => __('form.email_footer'),
             'formItems' => $data,
         ];
 
-        Mail::send('crscompany.frameworc::mail.templates.form-backend', $emailVars, function($message) use ($file) {
-            $message->to('vojta.klos@gmail.com', 'FrameworC email');
+        Mail::send('crscompany.frameworc::mail.templates.form-backend', $emailVars, function($message) use ($file, $entry) {
+            $isFirstLoop = true;
+            foreach ($entry->recipients as $recipient) {
+                if ($isFirstLoop) {
+                    $message->to($recipient);
+                    $isFirstLoop = false;
+                } else {
+                    $message->cc($recipient);
+                }
+            }
+
+            $message->subject(__('form.email_backend_subject'));
 
             if (!empty($file)) {
                 $message->attach($file, [
@@ -120,7 +138,8 @@ class Form extends ComponentBase
 
         if (!empty($data['email'])) {
             Mail::send('crscompany.frameworc::mail.templates.form-client', $emailVars, function($message) use ($data) {
-                $message->to($data['email'], 'FrameworC email');
+                $message->to($data['email']);
+                $message->subject(__('form.email_client_subject'));
             });
         }
 
@@ -147,5 +166,16 @@ class Form extends ComponentBase
         }
 
         return $title;
+    }
+
+    public static function onCaptcha() {
+        $options = new ChallengeOptions([
+            'hmacKey'   => env('ALTCHA_SECRET'),
+            'maxNumber' => 50000, // the maximum random number
+        ]);
+
+        $challenge = Altcha::createChallenge($options);
+
+        return json_decode(json_encode($challenge), true);
     }
 }

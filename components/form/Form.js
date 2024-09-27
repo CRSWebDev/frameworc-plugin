@@ -70,6 +70,15 @@ oc.registerControl('form', class extends oc.ControlBase {
         });
 
         Object.keys(e.detail.message.X_OCTOBER_ERROR_FIELDS).forEach((key) => {
+            if (key === 'altcha') {
+                oc.flashMsg({
+                    message: e.detail.message.X_OCTOBER_ERROR_MESSAGE,
+                    type: 'error'
+                });
+
+                return;
+            }
+
             const $el = this.$form.querySelector(`[data-form-field="${key}"]`);
 
             if ($el) {

@@ -55,12 +55,22 @@ class Builder extends ComponentBase
         $this->addCss(['components/builder/normalize.scss']);
         $this->addCss(['components/builder/base.scss']);
 
+        $this->addJs('components/form/altcha.js', [
+            'async' => true,
+            'defer' => true,
+            'type' => 'module'
+        ]);
+
         $this->addJs([
+            'components/builder/global.js',
             'components/accordion/Accordion.js',
             'components/form/Form.js',
             'components/imagestrip/ImageStrip.js',
             'components/slider/Slider.js',
-            'components/navigation/Navigation.js'
+            'components/navigation/Navigation.js',
+            'components/menublock/MenuBlock.js',
+            'components/gallery/Gallery.js',
         ]);
+
     }
 }

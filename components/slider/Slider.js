@@ -151,7 +151,7 @@ oc.registerControl('slider', class extends oc.ControlBase {
 
         this.track.style.gap = `${this.options.gap}px`;
         this.track.style.transitionDuration = this.options.transitionDuration;
-        this.slideWidth = (this.track.offsetWidth - this.options.gap * this.options.perView) / this.options.perView;
+        this.slideWidth = (this.track.offsetWidth - this.options.gap * (this.options.perView - 1)) / this.options.perView;
         this.moveAmount = this.slideWidth + this.options.gap;
 
         this.slides.forEach((slide) => {
@@ -234,7 +234,7 @@ oc.registerControl('slider', class extends oc.ControlBase {
         this.track.style.transitionDuration = '0s';
 
         if (type === 'translate') {
-            translate = value * (syncedPerView / this.options.perView);
+            translate = value * (syncedPerView / (this.options.perView ));
         } else if (type === 'touch') {
             translate =  this.currentTranslate + (this.touchMoveX - this.touchStartX);
         } else {
@@ -303,7 +303,7 @@ oc.registerControl('slider', class extends oc.ControlBase {
 
     update(fireEvent = true) {
         if (this.options.mode === 'slide') {
-            const translate = `translateX(${((this.moveAmount) * this.currentSlide - this.offset) * -1}px)`;
+            const translate = `translateX(${((this.moveAmount) * this.currentSlide) * -1}px)`;
             this.track.style.transform = translate;
         }
 

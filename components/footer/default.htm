@@ -5,7 +5,7 @@
     <div class="Flex">
         <div class="Flex-container">
             <div class="Flex-col">
-                <img src="{{ nav.logo | media }}" alt="ASIDO">
+                <img src="{{ nav.logo | media }}" class="Footer-logo" alt="r2p Invest">
             </div>
             <div class="Flex-col">
                 <div class="Footer-navWrapper">
@@ -23,9 +23,23 @@
                     {% endfor %}
                 </div>
             </div>
+        </div>
+        <div class="Flex-container">
             <div class="Flex-col">
                 <div class="Footer-content">
-                    {{ nav.text | content }}
+                    {{ nav.text | spacer | content }}
+                    <div class="Footer-bottom">
+                        <div class="Footer-madeBy">&copy; {{ 'now'|date('Y') }} {{ nav.madeBy }} <a href="https://crs-company.cz">CRS a.s.</a></div>
+                        <div class="Footer-socials">
+                            {{ nav.stayInTouch }}
+                            {% for social in nav.socials %}
+                                <a href="{{ social.url }}" class="Footer-social">
+                                    {% set partialName = 'icons/socials/' ~ social.site %}
+                                    {% partial partialName %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

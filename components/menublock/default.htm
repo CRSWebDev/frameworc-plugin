@@ -1,0 +1,60 @@
+{% set block = __SELF__.property('data') %}
+{% set data = block.content %}
+
+{% set menu = __SELF__.property('menu') %}
+
+<div class="Section" data-control="menublock">
+    <div class="Flex">
+        {% if block.headline %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="Headline">
+                        {{ block.headline | spacer | content }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="Flex-container">
+            <div class="Flex-col">
+                <div class="MenuBlock">
+                    {% for item in menu %}
+                        <div class="MenuBlock-itemWrapper">
+                            <a href="{{ item.url | link }}"
+                                class="MenuBlock-item {{ this.request.url == item.url | link ? 'isActive' : '' }}"
+                                {% if item.blank %}target="_blank" {% endif %}
+                                id="{{ __SELF__.id }}-{{ loop.index0 }}"
+                               {% if item.children %}data-has-children{% endif %}
+                            >
+                                {{ item.title }}
+                                {% if item.children %}
+                                    <span class="MenuBlock-itemIcon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
+                                    </span>
+                                {% endif %}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+{#                Sub navs #}
+                {% for item in menu %}
+                    {% set parentId = __SELF__.id ~ '-' ~ loop.index0 %}
+                    {% if item.children %}
+                        <div class="MenuBlock-subNavWrapper" data-parent-id="{{ parentId }}">
+                            <div class="MenuBlock-subNav">
+                                <a href="{{ item.url | link }}" class="MenuBlock-item MenuBlock-item--child" {% if item.blank %}target="_blank"{% endif %}>
+                                    {{ item.title }}
+                                </a>
+                                {% for child in item.children %}
+                                    <a href="{{ child.url | link }}" class="MenuBlock-item MenuBlock-item--child" {% if child.blank %}target="_blank"{% endif %}>
+                                        {{ child.title }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
