@@ -99,17 +99,18 @@ oc.registerControl('global', class extends oc.ControlBase {
     }
 
     handleKeydown(e) {
-        e.preventDefault();
-
         if (e.key === 'Escape') {
+            e.preventDefault();
             this.hideLightbox();
         }
 
         if (e.key === 'ArrowLeft') {
+            e.preventDefault();
             this.prevImage();
         }
 
         if (e.key === 'ArrowRight') {
+            e.preventDefault();
             this.nextImage();
         }
     }

@@ -11,7 +11,7 @@
             </div>
         </div>
     {% endif %}
-    <div class="Flex-container Flex-container--columns">
+    <div class="Flex-container Flex-container--columns Flex-container--columns{{ data.columns | length }}">
         {% for column in data.columns %}
             <div class="Flex-col">
                 {% set c = loop.index0 %}

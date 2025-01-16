@@ -1,8 +1,24 @@
 {% set block = __SELF__.property('data') %}
+{% set block_identifier = __SELF__.property('block_identifier') %}
 {% set data = block.content %}
 
-<div class="Header {{ data | moduleMods('Header', ['fullHeight', 'contrast']) }}"
-     style="background-image: {{ data.image | imageset(1920,1080) }};">
+{% put addStyles %}
+    {% if data.image %}
+        .{{ block_identifier }} {
+            background-image: {{ data.image | imageset(1920,1080) }};
+        }
+    {% endif %}
+
+    {% if data.imageMobile %}
+        @media (max-width: 991px) {
+            .{{ block_identifier }} {
+                background-image: {{ data.imageMobile | imageset(991,1200) }};
+            }
+        }
+    {% endif %}
+{% endput %}
+
+<div class="Header {{ data | moduleMods('Header', ['fullHeight', 'contrast']) }} {{ block_identifier }}">
     {% if data.overlay %}
         <div class="Header-overlay"></div>
     {% endif %}

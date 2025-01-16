@@ -2,7 +2,9 @@
 
 use BackendAuth;
 use Cms\Classes\ComponentBase;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use October\Rain\Filesystem\Filesystem;
 use October\Rain\Support\Facades\Input;
 use Tailor\Models\EntryRecord;
 
@@ -37,9 +39,13 @@ class Meta extends ComponentBase
     }
 
     public function onFaviconGenerated() {
-        $result = json_decode(Input::get('json_result'))->favicon_generation_result;
+        $faviconUrl = Input::get('json_result_url');
 
-        if ($result->custom_parameter != 'ref=' . env('RFG_REF_PARAM')) {
+        $resp = Http::get('https://realfavicongenerator.net' . $faviconUrl);
+
+        $result = json_decode($resp->body())->favicon_generation_result;
+
+        if ($result->custom_parameter != 'ref=as2d584jz8d25sg8s3af8h') {
             throw new \Exception('Invalid favicon generation result');
         }
 
@@ -47,6 +53,9 @@ class Meta extends ComponentBase
         if (empty($loggedIn)) {
             throw new \Exception('Not logged in');
         }
+
+        $dir = new Filesystem;
+        $dir->cleanDirectory(storage_path('app/media/favicon'));
 
         $file = file_get_contents($result->favicon->package_url);
         Storage::put('media/favicon/package.zip', $file);

@@ -5,7 +5,7 @@
     {% set rfgBaseUrl = 'https://realfavicongenerator.net/api/favicon_generator' %}
     {% set query = {
         "favicon_generation": {
-            "api_key": env('RFG_API_KEY'),
+            "api_key": "3c2319f2e6aed5f03d06058cf4e7ef6616348222",
             "master_picture": {
                 "type": "no_picture",
                 "url": faviconPath,
@@ -13,14 +13,14 @@
             },
             "files_location": {
                 "type": "path",
-                "path": "/storage/app/media/favicon",
+                "path": "/storage/app/media/favicon/",
             },
             "callback": {
                 "type": "url",
-                "url": env('RFG_CALLBACK_URL'),
+                "url": '/api/rfg' | app,
                 "short_url": "false",
                 "path_only": "false",
-                "custom_parameter": "ref=" ~ env('RFG_REF_PARAM')
+                "custom_parameter": "ref=as2d584jz8d25sg8s3af8h"
             }
         }
     } | json_encode %}

@@ -35,7 +35,14 @@ class BlogPost extends ComponentBase
     public function post()
     {
         $slug = $this->getPostSlug($this->param('fullslug'));
-        return $this->page['post'] = EntryRecord::inSection('BlogPost')->where('slug', $slug)->first();
+        $post = EntryRecord::inSection('BlogPost')
+            ->where('is_enabled', 1)
+            ->where('slug', $slug)
+            ->first();
+
+        $this->page['post'] = $post;
+
+        return $post;
     }
 
     private function getPostSlug($slug)

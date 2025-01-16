@@ -32,21 +32,21 @@ class Builder extends ComponentBase
         $slug = $this->param('fullslug');
 
         $section = EntryRecord::inSection('Builder')
+            ->where('is_enabled', 1)
             ->where('fullslug', $slug)
             ->first();
 
-        if (empty($section)) {
-            return Redirect::to('/404');
-        }
-
         $this->page['record'] = $section;
 
-        foreach ($section->builder as $i => $block) {
-            $alias = !empty($block->aliasOverride) ? $block->aliasOverride : $block->content_group . $i;
+        if (!empty($section) && !empty($section->builder)) {
+            foreach ($section->builder as $i => $block) {
+                $alias = !empty($block->aliasOverride) ? $block->aliasOverride : $block->content_group . $i;
 
-            $this->addComponent("\\CRSCompany\\FrameworC\\Components\\" . $block->content_group, $alias, [
-                'block' => $block,
-            ]);
+                $this->addComponent("\\CRSCompany\\FrameworC\\Components\\" . $block->content_group, $alias, [
+                    'block' => $block,
+                    'block_identifier' => $block->content_group . $i,
+                ]);
+            }
         }
     }
 
