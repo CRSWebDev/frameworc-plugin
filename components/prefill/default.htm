@@ -2,7 +2,36 @@
 {% set data = block.content %}
 
 {% for block in data.block.builder %}
-    <div id="{{ block.blockId }}" class="{{ block.customCssClass }}">
+    {% set block_identifier = block.content_group ~ loop.index0 %}
+
+    {% put addStyles %}
+        {% if block.backgroundImage %}
+            .Builder-container--prefill{{ data.id }}{{ block_identifier }} {
+            background-image: {{ block.backgroundImage | imageset(1920, 1080) }};
+            }
+        {% endif %}
+
+        {% if block.backgroundImageMobile %}
+            @media (max-width: 991px) {
+            .Builder-container--prefill{{ data.id }}{{ block_identifier }} {
+            background-image: {{ block.backgroundImageMobile | imageset(991, 1200) }};
+            }
+            }
+        {% endif %}
+    {% endput %}
+
+    <div
+        id="{{ str_slug(block.blockId) }}"
+        class="
+            Builder-container--{{ block.containerWidth ? block.containerWidth : 'defaultWidth' }}
+            Builder-container--{{ block.backgroundColor ? block.backgroundColor : 'defaultBg' }}
+            Builder-container--{{ block.elevated ? 'elevated' : 'notElevated' }}
+
+            Builder-container--prefill{{ data.id }}{{ block_identifier }}
+
+            {{ block.customCssClass }}
+        "
+    >
         {% if block.aliasOverride %}
             {% component block.aliasOverride data=block %}
         {% else %}

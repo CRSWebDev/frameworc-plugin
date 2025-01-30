@@ -34,9 +34,13 @@
 
                     <div class="Form-group">
                         {% if data.variant == 'outline' %}
-                            <button type="submit" class="Button Button--outline" data-attach-loading></button>
+                            <button type="submit" class="Button Button--outline" data-attach-loading>
+                                {{ 'form.submit'|_ }}
+                            </button>
                         {% else %}
-                            <button type="submit" class="Button Button--contrast" data-attach-loading></button>
+                            <button type="submit" class="Button Button--contrast" data-attach-loading>
+                                {{ 'form.submit'|_ }}
+                            </button>
                         {% endif %}
 
                         <altcha-widget
