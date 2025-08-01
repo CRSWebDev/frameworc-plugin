@@ -70,7 +70,7 @@ oc.registerControl('slider', class extends oc.ControlBase {
         this.arrowNext = this.el.querySelector('.Slider-arrow--next');
 
         this.options = Object.assign({
-            perView: 2.5,
+            perView: 2,
             gap: 30,
             transitionDuration: '0.3s',
             focusedSlidePosition: 'center', // left, center, right
@@ -131,6 +131,10 @@ oc.registerControl('slider', class extends oc.ControlBase {
     }
 
     setup() {
+        this.slides.forEach((slide) => {
+            slide.style.flexBasis = '0';
+        });
+
         if (this.options.breakpoints) {
             const breakpoints = Object.keys(this.options.breakpoints).sort((a, b) => a - b);
             const foundBreakpoint = breakpoints.find((breakpoint) => window.innerWidth <= breakpoint);
@@ -288,7 +292,7 @@ oc.registerControl('slider', class extends oc.ControlBase {
             index = this.totalSlides - this.options.perView;
         }
 
-        this.currentSlide = index;
+        this.currentSlide = parseInt(index);
 
         this.update(fireEvent);
     }

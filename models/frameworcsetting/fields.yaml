@@ -1,0 +1,479 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+  wrapper:
+    type: nestedform
+    showPanel: false
+    form:
+      tabs:
+        fields:
+          variable__sectionColors:
+              label: Barvy
+              type: section
+              tab: Proměnné
+
+          variable_color_primary:
+              label: Primární barva
+              tab: Proměnné
+              type: colorpicker
+              default: '#0597F2'
+              comment: Hlavní barva webu
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_primary_accent:
+              label: Primární barva - akcent
+              tab: Proměnné
+              type: colorpicker
+              default: '#05AFF2'
+              comment: Světlejší varianta primární barvy
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_primary_dark:
+              label: Primární barva - tmavá
+              tab: Proměnné
+              type: colorpicker
+              default: '#064260'
+              comment: Tmavší varianta primární barvy
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_white:
+              label: Bílá barva
+              tab: Proměnné
+              type: colorpicker
+              default: '#fafafa'
+              comment: Základní bílá barva
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_black:
+              label: Černá barva
+              tab: Proměnné
+              type: colorpicker
+              default: '#0a0a0a'
+              comment: Základní černá barva
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_accent:
+              label: Akcentová barva
+              tab: Proměnné
+              type: colorpicker
+              default: '#ececec'
+              comment: Světle šedá akcentová barva
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_muted:
+              label: Tlumená barva
+              tab: Proměnné
+              type: colorpicker
+              default: '#a0a0a0'
+              comment: Šedá barva pro tlumené prvky
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_bg_base:
+              label: Barva pozadí - základní
+              tab: Proměnné
+              type: colorpicker
+              default: '#fafafa'
+              comment: Výchozí barva pozadí
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_bg_accent:
+              label: Barva pozadí - akcent
+              tab: Proměnné
+              type: colorpicker
+              default: '#ececec'
+              comment: Akcentní barva pozadí
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_bg_contrast:
+              label: Barva pozadí - kontrast
+              tab: Proměnné
+              type: colorpicker
+              default: '#0597F2'
+              comment: Kontrastní barva pozadí
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_text_base:
+              label: Barva textu - základní
+              tab: Proměnné
+              type: colorpicker
+              default: '#0a0a0a'
+              comment: Výchozí barva textu
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_text_contrast:
+              label: Barva textu - kontrast
+              tab: Proměnné
+              type: colorpicker
+              default: '#fafafa'
+              comment: Kontrastní barva textu
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_text_primary:
+              label: Barva textu - primární
+              tab: Proměnné
+              type: colorpicker
+              default: '#0597F2'
+              comment: Primární barva textu
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_button_bg_base:
+              label: Barva tlačítka - základní pozadí
+              tab: Proměnné
+              type: colorpicker
+              default: '#0597F2'
+              comment: Výchozí barva pozadí tlačítka
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_button_bg_base_hover:
+              label: Barva tlačítka - hover pozadí
+              tab: Proměnné
+              type: colorpicker
+              default: '#05AFF2'
+              comment: Barva pozadí tlačítka při hoveru
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_button_bg_outline_hover:
+              label: Barva tlačítka - hover outline
+              tab: Proměnné
+              type: colorpicker
+              default: 'rgba(5,151,242,0.1)'
+              comment: Barva outline tlačítka při hoveru
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_button_bg_outline_hover_inverse:
+              label: Barva tlačítka - hover outline inverzní
+              tab: Proměnné
+              type: colorpicker
+              default: 'rgba(250,250,250,0.1)'
+              comment: Inverzní barva outline tlačítka při hoveru
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable__sectionAlertColors:
+              label: Barvy alertů
+              type: section
+              tab: Proměnné
+
+          variable_color_alert_success_bg:
+              label: Úspěch - pozadí
+              tab: Proměnné
+              type: colorpicker
+              default: '#C2F3D6'
+              comment: Pozadí pro úspěšné zprávy
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_alert_success_border:
+              label: Úspěch - okraj
+              tab: Proměnné
+              type: colorpicker
+              default: '#96EAB8'
+              comment: Okraj pro úspěšné zprávy
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_alert_success_text:
+              label: Úspěch - text
+              tab: Proměnné
+              type: colorpicker
+              default: '#1FB05A'
+              comment: Text pro úspěšné zprávy
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_alert_danger_bg:
+              label: Chyba - pozadí
+              tab: Proměnné
+              type: colorpicker
+              default: '#FFE1E3'
+              comment: Pozadí pro chybové zprávy
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_alert_danger_border:
+              label: Chyba - okraj
+              tab: Proměnné
+              type: colorpicker
+              default: '#FF99A4'
+              comment: Okraj pro chybové zprávy
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_color_alert_danger_text:
+              label: Chyba - text
+              tab: Proměnné
+              type: colorpicker
+              default: '#FF4556'
+              comment: Text pro chybové zprávy
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable__sectionSpacing:
+              label: Rozestupy
+              type: section
+              tab: Proměnné
+
+          variable_spacing_section:
+              label: Rozestup sekcí
+              tab: Proměnné
+              type: text
+              default: '5rem'
+              comment: Vertikální rozestup mezi sekcemi
+
+          variable_spacing_gap:
+              label: Základní rozestup
+              tab: Proměnné
+              type: text
+              default: '5rem'
+              comment: Základní rozestup mezi prvky
+
+          variable_spacing_navbar:
+              label: Výška navigace
+              tab: Proměnné
+              type: text
+              default: '72px'
+              comment: Výška navigační lišty
+
+          variable_spacing_grid_gap:
+              label: Rozestup gridu
+              tab: Proměnné
+              type: text
+              default: '1.5rem'
+              comment: Rozestup mezi grid prvky
+
+          variable__sectionBorderRadius:
+              label: Zaoblení rohů
+              type: section
+              tab: Proměnné
+
+          variable_border_radius_img:
+              label: Zaoblení obrázků
+              tab: Proměnné
+              type: text
+              default: '1rem'
+              comment: Zaoblení rohů pro obrázky
+
+          variable_border_radius_btn:
+              label: Zaoblení tlačítek
+              tab: Proměnné
+              type: text
+              default: '0.4rem'
+              comment: Zaoblení rohů pro tlačítka
+
+          variable__sectionShadows:
+              label: Stíny
+              type: section
+              tab: Proměnné
+
+          variable_shadow_base:
+              label: Základní stín
+              tab: Proměnné
+              type: text
+              default: '0 15px 18px rgba(23,23,36,0.15)'
+              comment: Základní stín pro karty a boxy
+
+          variable__sectionPlaceholder:
+              label: Placeholder
+              type: section
+              tab: Proměnné
+
+          variable_color_placeholder:
+              label: Barva placeholder
+              tab: Proměnné
+              type: colorpicker
+              default: '#d0d0d0'
+              comment: Barva pro placeholder text
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable__sectionImageStrip:
+              label: Image Strip
+              type: section
+              tab: Proměnné
+
+          variable_imageStrip_height:
+              label: Výška Image Strip
+              tab: Proměnné
+              type: text
+              default: '80px'
+              comment: Výška Image Strip komponenty
+
+          variable__sectionAltcha:
+              label: ALTCHA nastavení
+              type: section
+              tab: Proměnné
+
+          variable_altcha_border_width:
+              label: Šířka okraje ALTCHA
+              tab: Proměnné
+              type: text
+              default: '0'
+              comment: Šířka okraje pro ALTCHA widget
+
+          variable_altcha_border_radius:
+              label: Zaoblení ALTCHA
+              tab: Proměnné
+              type: text
+              default: '3px'
+              comment: Zaoblení rohů pro ALTCHA widget
+
+          variable_altcha_color_base:
+              label: ALTCHA - pozadí
+              tab: Proměnné
+              type: colorpicker
+              default: '#ffffff'
+              comment: Barva pozadí ALTCHA widgetu
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_altcha_color_border:
+              label: ALTCHA - okraj
+              tab: Proměnné
+              type: colorpicker
+              default: '#a0a0a0'
+              comment: Barva okraje ALTCHA widgetu
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_altcha_color_text:
+              label: ALTCHA - text
+              tab: Proměnné
+              type: text
+              default: 'currentColor'
+              comment: Barva textu ALTCHA widgetu
+
+          variable_altcha_color_border_focus:
+              label: ALTCHA - okraj při focusu
+              tab: Proměnné
+              type: text
+              default: 'currentColor'
+              comment: Barva okraje při focusu
+
+          variable_altcha_color_error_text:
+              label: ALTCHA - chybový text
+              tab: Proměnné
+              type: colorpicker
+              default: '#f23939'
+              comment: Barva chybového textu
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_altcha_color_footer_bg:
+              label: ALTCHA - pozadí patičky
+              tab: Proměnné
+              type: colorpicker
+              default: '#f4f4f4'
+              comment: Barva pozadí patičky ALTCHA
+              showInput: true
+              allowCustom: true
+              showAlpha: true
+
+          variable_altcha_max_width:
+              label: ALTCHA - maximální šířka
+              tab: Proměnné
+              type: text
+              default: 'auto'
+              comment: Maximální šířka ALTCHA widgetu
+
+          variable__sectionMobile:
+              label: Mobilní nastavení
+              type: section
+              tab: Proměnné
+
+          variable_mobile_spacing_section:
+              label: Mobilní rozestup sekcí
+              tab: Proměnné
+              type: text
+              default: '3rem'
+              comment: Rozestup sekcí na mobilních zařízeních
+
+          variable_mobile_spacing_gap:
+              label: Mobilní základní rozestup
+              tab: Proměnné
+              type: text
+              default: '3rem'
+              comment: Základní rozestup na mobilních zařízeních
+
+          variable__sectionFonts:
+              label: Fonty
+              type: section
+              tab: Proměnné
+
+          variable_font_base:
+              label: Základní font
+              tab: Proměnné
+              type: codeeditor
+              default: 'Inter, sans-serif'
+              comment: Základní font pro web
+
+          
+
+          integration_altcha_secret:
+            label: Altcha secret
+            tab: Integrace
+            type: password
+
+          integration_n8n_webhook_url:
+            label: N8N webhook URL
+            tab: Integrace
+            type: text
+            comment: Webhook URL pro N8N
+            placeholder: https://n8n.example.com/webhook/your-webhook-id
+
+          integration_n8n_newsletter_webhook_url:
+            label: N8N newsletter webhook URL
+            tab: Integrace
+            type: text
+            comment: Webhook URL pro newsletter
+            placeholder: https://n8n.example.com/webhook/your-webhook-id
+
+          integration_n8n_auth:
+            label: N8N heslo pro webhook
+            type: password
+            comment: Heslo pro webhook
+            tab: Integrace

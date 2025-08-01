@@ -5,7 +5,10 @@
     "license": "MIT",
     "require": {
         "composer/installers": "~1.0",
-        "october/rain": "~v3.5",
-        "ext-zip": "*"
+        "october/rain": "~v4.0",
+        "ext-zip": "*",
+        "altcha-org/altcha": "v1.1.2",
+        "symfony/postmark-mailer": "^7.3",
+        "symfony/http-client": "^7.3"
     }
 }

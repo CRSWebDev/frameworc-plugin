@@ -62,5 +62,23 @@
             background-position: center;
             padding: calc(var(--spacing-section) / 2) 0;
         }
+
+        &--hideMobile {
+            @media (max-width: 768px) {
+                display: none !important;
+            }
+        }
+
+        &--hideTablet {
+            @media (min-width: 769px) and (max-width: 991px) {
+                display: none !important;
+            }
+        }
+
+        &--hideDesktop {
+            @media (min-width: 992px) {
+                display: none !important;
+            }
+        }
     }
 }

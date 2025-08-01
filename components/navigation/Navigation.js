@@ -13,10 +13,12 @@ oc.registerControl('navigation', class extends oc.ControlBase {
 
         this.infobar = this.element.querySelector('.Infobar');
 
-        if (localStorage.getItem('infobarClosed')) {
-            this.infobar.style.display = 'none';
-        } else {
-            this.infobar.style.display = 'block';
+        if (this.infobar) {
+            if (localStorage.getItem('infobarClosed')) {
+                this.infobar.style.display = 'none';
+            } else {
+                this.infobar.style.display = 'block';
+            }
         }
     }
 

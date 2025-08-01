@@ -1,11 +1,31 @@
 {% set nav = Footer.getNav() %}
-{% set menu = Footer.getMenu(nav.nav.navigation) %}
+{% set menu = Footer.getMenu(nav.nav[0].navigation) %}
 
 <footer class="Footer">
+    {% if nav.showNewsletterForm %}
+        <div class="Flex">
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="Footer-newsletter">
+                        <div class="Footer-newsletterContent">
+                            <h2 class="Footer-newsletterTitle">{{ 'footer.newsletter.title'|_ }}</h2>
+                            <p class="Footer-newsletterText">{{ 'footer.newsletter.text'|_ }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="Flex-col">
+                    <div class="Footer-newsletterForm">
+                        {% component '@newsletterForm' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
     <div class="Flex">
         <div class="Flex-container">
             <div class="Flex-col">
-                <img src="{{ nav.logo | media }}" class="Footer-logo" alt="r2p Invest">
+                <img src="{{ nav.logo | media }}" class="Footer-logo">
             </div>
             <div class="Flex-col">
                 <div class="Footer-navWrapper">
@@ -33,7 +53,7 @@
                         <div class="Footer-socials">
                             {{ nav.stayInTouch }}
                             {% for social in nav.socials %}
-                                <a href="{{ social.url }}" class="Footer-social">
+                                <a href="{{ social.url }}" class="Footer-social" target="_blank" rel="noopener noreferrer">
                                     {% set partialName = 'icons/socials/' ~ social.site %}
                                     {% partial partialName %}
                                 </a>

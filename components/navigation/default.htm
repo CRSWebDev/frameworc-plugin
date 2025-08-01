@@ -1,5 +1,5 @@
 {% set nav = __SELF__.getNav() %}
-{% set menu = __SELF__.getMenu(nav.nav.navigation) %}
+{% set menu = __SELF__.getMenu(nav.nav[0].navigation) %}
 {% set availableSites = sitePicker.sites %}
 
 {% set menuStyle = record.menuStyle %}

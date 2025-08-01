@@ -15,12 +15,6 @@ oc.registerControl('global', class extends oc.ControlBase {
         this.listen('click', '.Lightbox-close', this.hideLightbox);
         this.listen('click', '.Lightbox-prev', this.prevImage);
         this.listen('click', '.Lightbox-next', this.nextImage);
-
-        document.addEventListener('keydown', this.proxy(this.handleKeydown));
-    }
-
-    disconnect() {
-        document.removeEventListener('keydown', this.proxy(this.handleKeydown));
     }
 
     mouseDown(e) {
@@ -96,23 +90,6 @@ oc.registerControl('global', class extends oc.ControlBase {
                 this.lightboxImage.classList.remove('isLoading');
             };
         }, 200);
-    }
-
-    handleKeydown(e) {
-        if (e.key === 'Escape') {
-            e.preventDefault();
-            this.hideLightbox();
-        }
-
-        if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            this.prevImage();
-        }
-
-        if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            this.nextImage();
-        }
     }
 });
 

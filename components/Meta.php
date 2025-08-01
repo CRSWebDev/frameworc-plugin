@@ -2,6 +2,7 @@
 
 use BackendAuth;
 use Cms\Classes\ComponentBase;
+use CRSCompany\FrameworC\Models\FrameworcSetting;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use October\Rain\Filesystem\Filesystem;
@@ -32,10 +33,12 @@ class Meta extends ComponentBase
     }
 
     public function init() {
+        $cssVariables = $this->getCssVariables();
         $section = EntryRecord::inSection('Meta')
             ->first();
 
         $this->page['meta'] = $section;
+        $this->page['cssVars'] = $cssVariables;
     }
 
     public function onFaviconGenerated() {
@@ -66,5 +69,35 @@ class Meta extends ComponentBase
         $zip->close();
 
         return '/admin/tailor/entries/meta?html_code=' . urlencode($result->favicon->html_code);
+    }
+
+    private function getCssVariables()
+    {
+        $settings = FrameworcSetting::instance();
+        return $this->generateCssVariables($settings);
+    }
+
+    /**
+     * Generate CSS variables string for inline use
+     */
+    private function generateCssVariables($settings)
+    {
+        $variables = [];
+        $settingsArray = $settings->toArray();
+        
+        // Get all variable_ prefixed settings
+        foreach ($settingsArray['wrapper'] as $key => $value) {
+            if (strpos($key, 'variable_') === 0) {
+                // Convert variable_color_primary to --color-primary
+                $cssVarName = '--' . str_replace('variable_', '', $key);
+                $cssVarName = str_replace('_', '-', $cssVarName);
+                
+                // Only add if value is not null or empty
+                if (!empty($value) || $value === '0') {
+                    $variables[] = $cssVarName . ': ' . $value;
+                }
+            }
+        }
+        return implode('; ', $variables);
     }
 }

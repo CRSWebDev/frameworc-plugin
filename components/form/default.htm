@@ -19,10 +19,10 @@
                     {% endif %}
                     <div id="frameworc-form-error-{{ data.id }}"></div>
                     <input type="hidden" name="_form_id" value="{{ data.id }}">
-                    <input type="hidden" name="_form_true_id" value="{{ data.form.id }}">
+                    <input type="hidden" name="_form_true_id" value="{{ block.form.id }}">
 
                     <div class="Form-group">
-                        {% for field in data.form.fwcFields %}
+                        {% for field in block.form.fwcFields %}
                             {% set template = '@fields/' ~ field.content_group %}
 
                             <div class="Form-control Form-control--{{ field.width ? field.width : 'full' }}" data-form-field="{{ field.name }}">

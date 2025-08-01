@@ -31,7 +31,31 @@
                     </div>
                 </div>
             {% endif %}
-            {% if not data.noImage %}
+            {% if data.doubleText %}
+                <div class="{{ colClass }}">
+                    {% if data.headline2 %}
+                        <div class="Headline">
+                            {{ data.headline2 | spacer | content }}
+                        </div>
+                    {% endif %}
+                    <div class="Buttons">
+                        {% for i in 3..4 %}
+                            {% set button = {
+                                link: data['buttonLink' ~ i],
+                                label: data['buttonLabel' ~ i],
+                                contrast: data['buttonContrast' ~ i],
+                                outline: data['buttonOutline' ~ i],
+                            } %}
+
+                            {% if button.link and button.label %}
+                                <a href="{{ button.link | link }}" class="Button {{ button | moduleMods('Button', ['contrast', 'outline']) }}">
+                                    {{ button.label }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% elseif not data.noImage %}
                 <div class="{{ colClass }}"
                      {% if data.backgroundImage %}style="background-image: {{ data.image | imageset(imgDimensions.w, imgDimensions.h, 'landscape') }}"{% endif %}>
                     {% if data.noText %}

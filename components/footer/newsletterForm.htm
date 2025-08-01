@@ -1,0 +1,38 @@
+<form
+    id="newsletter-form"
+    data-request="onNewsletterSubmit"
+    data-request-success="oc.flashMsg({
+        message: '{{ 'footer.newsletter.success'|_ }}',
+        type: 'success'
+    })"
+    data-request-error="oc.flashMsg({
+        message: '{{ 'footer.newsletter.error'|_ }}',
+        type: 'error'
+    })"
+>
+    <div class="Form-control Form-control--full">
+        <input type="email" class="Form-field Form-field--text" name="email" id="newsletter-email" placeholder="{{ 'footer.newsletter.email_placeholder'|_ }}">
+        <label class="Form-label" for="newsletter-email">{{ 'footer.newsletter.email_label'|_ }} <span class="Form-required">*</span></label>
+    </div>
+
+    <div class="Form-group" style="margin-top: 10px; margin-bottom: 10px;">
+        <button type="submit" class="Button Button--contrast">{{ 'footer.newsletter.subscribe_button'|_ }}</button>
+        
+        <altcha-widget
+            challengeurl="/api/captcha"
+            auto="onload"
+            hidefooter
+            hidelogo
+            strings='{
+                "ariaLinkLabel": "{{ 'form.captcha.ariaLinkLabel'|_ }}",
+                "error": "{{ 'form.captcha.error'|_ }}",
+                "expired": "{{ 'form.captcha.expired'|_ }}",
+                "footer": "{{ 'form.captcha.footer'|_ }}",
+                "label": "{{ 'form.captcha.label'|_ }}",
+                "verified": "{{ 'form.captcha.verified'|_ }}",
+                "verifying": "{{ 'form.captcha.verifying'|_ }}",
+                "waitAlert": "{{ 'form.captcha.waitAlert'|_ }}"
+            }'
+        ></altcha-widget>
+    </div>
+</form>

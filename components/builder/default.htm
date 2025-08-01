@@ -2,7 +2,6 @@
     {% partial '404' %}
 {% endif %}
 
-
 {% for block in record.builder %}
     {% set block_identifier = block.content_group ~ loop.index0 %}
 
@@ -31,7 +30,14 @@
 
             Builder-container--{{ block_identifier }}
 
-            {{ block.customCssClass }}
+            {% for item in block.customCssClass %}Builder-container--{{ item }} {% endfor %}
+            
+
+{% if block.responsiveHide %}
+    {% for item in block.responsiveHide %}
+        Builder-container--hide{{ item|capitalize }}
+    {% endfor %}
+{% endif %}
         "
     >
         {% if block.aliasOverride %}

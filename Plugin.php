@@ -81,6 +81,19 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerSettings()
+    {
+        return [
+            'settings' => [
+                'label' => 'FrameworC Settings',
+                'description' => 'Obecná nastavení pro FrameworC plugin',
+                'category' => 'FrameworC',
+                'icon' => 'icon-cog',
+                'class' => \CRSCompany\FrameworC\Models\FrameworcSetting::class,
+            ]
+        ];
+    }
+
     /**
      * registerPermissions used by the backend.
      */

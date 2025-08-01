@@ -1,11 +1,39 @@
-<title>{{ record.title }} | {{ meta.metaTitle }}</title>
+{% if record.metaTitle %}
+    <title>{{ record.metaTitle }} | {{ meta.metaTitle }}</title>
+{% else %}
+    <title>{{ record.title }} | {{ meta.metaTitle }}</title>
+{% endif %}
 
 {{ meta.faviconHtml | raw }}
 
-<meta name="description" content="{{ meta.description }}">
+{% if record.metaTitle %}
+    <meta name="title" content="{{ record.metaTitle }} | {{ meta.metaTitle }}">
+    <meta property="og:title" content="{{ record.metaTitle }} | {{ meta.metaTitle }}">
+{% else %}
+    <meta name="title" content="{{ record.title ~ ' | ' ~ meta.metaTitle }}">
+    <meta property="og:title" content="{{ meta.ogTitle ? meta.ogTitle : record.title ~ ' | ' ~ meta.metaTitle }}" />
+{% endif %}
 
-<meta property="og:title" content="{{ meta.ogTitle ? meta.ogTitle : record.title ~ ' | ' ~ meta.metaTitle }}" />
-<meta property="og:description" content="{{ meta.ogDescription ? meta.ogDescription : meta.description }}" />
-<meta property="og:image" content="{{ meta.ogImage | media }}" />
+{% if record.metaDescription %}
+    <meta name="description" content="{{ record.metaDescription }}">
+    <meta property="og:description" content="{{ record.metaDescription }}">
+{% else %}
+    <meta name="description" content="{{ meta.description }}">
+    <meta property="og:description" content="{{ meta.ogDescription ? meta.ogDescription : meta.description }}" />
+{% endif %}
+
+{% if record.ogImage %}
+    <meta property="og:image" content="{{ record.metaImage | media }}" />
+{% else %}
+    <meta property="og:image" content="{{ meta.ogImage | media }}" />
+{% endif %}
 
 {{ meta.headerHtml | raw }}
+
+{# CSS Variables #}
+
+<style>
+    :root {
+        {{ cssVars }};
+    }
+</style>

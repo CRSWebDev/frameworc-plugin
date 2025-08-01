@@ -11,6 +11,9 @@ use Tailor\Models\EntryRecord;
 use Validator;
 use AltchaOrg\Altcha\ChallengeOptions;
 use AltchaOrg\Altcha\Altcha;
+use CRSCompany\FrameworC\Models\FrameworcSetting;
+use Illuminate\Support\Facades\Http;
+use CRSCompany\FrameworC\Classes\SettingsHelper;
 
 /**
  * Form Component
@@ -19,6 +22,8 @@ use AltchaOrg\Altcha\Altcha;
  */
 class Form extends ComponentBase
 {
+    private $settings;
+
     public function componentDetails()
     {
         return [
@@ -35,10 +40,16 @@ class Form extends ComponentBase
         return [];
     }
 
+    public function init() {
+        $this->settings = SettingsHelper::getByPrefix('integration_');
+    }
+
     public function onSubmit() {
         $data = Input::all();
 
-        $captchaOk = Altcha::verifySolution($data['altcha'], env('ALTCHA_SECRET'));
+        $altcha = new Altcha($this->settings['altcha_secret']);
+
+        $captchaOk = $altcha->verifySolution($data['altcha'], true);
 
         if (!$captchaOk) {
             throw new ValidationException(['altcha' => __('form.captcha.error')]);
@@ -60,7 +71,7 @@ class Form extends ComponentBase
         }
 
         $rules = [];
-        $messqaes = [];
+        $messages = [];
 
         foreach ($entry->fwcFields as $field) {
             if ($field->required) {
@@ -109,38 +120,70 @@ class Form extends ComponentBase
         $post->inquiry = json_encode($data);
         $post->save();
 
-        $emailVars = [
-            'header' => __('form.email_header'),
-            'footer' => __('form.email_footer'),
-            'formItems' => $data,
-        ];
-
-        Mail::send('crscompany.frameworc::mail.templates.form-backend', $emailVars, function($message) use ($file, $entry) {
-            $isFirstLoop = true;
-            foreach ($entry->recipients as $recipient) {
-                if ($isFirstLoop) {
-                    $message->to($recipient);
-                    $isFirstLoop = false;
-                } else {
-                    $message->cc($recipient);
-                }
-            }
-
-            $message->subject(__('form.email_backend_subject'));
-
-            if (!empty($file)) {
-                $message->attach($file, [
-                    'as' => $file->getClientOriginalName(),
-                    'mime' => $file->getClientMimeType(),
+        // Check if n8n webhook URL is configured and send request
+        $n8nWebhookUrl = $this->settings['n8n_webhook_url'];
+        if (!empty($n8nWebhookUrl)) {
+            try {
+                $response = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                    'X-FWC-Auth' => $this->settings['n8n_auth'],
+                ])
+                ->timeout(30)
+                ->post($n8nWebhookUrl, [
+                    'form_id' => $formTrueId,
+                    'form_data' => $data,
+                    'timestamp' => now()->toISOString(),
+                    'inquiry_id' => $post->id,
+                    'source' => 'frameworc-form',
+                    'form_title' => $entry->title ?? 'Unknown Form'
                 ]);
+            } catch (\Exception $e) {
+                // Silent fail - webhook request failed
             }
-        });
+        }
 
-        if (!empty($data['email'])) {
-            Mail::send('crscompany.frameworc::mail.templates.form-client', $emailVars, function($message) use ($data) {
-                $message->to($data['email']);
-                $message->subject(__('form.email_client_subject'));
+        // Skip sending emails if n8n webhook URL is configured
+        if (empty($this->settings['n8n_webhook_url'])) {
+            if (empty($entry->recipients)) { // if no recipients, skip sending email
+                return [
+                    $formElement => $this->renderPartial('@success')
+                ];
+            }
+
+            $emailVars = [
+                'header' => __('form.email_header'),
+                'footer' => __('form.email_footer'),
+                'formItems' => $data,
+            ];
+    
+
+            Mail::send('crscompany.frameworc::mail.templates.form-backend', $emailVars, function($message) use ($file, $entry) {
+                $isFirstLoop = true;
+                foreach ($entry->recipients as $recipient) {
+                    if ($isFirstLoop) {
+                        $message->to($recipient);
+                        $isFirstLoop = false;
+                    } else {
+                        $message->cc($recipient);
+                    }
+                }
+
+                $message->subject(__('form.email_backend_subject'));
+
+                if (!empty($file)) {
+                    $message->attach($file, [
+                        'as' => $file->getClientOriginalName(),
+                        'mime' => $file->getClientMimeType(),
+                    ]);
+                }
             });
+
+            if (!empty($data['email'])) {
+                Mail::send('crscompany.frameworc::mail.templates.form-client', $emailVars, function($message) use ($data) {
+                    $message->to($data['email']);
+                    $message->subject(__('form.email_client_subject'));
+                });
+            }
         }
 
         return [
@@ -169,12 +212,16 @@ class Form extends ComponentBase
     }
 
     public static function onCaptcha() {
-        $options = new ChallengeOptions([
-            'hmacKey'   => env('ALTCHA_SECRET'),
-            'maxNumber' => 50000, // the maximum random number
-        ]);
+        $secret = SettingsHelper::getByPrefix('integration_')['altcha_secret'];
+        $altcha = new Altcha($secret);
 
-        $challenge = Altcha::createChallenge($options);
+        $options = new ChallengeOptions(
+            maxNumber: 50000,
+            // This sets the 'expires' option to a DateTimeImmutable object representing the current time plus 10 minutes.
+            expires: (new \DateTimeImmutable())->add(new \DateInterval('PT10M')),
+        );
+
+        $challenge = $altcha->createChallenge($options);
 
         return json_decode(json_encode($challenge), true);
     }
