@@ -12,3 +12,4 @@ v1.0.4: Added background image to section
 v1.0.5: Updated menu system with new October features
 v1.0.6: Removed dependency on Tailor export plugin
 v1.1.0: Big update with a lot of new features
+v1.1.1: Changed variables to be a css file rather than separate fields

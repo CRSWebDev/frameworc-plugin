@@ -1,6 +1,7 @@
 <?php namespace CRSCompany\FrameworC\Components;
 
 use Cms\Classes\ComponentBase;
+use CRSCompany\FrameworC\Classes\SettingsHelper;
 use CRSCompany\FrameworC\Models\FrameworcSetting;
 use Redirect;
 use Tailor\Models\EntryRecord;
@@ -53,10 +54,6 @@ class Builder extends ComponentBase
 
     public function onRun()
     {
-        $cssVariables = $this->getCssVariables();
-
-        $this->page['cssVariables'] = $cssVariables;
-
         $this->addCss(['components/builder/normalize.scss']);
         $this->addCss(['components/builder/base.scss']);
 
@@ -78,56 +75,4 @@ class Builder extends ComponentBase
         ]);
 
     }
-
-    private function getCssVariables()
-    {
-        $settings = FrameworcSetting::instance();
-        return $this->generateCssVariables($settings);
-    }
-
-    /**
-     * Get settings by prefix and organize them into an array
-     */
-    private function getSettingsByPrefix($settings, $prefix)
-    {
-        $result = [];
-        $settingsArray = $settings->toArray();
-        
-        foreach ($settingsArray as $key => $value) {
-            if (strpos($key, $prefix) === 0) {
-                // Remove prefix and convert to camelCase for array keys
-                $cleanKey = str_replace($prefix, '', $key);
-                $result[$cleanKey] = $value;
-            }
-        }
-        
-        return $result;
-    }
-
-    /**
-     * Generate CSS variables string for inline use
-     */
-    private function generateCssVariables($settings)
-    {
-        $variables = [];
-        $settingsArray = $settings->toArray();
-        
-        // Get all variable_ prefixed settings
-        foreach ($settingsArray as $key => $value) {
-            if (strpos($key, 'variable_') === 0) {
-                // Convert variable_color_primary to --color-primary
-                $cssVarName = '--' . str_replace('variable_', '', $key);
-                $cssVarName = str_replace('_', '-', $cssVarName);
-                
-                // Only add if value is not null or empty
-                if (!empty($value) || $value === '0') {
-                    $variables[] = $cssVarName . ': ' . $value;
-                }
-            }
-        }
-        
-        return implode('; ', $variables);
-    }
-
-
 }

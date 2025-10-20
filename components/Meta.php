@@ -2,6 +2,7 @@
 
 use BackendAuth;
 use Cms\Classes\ComponentBase;
+use CRSCompany\FrameworC\Classes\SettingsHelper;
 use CRSCompany\FrameworC\Models\FrameworcSetting;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -74,30 +75,11 @@ class Meta extends ComponentBase
     private function getCssVariables()
     {
         $settings = FrameworcSetting::instance();
-        return $this->generateCssVariables($settings);
-    }
 
-    /**
-     * Generate CSS variables string for inline use
-     */
-    private function generateCssVariables($settings)
-    {
-        $variables = [];
-        $settingsArray = $settings->toArray();
-        
-        // Get all variable_ prefixed settings
-        foreach ($settingsArray['wrapper'] as $key => $value) {
-            if (strpos($key, 'variable_') === 0) {
-                // Convert variable_color_primary to --color-primary
-                $cssVarName = '--' . str_replace('variable_', '', $key);
-                $cssVarName = str_replace('_', '-', $cssVarName);
-                
-                // Only add if value is not null or empty
-                if (!empty($value) || $value === '0') {
-                    $variables[] = $cssVarName . ': ' . $value;
-                }
-            }
-        }
-        return implode('; ', $variables);
+        $settingCss = SettingsHelper::getByPrefix('variable_', $settings);
+
+        $css = $settingCss['variablesScss'] ?? '';
+
+        return $css;
     }
 }

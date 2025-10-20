@@ -1,4 +1,7 @@
 :root {
+    /*
+     * Color Palette
+     */
     --color-primary: #0597F2;
     --color-primary-accent: #05AFF2;
     --color-primary-transparent: rgba(5,151,242,0.1);
@@ -22,16 +25,28 @@
     --color-button-bg-outline-hover: var(--color-primary-transparent);
     --color-button-bg-outline-hover-inverse: var(--color-white-transparent);
 
+    /*
+     * Shadows
+     */
     --shadow-base: 0 15px 18px rgba(23,23,36,0.15);
 
+    /*
+     * Borders & Radius
+     */
     --border-radius-img: 1rem;
     --border-radius-btn: .4rem;
 
+    /*
+     * Spacing
+     */
     --spacing-section: 5rem;
     --spacing-gap: 5rem;
     --spacing-navbar: 72px;
     --spacing-grid-gap: 1.5rem;
 
+    /*
+     * Alerts
+     */
     --color-alert-success-bg: #C2F3D6;
     --color-alert-success-border: #96EAB8;
     --color-alert-success-text: #1FB05A;
@@ -41,8 +56,14 @@
 
     --color-placeholder: #d0d0d0;
 
+    /*
+     * Image strip
+     */
     --imageStrip-height: 80px;
 
+    /*
+     * Altcha
+     */
     --altcha-border-width: 0;
     --altcha-border-radius: 3px;
     --altcha-color-base: #ffffff;
@@ -54,8 +75,14 @@
     --altcha-max-width: auto;
 }
 
+/*
+ * Responsive adjustments
+ */
 @media (max-width: 768px) {
     :root {
+        /*
+         * Spacing
+         */
         --spacing-section: 3rem;
         --spacing-gap: 3rem;
     }
