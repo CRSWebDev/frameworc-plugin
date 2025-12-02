@@ -8,7 +8,11 @@ class SettingsHelper {
         $settings = FrameworcSetting::instance();
         $result = [];
         $settingsArray = $settings->toArray();
-        
+
+        if (!isset($settingsArray['wrapper'])) {
+            return $result;
+        }
+
         foreach ($settingsArray['wrapper'] as $key => $value) {
             if (strpos($key, $prefix) === 0) {
                 // Remove prefix and convert to camelCase for array keys
