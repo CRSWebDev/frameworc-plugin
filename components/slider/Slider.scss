@@ -38,6 +38,7 @@
 
     &-arrow--prev {
         left: 0;
+        transform: translateY(-50%) scaleX(-1);
     }
 
     &-arrow--next {
@@ -49,11 +50,13 @@
         justify-content: center;
         margin-top: 1rem;
         gap: 5px;
+        list-style: none;
+        padding: 0;
     }
 
     &-dot {
         border-radius: 5px;
-        flex: 0 0 10px;
+        width: 10px;
         height: 10px;
         background-color: var(--color-primary-transparent);
         transition: all 0.3s ease;
@@ -63,9 +66,9 @@
         border: 0;
         padding: 0;
 
-        &.isActive {
+        &.is-active {
             background-color: var(--color-primary);
-            flex: 0 0 20px;
+            width: 20px;
         }
     }
 }

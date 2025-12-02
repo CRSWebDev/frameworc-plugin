@@ -1,0 +1,7 @@
+{% set block = __SELF__.property('data') %}
+{% set data = block.content %}
+{% set blockId = __SELF__.property('data').blockId %}
+
+{% set variant = '@' ~ data.variant %}
+
+{% partial variant %}

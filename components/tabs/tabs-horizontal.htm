@@ -1,0 +1,48 @@
+{% set options = {
+    startIndex: data.startIndex ? data.startIndex : 0,
+    syncWith: data.syncWith ? data.syncWith : '',
+} %}
+
+<div class="Section" data-control="tabs" data-options="{{ options | json_encode | escape() | raw }}">
+    <div class="Flex">
+        {% if block.headline %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="Headline">
+                        {{ block.headline | spacer | content }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="Flex-container">
+            <div class="Tabs Tabs--tabs Tabs--tabsHorizontal" id="frameworc-slider-{{ data.id }}" data-slider-id="{{ data.id }}">
+                <div class="Tabs-dots">
+                    {% for slide in data.slides %}
+                        <button class="Tabs-dot" data-slide="{{ loop.index0 }}">
+                            {{ slide.headline }}
+                        </button>
+                    {% endfor %}
+                </div>
+                <div class="Tabs-container">
+                    <div class="Tabs-track">
+                        {% for slide in data.slides %}
+                            <div class="Tabs-slide">
+                                <div class="Tabs-image">
+                                    <img src="{{ slide.image | media | resize(null, 400) }}" srcset="{{ slide.image | srcset(null, 400, 'auto') }}" alt="{{ slide.headline }}" draggable="false" />
+                                </div>
+                                <div class="Tabs-content">
+                                    <h3 class="Headline">
+                                        {{ slide.headline }}
+                                    </h3>
+                                    <div class="Content">
+                                        {{ slide.text | spacer | content }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
