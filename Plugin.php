@@ -78,6 +78,7 @@ class Plugin extends PluginBase
             'CRSCompany\FrameworC\Components\MenuBlock' => 'MenuBlock',
             'CRSCompany\FrameworC\Components\Gallery' => 'Gallery',
             'CRSCompany\FrameworC\Components\Downloads' => 'Downloads',
+            'CRSCompany\FrameworC\Components\Tabs' => 'Tabs',
         ];
     }
 
@@ -136,8 +137,8 @@ class Plugin extends PluginBase
                 'json_decode' => [$this, 'jsonDecodeFilter'],
                 'base64_encode' => [$this, 'getBase64'],
                 'spacer' => [$this, 'spacerFilter'],
-                'srcset' => [$this, 'srcsetFilter'],
-                'imageset' => [$this, 'imagesetFilter'],
+                'srcset' => [$this, 'srcsetFilter', false],
+                'imageset' => [$this, 'imagesetFilter', false],
             ],
             'functions' => [
                 'isBlogPost' => [$this, 'isBlogPost'],

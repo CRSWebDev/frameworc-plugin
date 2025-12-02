@@ -1,17 +1,18 @@
 {% set block = __SELF__.property('data') %}
 {% set block_identifier = __SELF__.property('block_identifier') %}
+{% set block_unique_class = __SELF__.property('block_unique_class') %}
 {% set data = block.content %}
 
 {% put addStyles %}
     {% if data.image %}
-        .{{ block_identifier }} {
+        .{{ block_unique_class }} {
             background-image: {{ data.image | imageset(1920,1080) }};
         }
     {% endif %}
 
     {% if data.imageMobile %}
         @media (max-width: 991px) {
-            .{{ block_identifier }} {
+            .{{ block_unique_class }} {
                 background-image: {{ data.imageMobile | imageset(991,1200) }};
             }
         }

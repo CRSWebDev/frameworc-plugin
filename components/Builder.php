@@ -54,6 +54,7 @@ class Builder extends ComponentBase
 
     public function onRun()
     {
+        $this->addCss('components/slider/css/splide.min.css');
         $this->addCss(['components/builder/normalize.scss']);
         $this->addCss(['components/builder/base.scss']);
 
@@ -68,7 +69,9 @@ class Builder extends ComponentBase
             'components/accordion/Accordion.js',
             'components/form/Form.js',
             'components/imagestrip/ImageStrip.js',
+            'components/slider/js/splide.min.js',
             'components/slider/Slider.js',
+            'components/tabs/Tabs.js',
             'components/navigation/Navigation.js',
             'components/menublock/MenuBlock.js',
             'components/gallery/Gallery.js',

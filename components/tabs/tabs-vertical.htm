@@ -10,7 +10,7 @@
     syncWith: data.syncWith ? data.syncWith : '',
 } %}
 
-<div class="Section" data-control="slider" data-options="{{ options | json_encode | escape() | raw }}">
+<div class="Section" data-control="tabs" data-options="{{ options | json_encode | escape() | raw }}">
     <div class="Flex">
         {% if block.headline %}
             <div class="Flex-container">
@@ -21,26 +21,26 @@
                 </div>
             </div>
         {% endif %}
-        <div class="Slider Slider--tabs Slider--tabsVertical" id="frameworc-slider-{{ data.id }}" data-slider-id="{{ data.id }}">
+        <div class="Tabs Tabs--tabs Tabs--tabsVertical" id="frameworc-slider-{{ data.id }}" data-slider-id="{{ data.id }}">
             <div class="Flex-container">
                 <div class="Flex-col">
-                    <div class="Slider-dots">
+                    <div class="Tabs-dots">
                         {% for slide in data.slides %}
-                            <button class="Slider-dot" data-slide="{{ loop.index0 }}">
+                            <button class="Tabs-dot" data-slide="{{ loop.index0 }}">
                                 {{ slide.headline }}
                             </button>
                         {% endfor %}
                     </div>
                 </div>
                 <div class="Flex-col Flex-col70">
-                    <div class="Slider-container">
-                        <div class="Slider-track">
+                    <div class="Tabs-container">
+                        <div class="Tabs-track">
                             {% for slide in data.slides %}
-                                <div class="Slider-slide">
-                                    <div class="Slider-image">
+                                <div class="Tabs-slide">
+                                    <div class="Tabs-image">
                                         <img src="{{ slide.image | media | resize(null, 400) }}" srcset="{{ slide.image | srcset(null, 400, 'auto') }}" alt="{{ slide.headline }}" draggable="false" />
                                     </div>
-                                    <div class="Slider-content">
+                                    <div class="Tabs-content">
                                         <h3 class="Headline">
                                             {{ slide.headline }}
                                         </h3>
@@ -57,20 +57,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    window.fwcSliderIds = window.fwcSliderIds || [];
-
-    window.fwcSliderIds.push({
-        id: 'frameworc-slider-{{ data.id }}',
-        options: {
-            perView: 1,
-            startIndex: {{ data.startIndex ? data.startIndex : 0 }},
-            syncWith: "{{ data.syncWith ? data.syncWith : '' }}",
-            autoplay: {{ data.autoplay ? data.autoplay : 'false' }},
-            arrows: false,
-            mode: 'fade',
-            disableDrag: true
-        }
-    });
-</script>

@@ -2,6 +2,72 @@
 {% set data = block.content %}
 {% set blockId = __SELF__.property('data').blockId %}
 
-{% set variant = '@' ~ data.variant %}
+{% set options = {
+    id: blockId,
+    perPage: data.perView ? data.perView : 1,
+    gap: data.gap ? data.gap : 30,
+    start: data.startIndex ? data.startIndex : 0,
+    type: data.loop ? 'loop' : 'slide',
+    autoplay: data.autoplay ? true : false,
+    interval: data.autoplay,
+    focus: data.focusedSlidePosition == 'center' ? 'center' : 0,
+    syncWith: data.syncWith ? ('frameworc-slider-' ~ data.syncWith) : '',
+    autoWidth: data.autoWidth ? true : false,
+} %}
 
-{% partial variant %}
+<div class="Section" data-control="slider" data-options='{{ options | json_encode | escape() | raw }}' id="frameworc-slider-{{ options.id }}">
+    <div class="Flex">
+        {% if block.headline %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="Headline">
+                        {{ block.headline | spacer | content }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="Flex-container">
+            <div class="Slider" {% if data.gallery %}data-gallery{% endif %}>
+                <section class="splide">
+                    <div class="splide__arrows Slider-arrows">
+                        <button class="Slider-arrow Slider-arrow--prev splide__arrow--prev">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>
+                        </button>
+                        <button class="Slider-arrow Slider-arrow--next splide__arrow--next">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
+                        </button>
+                    </div>
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            {% for slide in data.slides %}
+                                <li class="splide__slide">
+                                    <div class="Slider-image">
+                                        <img
+                                            src="{{ slide.image | media | resize(null, 400) }}"
+                                            srcset="{{ slide.image | srcset(null, 400, 'auto') }}"
+                                            alt="{{ slide.headline }}"
+                                            draggable="false"
+                                            {% if data.gallery %}
+                                                data-lightbox="{{ slide.image | media | resize(null, 1500) }}"
+                                                data-lightbox-index="{{ loop.index0 }}"
+                                            {% endif %}
+                                        />
+                                    </div>
+                                    <div class="Slider-content">
+                                        <h3 class="Headline">
+                                            {{ slide.headline }}
+                                        </h3>
+                                        <div class="Content">
+                                            {{ slide.text | spacer | content }}
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

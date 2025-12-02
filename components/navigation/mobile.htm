@@ -32,16 +32,24 @@
         </div>
     {% endif %}
 
-    <div class="Navigation-sitepicker Navigation-sitePicker--mobile">
-        {% for site in sitePicker.sites %}
-            {% set active = false %}
+    {% if nav.extraNavLabel2 and nav.extraNavLink2 %}
+        <div class="Navigation-extraLinkWrapper Navigation-extraLinkWrapper--secondary">
+            <a href="{{ nav.extraNavLink2 | link }}" class="Navigation-extraLink Navigation-extraLink--secondary">{{ nav.extraNavLabel2 }}</a>
+        </div>
+    {% endif %}
 
-            {% if this.site.code == site.code %}
-                {% set active = true %}
-            {% endif %}
-                <a href="{{ site.url }}" class="Navigation-item Navigation-item--child {{ active ? 'isActive' }}" title="{{ site.name }}">
-                    {{ site.name }}
-                </a>
-        {% endfor %}
-    </div>
+    {% if sitePicker.sites | length > 1 %}
+        <div class="Navigation-sitepicker Navigation-sitePicker--mobile">
+            {% for site in sitePicker.sites %}
+                {% set active = false %}
+
+                {% if this.site.code == site.code %}
+                    {% set active = true %}
+                {% endif %}
+                    <a href="{{ site.url }}" class="Navigation-item Navigation-item--child {{ active ? 'isActive' }}" title="{{ site.name }}">
+                        {{ site.name }}
+                    </a>
+            {% endfor %}
+        </div>
+    {% endif %}
 </div>

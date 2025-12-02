@@ -1,0 +1,96 @@
+.Tabs {
+    position: relative;
+    width: 100%;
+
+    &-container {
+        overflow: hidden;
+    }
+
+    &-track {
+        position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        transition: transform 0.3s ease;
+    }
+
+    &-slide {
+        flex: 0 0 100%;
+        box-sizing: border-box;
+        padding: 0;
+    }
+
+    &-dots {
+        justify-content: center;
+        gap: 5px;
+        list-style: none;
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 2rem;
+        display: block;
+    }
+
+    &-dot {
+        border-radius: 5px;
+        flex: 0 0 10px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: inline-block;
+        box-sizing: border-box;
+        border: 0;
+        padding: 5px 10px;
+
+        &.isActive {
+            background-color: var(--color-primary);
+        }
+    }
+
+    &-slide {
+        padding: 0;
+    }
+}
+
+.Tabs--fade {
+    .Tabs-container {
+        overflow: visible;
+    }
+
+    .Tabs-track {
+        display: block;
+        position: relative;
+        transition: height ease .3s;
+    }
+
+    .Tabs-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: all ease .3s;
+        transform: translateY(10px);
+
+        &.isActive {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .3s;
+        }
+    }
+}
+
+.Tabs--tabsVertical {
+    .Flex-container {
+        align-items: flex-start;
+    }
+
+    .Tabs-dots {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+    .Tabs-dot {
+        margin-right: 0;
+        transform-origin: right center;
+    }
+}

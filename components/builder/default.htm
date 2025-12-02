@@ -5,16 +5,18 @@
 {% for block in record.builder %}
     {% set block_identifier = block.content_group ~ loop.index0 %}
 
+    {% set block_unique_class = block.content_group ~ '_' ~ record.id ~ '_' ~ loop.index0 %}
+
     {% put addStyles %}
         {% if block.backgroundImage %}
-            .Builder-container--{{ block_identifier }} {
+            .Builder-container--{{ block_unique_class }} {
                 background-image: {{ block.backgroundImage | imageset(1920, 1080) }};
             }
         {% endif %}
 
         {% if block.backgroundImageMobile %}
             @media (max-width: 991px) {
-                .Builder-container--{{ block_identifier }} {
+                .Builder-container--{{ block_unique_class }} {
                     background-image: {{ block.backgroundImageMobile | imageset(991, 1200) }};
                 }
             }
@@ -28,10 +30,10 @@
             Builder-container--{{ block.backgroundColor ? block.backgroundColor : 'defaultBg' }}
             Builder-container--{{ block.elevated ? 'elevated' : 'notElevated' }}
 
-            Builder-container--{{ block_identifier }}
+            Builder-container--{{ block_unique_class }}
 
             {% for item in block.customCssClass %}Builder-container--{{ item }} {% endfor %}
-            
+
 
 {% if block.responsiveHide %}
     {% for item in block.responsiveHide %}
@@ -41,9 +43,9 @@
         "
     >
         {% if block.aliasOverride %}
-            {% component block.aliasOverride data=block block_identifier=block_identifier %}
+            {% component block.aliasOverride data=block block_identifier=block_identifier block_unique_class=block_unique_class %}
         {% else %}
-            {% component block_identifier data=block block_identifier=block_identifier %}
+            {% component block_identifier data=block block_identifier=block_identifier block_unique_class=block_unique_class %}
         {% endif %}
     </div>
 {% endfor %}

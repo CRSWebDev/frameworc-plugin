@@ -42,6 +42,13 @@ class Meta extends ComponentBase
         $this->page['cssVars'] = $cssVariables;
     }
 
+    static function getMeta() {
+        $meta = EntryRecord::inSection('Meta')
+            ->first();
+
+        return $meta;
+    }
+
     public function onFaviconGenerated() {
         $faviconUrl = Input::get('json_result_url');
 

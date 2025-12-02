@@ -20,22 +20,26 @@
         </div>
     </div>
 
-    <div class="Section">
-        <div class="Flex">
-            <div class="Flex-container">
-                <h2 class="Headline">{{ 'blog.downloads_headline'|_ }}</h2>
+    {% if post.downloads | length > 0 %}
+        <div class="Section">
+            <div class="Flex">
+                <div class="Flex-container">
+                    <h2 class="Headline">{{ 'blog.downloads_headline'|_ }}</h2>
+                </div>
+                {% partial 'Downloads::list' data=post.downloads %}
             </div>
-            {% partial 'Downloads::list' data=post.downloads %}
         </div>
-    </div>
+    {% endif %}
 
-    <div class="Section">
-        <div class="Flex">
-            <div class="Flex-container">
-                <h2 class="Headline">{{ 'blog.gallery_headline'|_ }}</h2>
+    {% if post.gallery | length > 0 %}
+        <div class="Section">
+            <div class="Flex">
+                <div class="Flex-container">
+                    <h2 class="Headline">{{ 'blog.gallery_headline'|_ }}</h2>
+                </div>
+                {% partial 'Gallery::grid' data=post.gallery %}
             </div>
-            {% partial 'Gallery::grid' data=post.gallery %}
         </div>
-    </div>
+    {% endif %}
 {% endif %}
 
