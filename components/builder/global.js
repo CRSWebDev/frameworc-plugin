@@ -15,6 +15,7 @@ oc.registerControl('global', class extends oc.ControlBase {
         this.listen('click', '.Lightbox-close', this.hideLightbox);
         this.listen('click', '.Lightbox-prev', this.prevImage);
         this.listen('click', '.Lightbox-next', this.nextImage);
+        this.listen('click', '.Lightbox-overlay', this.hideLightbox);
 
         addEventListener('keydown', this.proxy(this.keydownHandler));
     }
