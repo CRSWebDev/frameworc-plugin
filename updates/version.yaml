@@ -15,3 +15,4 @@ v1.1.0: Big update with a lot of new features
 v1.1.1: Changed variables to be a css file rather than separate fields
 v1.4.0: Replaced custom slider with SplideJS, separated Tabs and Slider components, bug fixes and QOL updates, sync version with git tag
 v1.4.1: Fix exception settingshelper
+v1.4.2: Gallery, lightbox, header updates
