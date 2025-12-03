@@ -33,9 +33,41 @@
             }
         }
 
+        /* SPACING */
+        &--noSpacing {
+            & > .Section {
+                margin: 0;
+            }
+        }
+
+        &--noSpacingTop {
+            & > .Section {
+                margin: 0 0 calc(var(--spacing-section)) 0;
+            }
+        }
+
+        &--noSpacingBottom {
+            & > .Section {
+                margin: calc(var(--spacing-section)) 0 0 0;
+            }
+        }
+
+        &--narrowSpacing {
+            & > .Section {
+                margin: calc(var(--spacing-section) / 2) 0;
+            }
+        }
+
+        /* APPEARANCE */
         &--pop {
             margin: 1rem;
             border-radius: var(--border-radius-img);
+        }
+
+        &--centerButtons {
+            .Buttons {
+                justify-content: center;
+            }
         }
 
         /* BACKGROUNDS */
@@ -78,6 +110,38 @@
         &--hideDesktop {
             @media (min-width: 992px) {
                 display: none !important;
+            }
+        }
+
+        /* ANIMATIONS */
+        &--animate {
+            opacity: 0;
+
+            &.isInitialized {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            &.Section--noChildren, &.Section--noChildren.isInitialized {
+                transform: translateY(70px);
+                opacity: 0;
+            }
+
+            &.Section--noChildren.isInitialized.isVisible {
+                transition: all ease .5s;
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .Tiles-tile, .BlogList-item, .Accordion-item, .Gallery-column {
+                opacity: 0;
+                transform: translateY(70px);
+                transition: all ease .5s;
+
+                &.isVisible {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
         }
     }

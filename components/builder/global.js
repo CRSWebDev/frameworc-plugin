@@ -157,14 +157,8 @@ class FadeInElement {
         });
     }
 
-    fadeOut() {
-        this.childElememts.forEach((child, index) => {
-            child.classList.remove('isVisible');
-        });
-    }
-
     fadeInOnScroll() {
-        const offset = window.scrollY + window.innerHeight - window.innerHeight / 4;
+        const offset = window.scrollY + window.innerHeight - window.innerHeight / 3;
 
         if (offset > this.offsetTop && !this.isVisible) {
             this.fadeIn();
@@ -177,7 +171,7 @@ let elementInstances = [];
 addEventListener('page:loaded', function() {
     elementInstances = [];
 
-    const elements = document.querySelectorAll('.animate');
+    const elements = document.querySelectorAll('.Builder-container--animate');
 
     elements.forEach((element) => {
         const instance = new FadeInElement(element, '.Tiles-tile, .BlogList-item, .Accordion-item, .Gallery-column');
@@ -189,7 +183,6 @@ addEventListener('page:loaded', function() {
 
 addEventListener('page:visit', function(event) {
     elementInstances.forEach((instance) => {
-        instance.fadeOut();
         window.removeEventListener('scroll', instance.fadeInOnScroll.bind(instance));
     });
 });
