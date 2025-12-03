@@ -3,23 +3,28 @@
 {% set block_unique_class = __SELF__.property('block_unique_class') %}
 {% set data = block.content %}
 
-{% put addStyles %}
-    {% if data.image %}
-        .{{ block_unique_class }} {
-            background-image: {{ data.image | imageset(1920,1080) }};
-        }
-    {% endif %}
-
-    {% if data.imageMobile %}
-        @media (max-width: 991px) {
+{% if not data.isVideoBg %}
+    {% put addStyles %}
+        {% if data.image %}
             .{{ block_unique_class }} {
-                background-image: {{ data.imageMobile | imageset(991,1200) }};
+                background-image: {{ data.image | imageset(1920,1080) }};
             }
-        }
-    {% endif %}
-{% endput %}
+        {% endif %}
 
-<div class="Header {{ data | moduleMods('Header', ['fullHeight', 'contrast']) }} {{ block_identifier }}">
+        {% if data.imageMobile %}
+            @media (max-width: 991px) {
+                .{{ block_unique_class }} {
+                    background-image: {{ data.imageMobile | imageset(991,1200) }};
+                }
+            }
+        {% endif %}
+    {% endput %}
+{% endif %}
+
+<div class="Header {{ data | moduleMods('Header', ['fullHeight', 'contrast', 'isVideoBg']) }} {{ block_identifier }}">
+    {% if data.isVideoBg %}
+        <video class="Header-video" src="{{ data.image | media }}" {% if data.imageMobile %}poster="{{ data.imageMobile | media }}"{% endif %} autoplay muted playsinline loop></video>
+    {% endif %}
     {% if data.overlay %}
         <div class="Header-overlay"></div>
     {% endif %}
