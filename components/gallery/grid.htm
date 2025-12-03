@@ -7,17 +7,25 @@
 {% endif %}
 
 <div class="Flex-container">
-    <div class="Flex-col">
+    <div class="Flex-col" style="position: relative;">
         <div class="Gallery" data-control="gallery" data-options='{"columns": {{ columns }}}'>
-            <div class="Gallery-imageHolder">
-                {% for item in data.images %}
-                    <img src="{{ item | media | resize(resizeWidth) }}" srcset="{{ item | srcset(resizeWidth, null, 'auto') }}" data-lightbox="{{ item | media | resize(null, 1500) }}" class="Gallery-image">
-                {% endfor %}
+            <div class="Gallery-wrapper">
+                <div class="Gallery-imageHolder">
+                    {% for item in data.images %}
+                        <img src="{{ item | media | resize(resizeWidth) }}" srcset="{{ item | srcset(resizeWidth, null, 'auto') }}" data-lightbox="{{ item | media | resize(null, 1500) }}" class="Gallery-image">
+                    {% endfor %}
+                </div>
+                <div class="Gallery-container" data-gallery>
+                    {% for i in 1..columns %}
+                        <div class="Gallery-column" style="flex: 0 0 calc({{ 100 / columns }}%);"></div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="Gallery-container" data-gallery>
-                {% for i in 1..columns %}
-                    <div class="Gallery-column" style="flex: 0 0 calc({{ 100 / columns }}%);"></div>
-                {% endfor %}
+
+            <div class="Gallery-button">
+                <button type="button" class="Button Button--icon Gallery-buttonPrev" data-gallery-prev>
+                    {{ 'Načíst další'|_ }}
+                </button>
             </div>
         </div>
     </div>

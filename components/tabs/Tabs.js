@@ -1,7 +1,11 @@
 oc.registerControl('tabs', class extends oc.ControlBase {
     connect() {
-        this.images.forEach((image) => {
+        this.images.forEach((image, i) => {
             image.addEventListener('load', this.proxy(this.checkLoadedImage));
+
+            if (image.complete) {
+                this.checkLoadedImage();
+            }
         });
 
         addEventListener('resize', this.proxy(this.resize));
@@ -66,7 +70,7 @@ oc.registerControl('tabs', class extends oc.ControlBase {
         this.update();
     }
 
-    checkLoadedImage() {
+    checkLoadedImage(event) {
         this.numImagesLoaded++;
 
         if (this.numImagesLoaded === this.images.length) {
