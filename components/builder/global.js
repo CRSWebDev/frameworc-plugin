@@ -15,6 +15,12 @@ oc.registerControl('global', class extends oc.ControlBase {
         this.listen('click', '.Lightbox-close', this.hideLightbox);
         this.listen('click', '.Lightbox-prev', this.prevImage);
         this.listen('click', '.Lightbox-next', this.nextImage);
+
+        addEventListener('keydown', this.proxy(this.keydownHandler));
+    }
+
+    disconnect() {
+        removeEventListener('keydown', this.proxy(this.keydownHandler));
     }
 
     mouseDown(e) {
@@ -37,8 +43,28 @@ oc.registerControl('global', class extends oc.ControlBase {
         }
     }
 
+    keydownHandler(e) {
+        if (this.lightbox.classList.contains('isActive')) {
+            e.preventDefault();
+
+            switch (e.key) {
+                case 'Escape':
+                    this.hideLightbox();
+                    break;
+                case 'ArrowLeft':
+                    this.prevImage();
+                    break;
+                case 'ArrowRight':
+                    this.nextImage();
+                    break;
+            }
+        }
+    }
+
     showLightbox(e) {
         e.preventDefault();
+
+        document.body.style.overflow = 'hidden';
 
         const images = e.target.closest('[data-gallery]').querySelectorAll('[data-lightbox]');
         this.lightboxGallery = Array.from(images).map((image) => image.getAttribute('data-lightbox'));
@@ -51,6 +77,8 @@ oc.registerControl('global', class extends oc.ControlBase {
     }
 
     hideLightbox() {
+        document.body.style.overflow = '';
+
         this.lightbox.classList.remove('isActive');
     }
 
