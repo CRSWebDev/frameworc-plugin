@@ -1,5 +1,6 @@
 oc.registerControl('global', class extends oc.ControlBase {
     init() {
+        /* LIGHTBOX */
         this.lightbox = this.element.querySelector('#lightbox');
         this.lightboxImage = this.lightbox.querySelector('.Lightbox-image');
         this.lightboxGallery = [];

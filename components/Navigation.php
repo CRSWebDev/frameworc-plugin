@@ -40,6 +40,7 @@ class Navigation extends ComponentBase
                 $menu[$item->id] = [
                     'title' => $item->title,
                     'url' => $item->url,
+                    'anchor' => $item->anchor,
                     'blank' => $item->blank,
                     'children' => []
                 ];
@@ -47,6 +48,7 @@ class Navigation extends ComponentBase
                 $menu[$item->parent_id]['children'][] = [
                     'title' => $item->title,
                     'url' => $item->url,
+                    'anchor' => $item->anchor,
                     'blank' => $item->blank
                 ];
             }

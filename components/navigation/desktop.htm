@@ -3,11 +3,17 @@
     {% for item in menu %}
         {% if not item.parent_id %}
             {% set isActive = false %}
-            {% if item.url | link == current | app or (item.url | link == '/' and current == '/home') %}
+            {% set itemLink = item.url | link %}
+            {% if itemLink | link == current | app or (itemLink | link == '/' and current == '/home') %}
                 {% set isActive = true %}
             {% endif %}
             <div class="Navigation-itemWrapper">
-                <a href="{{ item.url | link }}" class="Navigation-item Navigation-item--level1 {{ isActive ? 'isActive' : '' }}" {% if item.blank %}target="_blank"{% endif %}>
+                <a
+                    href="{{ itemLink }}"
+                    class="Navigation-item Navigation-item--level1 {{ isActive and not item.anchor ? 'isActive' : '' }} {{ item.anchor ? 'Navigation-item--anchor' : '' }}"
+                    {% if item.blank %}target="_blank"{% endif %}
+                    {% if item.anchor %}data-turbo="false"{% endif %}
+                >
                     {{ item.title }}
                     {% if item.children %}
                         <span class="Navigation-itemIcon">
@@ -19,7 +25,12 @@
                     <div class="Navigation-subNavWrapper">
                         <div class="Navigation-subNav">
                             {% for child in item.children %}
-                                <a href="{{ child.url | link }}" class="Navigation-item Navigation-item--child" {% if child.blank %}target="_blank"{% endif %}>
+                                <a
+                                    href="{{ child.url | link }}"
+                                    class="Navigation-item Navigation-item--child {{ child.anchor ? 'Navigation-item--anchor' : '' }}"
+                                    {% if child.blank %}target="_blank"{% endif %}
+                                    {% if child.anchor %}data-turbo="false"{% endif %}
+                                >
                                     {{ child.title }}
                                 </a>
                             {% endfor %}

@@ -2,8 +2,14 @@
     {% for item in menu %}
         {% if not item.parent_id %}
             {% set itemLoop = loop.index0 %}
+            {% set itemLink = item.url | link %}
             <div class="Navigation-itemWrapper">
-                <a href="{{ item.url | link }}" class="Navigation-item">
+                <a
+                    href="{{ item.url | link }}"
+                    class="Navigation-item {% if item.anchor %}Navigation-item--anchor{% endif %}"
+                    {% if item.anchor %}data-turbo="false"{% endif %}
+                    {% if item.blank %}target="_blank" {% endif %}
+                >
                     {{ item.title }}
                 </a>
                 {% if item.children %}
@@ -16,7 +22,12 @@
                 <div class="Navigation-subNavWrapper" id="nav-parent-item-{{ itemLoop }}">
                     <div class="Navigation-subNav">
                         {% for child in item.children %}
-                            <a href="{{ child.url | link }}" class="Navigation-item Navigation-item--child">
+                            <a
+                                href="{{ child.url | link }}"
+                                class="Navigation-item Navigation-item--child {% if child.anchor %}Navigation-item--anchor{% endif %}"
+                                {% if child.anchor %}data-turbo="false"{% endif %}
+                                {% if child.blank %}target="_blank" {% endif %}
+                            >
                                 {{ child.title }}
                             </a>
                         {% endfor %}

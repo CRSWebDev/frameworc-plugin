@@ -3,7 +3,7 @@
 {% set availableSites = sitePicker.sites %}
 
 {% set menuStyle = record.menuStyle %}
-
+{% set menuHide = record.menuHide == 'no' ? 0 : 1 %}
 {% if not record.menuStyle %}
     {% set menuStyle = 'solid' %}
 {% endif %}
@@ -16,7 +16,7 @@
 
 {% set current = code ~ this.param.fullslug %}
 
-<div class="Navigation Navigation--{{ menuStyle }} Navigation--desktop" data-control="navigation">
+<div class="Navigation Navigation--{{ menuStyle }} Navigation--desktop" data-control="navigation" data-options='{ "menuHide": {{ menuHide }} }'>
     {% if nav.showInfobar %}
         {% partial '@infobar' %}
     {% endif %}

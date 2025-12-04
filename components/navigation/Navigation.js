@@ -1,5 +1,7 @@
 oc.registerControl('navigation', class extends oc.ControlBase {
     init() {
+        this.options = JSON.parse(this.config.options || '{}');
+
         this.offset = 200;
 
         this.lastScrollTop = 0;
@@ -20,10 +22,25 @@ oc.registerControl('navigation', class extends oc.ControlBase {
                 this.infobar.style.display = 'block';
             }
         }
+
+        this.menuHide = this.options.menuHide === 1;
+
+        /* SCROLLSPY */
+        this.scrollElement = window;
+        this.scrollSpyLinks = Array.from(document.querySelectorAll('.Navigation-item--anchor'));
+        this.scrollSpyBoxes = this.scrollSpyLinks.map((link) => {
+            let targetSelector = link.getAttribute('href');
+            if (targetSelector.startsWith('/')) {
+                targetSelector = targetSelector.substring(1);
+            }
+
+            return document.querySelector(targetSelector);
+        });
     }
 
     connect() {
         window.addEventListener('scroll', this.proxy(this.handleScroll));
+        this.scrollSpy(0);
 
         this.listen('click', '.Navigation-toggle', this.handleToggle);
         this.listen('click', '.Navigation-subNavToggle', this.handleSubNavToggle);
@@ -33,6 +50,8 @@ oc.registerControl('navigation', class extends oc.ControlBase {
         this.listen('mouseenter', '.Navigation-extraLinkWrapper', this.initialUnderlinePosition);
 
         this.listen('click', '.Infobar-close', this.closeInfobar);
+
+        this.listen('click', '.Navigation-item', this.handleToggle);
 
         setTimeout(() => {
             this.initialUnderlinePosition();
@@ -46,6 +65,8 @@ oc.registerControl('navigation', class extends oc.ControlBase {
     handleScroll() {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 
+        this.scrollSpy(scrollTop);
+
         if (scrollTop >= this.offset) {
             this.element.classList.add('isScrolled');
         } else {
@@ -53,6 +74,10 @@ oc.registerControl('navigation', class extends oc.ControlBase {
         }
 
         // Hide nav when scrolling down
+        if (this.menuHide === false) {
+            return;
+        }
+
         if (scrollTop > this.lastScrollTop + this.scrollOffset) {
             this.element.classList.add('isHidden');
             this.lastScrollTop = scrollTop;
@@ -66,7 +91,12 @@ oc.registerControl('navigation', class extends oc.ControlBase {
     }
 
     handleToggle(e) {
-        e.preventDefault();
+        if (e.target.classList.contains('Navigation-item')) {
+            this.element.classList.remove('isOpen');
+            this.mobileNav.classList.remove('isActive');
+
+            return;
+        }
 
         this.element.classList.toggle('isOpen');
         this.mobileNav.classList.toggle('isActive');
@@ -121,5 +151,28 @@ oc.registerControl('navigation', class extends oc.ControlBase {
         localStorage.setItem('infobarClosed', true);
 
         this.infobar.style.display = 'none';
+    }
+
+    scrollSpy(scrollTop) {
+        this.scrollSpyLinks.forEach((link) => {
+            link.classList.remove('isActive');
+        })
+
+        let visibleBox = null;
+
+        // Check if boxes are visible
+        for (let i = this.scrollSpyBoxes.length - 1; i >= 0; i--) {
+            const box = this.scrollSpyBoxes[i];
+
+            if (box.offsetTop > scrollTop - 100) {
+                visibleBox = box;
+            }
+        }
+
+        if (visibleBox) {
+            const link = this.scrollSpyLinks[this.scrollSpyBoxes.indexOf(visibleBox)];
+            link.classList.add('isActive');
+            this.moveUnderline({target: link});
+        }
     }
 })

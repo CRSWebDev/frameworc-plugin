@@ -61,7 +61,6 @@ oc.registerControl('gallery', class extends oc.ControlBase {
     }
 
     loadMoreImages() {
-        console.log(this.unloadedImages);
         this.imagesToLoad = this.unloadedImages;
         this.maxLoadImages = 99999;
         this.loadImages();
@@ -70,7 +69,6 @@ oc.registerControl('gallery', class extends oc.ControlBase {
     }
 
     distributeImage(image) {
-        console.log('distributeImage', image);
         let shortestColumn = this.columns[0];
 
         this.columns.forEach((column) => {
