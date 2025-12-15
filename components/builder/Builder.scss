@@ -16,7 +16,7 @@
         /* SIZES */
         &--narrow {
             .Flex-container {
-                max-width: 800px;
+                max-width: var(--container-narrow-max-width);
             }
         }
 
@@ -86,6 +86,44 @@
 
             p {
                 color: #fff;
+            }
+        }
+
+        &--containerContrast {
+            --container-width: var(--container-max-width);
+
+            &:is(.Builder-container--narrow) {
+                --container-width: var(--container-narrow-max-width);
+            }
+
+            & > .Section > .Flex > .Flex-container {
+                background-color: var(--color-primary);
+                padding: var(--container-padding-with-bg);
+                border-radius: var(--border-radius-img);
+                max-width: calc(var(--container-width) - var(--container-padding-with-bg));
+
+                .Headline {
+                    color: var(--color-primary-dark);
+                }
+
+                p {
+                    color: #fff;
+                }
+            }
+        }
+
+        &--containerAccent {
+            --container-width: var(--container-max-width);
+
+            &:is(.Builder-container--narrow) {
+                --container-width: var(--container-narrow-max-width);
+            }
+
+            & > .Section > .Flex > .Flex-container {
+                background-color: var(--color-accent);
+                padding: var(--container-padding-with-bg);
+                border-radius: var(--border-radius-img);
+                max-width: calc(var(--container-width) - var(--container-padding-with-bg));
             }
         }
 
