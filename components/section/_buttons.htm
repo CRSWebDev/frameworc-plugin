@@ -1,0 +1,25 @@
+{% set startIndex = 1 %}
+{% set endIndex = startIndex + 1 %}
+
+{% if start %}
+    {% set startIndex = start %}
+    {% set endIndex = start + 1 %}
+{% endif %}
+
+<div class="Buttons">
+    {% for i in startIndex..endIndex %}
+        {% set button = {
+            link: data['buttonLink' ~ i],
+            label: data['buttonLabel' ~ i],
+            contrast: data['buttonContrast' ~ i],
+            outline: data['buttonOutline' ~ i],
+            blank: data['buttonBlank' ~ i],
+        } %}
+
+        {% if button.link and button.label %}
+            <a href="{{ button.link | link }}" class="Button {{ button | moduleMods('Button', ['contrast', 'outline']) }}" {% if button.blank %}target="_blank"{% endif %}>
+                {{ button.label }}
+            </a>
+        {% endif %}
+    {% endfor %}
+</div>

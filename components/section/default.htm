@@ -4,18 +4,21 @@
 
 {%
     set vars = {
-        '@variant1': {
+        '@halfAndHalf': {
             imgDimensions: {w: 800, h: 600},
         },
-        '@variant2': {
+        '@img70': {
+            imgDimensions: {w: 800, h: 600},
+        },
+        '@text70': {
+            imgDimensions: {w: 800, h: 600},
+        },
+        '@noText': {
             imgDimensions: {w: 1200, h: 800},
         }
     }
 %}
 
 {% set imgDimensions = vars[variant].imgDimensions %}
-{% if data.noText %}
-    {% set imgDimensions = {w: 1200, h: 600} %}
-{% endif %}
 
 {% partial variant %}

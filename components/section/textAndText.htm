@@ -1,0 +1,27 @@
+{% set colClass = 'Flex-col Flex-col50' %}
+
+<div class="Section {{ data | moduleMods('Section', ['accent', 'contrast', 'narrow', 'backgroundImage']) }}">
+    <div class="Flex {{ data.reverse ? 'Flex--reverse' : '' }}">
+        <div class="Flex-container">
+            <div class="{{ colClass }}">
+                {% if block.headline %}
+                    <div class="Headline">
+                        {{ block.headline | spacer | content }}
+                    </div>
+                {% endif %}
+
+                {% partial '@_buttons' %}
+            </div>
+
+            <div class="{{ colClass }}">
+                {% if data.headline2 %}
+                    <div class="Headline">
+                        {{ data.headline2 | spacer | content }}
+                    </div>
+                {% endif %}
+
+                {% partial '@_buttons' start=3 %}
+            </div>
+        </div>
+    </div>
+</div>

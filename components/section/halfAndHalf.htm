@@ -1,0 +1,23 @@
+{% set colClass = 'Flex-col Flex-col50' %}
+
+<div class="Section {{ data | moduleMods('Section', ['accent', 'contrast', 'narrow', 'backgroundImage']) }}">
+    <div class="Flex {{ data.reverse ? 'Flex--reverse' : '' }}">
+        <div class="Flex-container">
+            <div class="{{ colClass }}">
+                {% if block.headline %}
+                    <div class="Headline">
+                        {{ block.headline | spacer | content }}
+                    </div>
+                {% endif %}
+
+                {% partial '@_buttons' %}
+            </div>
+
+            <div class="{{ colClass }}" {% if data.backgroundImage %}style="background-image: {{ data.image | imageset(imgDimensions.w, imgDimensions.h, 'landscape') }}"{% endif %}>
+                {% if not data.backgroundImage %}
+                    <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'landscape'}) }}" srcset="{{ data.image | srcset(imgDimensions.w, imgDimensions.h, 'landscape') }}" alt="{{ data.headline }}" />
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="Section {{ data | moduleMods('Section', ['accent', 'contrast', 'narrow']) }}">
+    <div class="Flex {{ data.reverse ? 'Flex--reverse' : '' }}">
+        <div class="Flex-container">
+            <div class="Flex-col">
+                {% if block.headline %}
+                    <div class="Headline">
+                        {{ block.headline | spacer | content }}
+                    </div>
+                {% endif %}
+
+                {{ data.embed | raw }}
+
+                {% partial '@_buttons' %}
+            </div>
+        </div>
+    </div>
+</div>
