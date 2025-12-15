@@ -1,4 +1,4 @@
-<a href="{{ tile.linkUrl | link }}" class="Tiles-tile {{ data | moduleMods('Tiles-tile', ['contrastHover', 'contrastBorderHover', 'outline', 'borderless']) }}">
+<a href="{{ tile.linkUrl | link }}" class="Tiles-tile {{ data | moduleMods('Tiles-tile', ['contrastHover', 'contrastBorderHover', 'outline', 'borderless']) }}" {% if tile.linkBlank %}target="_blank" {% endif %}>
     {% if data.tileIcon %}
         <div class="Tiles-icon">
             {{ tile.image | svg | raw }}

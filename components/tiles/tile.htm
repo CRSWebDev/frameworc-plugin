@@ -14,7 +14,7 @@
     </div>
     {% if tile.linkUrl and tile.linkText %}
         <div class="Tiles-button">
-            <a href="{{ tile.linkUrl | link }}" class="Button {{ data.buttonStyle }}">{{ tile.linkText }}</a>
+            <a href="{{ tile.linkUrl | link }}" class="Button {{ data.buttonStyle }}" {% if tile.linkBlank %}target="_blank" {% endif %}>{{ tile.linkText }}</a>
         </div>
     {% endif %}
 </div>
