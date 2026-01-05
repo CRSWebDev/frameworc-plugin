@@ -7,21 +7,39 @@
 
     {% set block_unique_class = block.content_group ~ '_' ~ record.id ~ '_' ~ loop.index0 %}
 
-    {% put addStyles %}
-        {% if block.backgroundImage %}
-            .Builder-container--{{ block_unique_class }} {
-                background-image: {{ block.backgroundImage | imageset(1920, 1080) }};
-            }
-        {% endif %}
-
-        {% if block.backgroundImageMobile %}
-            @media (max-width: 991px) {
+    {% if block.backgroundColor == 'image' %}
+        {% put addStyles %}
+            {% if block.backgroundImage %}
                 .Builder-container--{{ block_unique_class }} {
-                    background-image: {{ block.backgroundImageMobile | imageset(991, 1200) }};
+                    background-image: {{ block.backgroundImage | imageset(1920, 1080) }};
                 }
-            }
-        {% endif %}
-    {% endput %}
+            {% endif %}
+
+            {% if block.backgroundImageMobile %}
+                @media (max-width: 991px) {
+                    .Builder-container--{{ block_unique_class }} {
+                        background-image: {{ block.backgroundImageMobile | imageset(991, 1200) }};
+                    }
+                }
+            {% endif %}
+        {% endput %}
+    {% elseif block.backgroundColor == 'containerImage' %}
+        {% put addStyles %}
+            {% if block.backgroundImage %}
+                .Builder-container--{{ block_unique_class }} > .Section > .Flex > .Flex-container {
+                    background-image: {{ block.backgroundImage | imageset(1920, 1080) }};
+                }
+            {% endif %}
+
+            {% if block.backgroundImageMobile %}
+                @media (max-width: 991px) {
+                    .Builder-container--{{ block_unique_class }} > .Section > .Flex > .Flex-container {
+                        background-image: {{ block.backgroundImageMobile | imageset(991, 1200) }};
+                    }
+                }
+            {% endif %}
+        {% endput %}
+    {% endif %}
 
     <div
         id="{{ str_slug(block.blockId) }}"

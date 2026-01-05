@@ -127,6 +127,22 @@
             }
         }
 
+        &--containerImage {
+            --container-width: var(--container-max-width);
+
+            &:is(.Builder-container--narrow) {
+                --container-width: var(--container-narrow-max-width);
+            }
+
+            & > .Section > .Flex > .Flex-container {
+                background-size: cover;
+                background-position: center;
+                padding: var(--container-padding-with-bg);
+                border-radius: var(--border-radius-img);
+                max-width: calc(var(--container-width) - var(--container-padding-with-bg));
+            }
+        }
+
         &--image {
             background-size: cover;
             background-position: center;
