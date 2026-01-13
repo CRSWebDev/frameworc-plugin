@@ -26,7 +26,7 @@ fields:
           integration_altcha_secret:
             label: Altcha secret
             tab: Integrace
-            type: password
+            type: sensitive
 
           integration_n8n_webhook_url:
             label: N8N webhook URL
@@ -44,6 +44,6 @@ fields:
 
           integration_n8n_auth:
             label: N8N heslo pro webhook
-            type: password
+            type: sensitive
             comment: Heslo pro webhook
             tab: Integrace
