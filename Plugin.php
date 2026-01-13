@@ -159,8 +159,14 @@ class Plugin extends PluginBase
     }
 
     public function svgFilter($url) {
-        $svg = Storage::disk('media')->get($url);
-        return $svg;
+        if (str_contains('.svg', $url)) {
+            $svg = Storage::disk('media')->get($url);
+            return $svg;
+        }
+
+        // Return <img> with jpg, png as is with correct path
+        $mediaUrl = MediaLibrary::url($url);
+        return '<img src="' . $mediaUrl . '" alt="" />';
     }
 
     public function svgAssetFilter($url) {
