@@ -1,0 +1,36 @@
+{% set block = __SELF__.property('data') %}
+{% set block_unique_class = __SELF__.property('block_unique_class') %}
+{% set data = block.content %}
+
+{% set feed = __SELF__.getInstaFeed(data.token) %}
+
+<div class="Section">
+    <div class="Flex">
+        <div class="Flex-container">
+            <div class="Flex-col">
+                <div class="Headline">
+                    {{ block.headline | content }}
+                </div>
+            </div>
+        </div>
+        {% if feed | length > 0 %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="InstaFeed">
+                        <div class="InstaFeed-grid isColumns-{{ data.columnCount }}">
+                            {% set imageCount = data.imageCount - 1 %}
+
+                            {% for item in 0..imageCount %}
+                                {% if feed[item].media_type == 'VIDEO' %}
+                                    <a href="{{ feed[item].permalink }}" class="InstaFeed-item InstaFeed-item--video" target="_blank" style="background-image: url({{ feed[item].thumbnail_url }})"></a>
+                                {% else %}
+                                    <a href="{{ feed[item].permalink }}" class="InstaFeed-item" target="_blank" style="background-image: url({{ feed[item].media_url }})"></a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

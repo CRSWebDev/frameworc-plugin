@@ -9,6 +9,7 @@
         "ext-zip": "*",
         "altcha-org/altcha": "v1.1.2",
         "symfony/postmark-mailer": "^7.3",
-        "symfony/http-client": "^7.3"
+        "symfony/http-client": "^7.3",
+        "yizack/instagram-feed": "^2.0"
     }
 }

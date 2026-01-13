@@ -79,6 +79,7 @@ class Plugin extends PluginBase
             'CRSCompany\FrameworC\Components\Gallery' => 'Gallery',
             'CRSCompany\FrameworC\Components\Downloads' => 'Downloads',
             'CRSCompany\FrameworC\Components\Tabs' => 'Tabs',
+            'CRSCompany\FrameworC\Components\InstaFeed' => 'InstaFeed',
         ];
     }
 
