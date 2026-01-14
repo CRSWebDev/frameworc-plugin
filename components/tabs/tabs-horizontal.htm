@@ -37,6 +37,8 @@
                                     <div class="Content">
                                         {{ slide.text | spacer | content }}
                                     </div>
+
+                                    {% partial '@_buttons' data=slide %}
                                 </div>
                             </div>
                         {% endfor %}

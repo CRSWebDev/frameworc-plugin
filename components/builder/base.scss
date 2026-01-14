@@ -3,7 +3,8 @@
 body, html {
     font-family: 'Inter', sans-serif;
     background-color: var(--color-bg-base);
-    scroll-margin-top: var(--spacing-navbar);
+    scroll-padding-top: var(--spacing-navbar);
+    scroll-behavior: smooth;
 }
 
 body {

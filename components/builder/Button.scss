@@ -29,13 +29,11 @@ Buttons Wrapper
     color: var(--color-text-base);
     font-weight: bold;
     border-radius: var(--border-radius-btn);
-    box-shadow: var(--shadow-base);
     border: 0;
 
     &:hover, &:focus, &:active {
         background-color: var(--color-button-bg-base-hover);
         color: var(--color-text-base);
-        box-shadow: none;
     }
 }
 
@@ -53,7 +51,6 @@ Buttons Wrapper
     background-color: transparent;
     color: var(--color-button-bg-base);
     border: 2px solid var(--color-button-bg-base);
-    box-shadow: none;
 
     &:hover, &:focus, &:active {
         background-color: var(--color-button-bg-outline-hover);
@@ -74,6 +71,45 @@ Buttons Wrapper
     }
 }
 
+.Button--blurLight, .Button--blurDark {
+    backdrop-filter: blur(10px);
+    background-color: transparent;
+    border: 0;
+}
+
+.Button--blurLight {
+    color: var(--color-black);
+    background-color: rgba(255, 255, 255, 0.3);
+
+    &:hover, &:focus, &:active {
+        color: var(--color-primary);
+        background-color: rgba(255,255,255,0.4);
+    }
+}
+
+.Button--blurDark {
+    color: var(--color-white);
+    background-color: rgba(0, 0, 0, 0.3);
+
+    &:hover, &:focus, &:active {
+        background-color: rgba(0, 0, 0, 0.4);
+        color: var(--color-primary);
+    }
+}
+
+.Button--plain {
+    background-color: transparent;
+    color: var(--color-primary);
+    padding: 0;
+    gap: .5rem;
+
+    &:hover, &:focus, &:active {
+        text-decoration: underline;
+        background-color: transparent;
+        color: var(--color-primary);
+    }
+}
+
 .Button--inverse {
     background-color: var(--color-white);
     color: var(--color-primary);
@@ -81,5 +117,46 @@ Buttons Wrapper
     &:hover, &:focus, &:active {
         background-color: var(--color-accent);
         color: var(--color-primary);
+    }
+}
+
+.Button--contrast {
+    &.Button--blurLight {
+        color: var(--color-white);
+
+        &:hover, &:focus, &:active {
+            color: var(--color-primary);
+        }
+    }
+
+    &.Button--blurDark {
+        background-color: rgba(0, 0, 0, 0.1);
+        color: var(--color-black);
+
+        &:hover, &:focus, &:active {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: var(--color-primary);
+        }
+    }
+
+    &.Button--plain {
+        color: var(--color-white);
+
+        &:hover, &:focus, &:active {
+            text-decoration: underline;
+            background-color: transparent;
+            color: var(--color-white);
+        }
+    }
+
+    &.Button--outline {
+        border-color: var(--color-white);
+        color: var(--color-white);
+
+        &:hover, &:focus, &:active {
+            background-color: var(--color-white-transparent);
+            border-color: var(--color-accent);
+            color: var(--color-white);
+        }
     }
 }

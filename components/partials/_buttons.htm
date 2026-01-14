@@ -12,12 +12,11 @@
             link: data['buttonLink' ~ i],
             label: data['buttonLabel' ~ i],
             contrast: data['buttonContrast' ~ i],
-            outline: data['buttonOutline' ~ i],
             blank: data['buttonBlank' ~ i],
         } %}
 
         {% if button.link and button.label %}
-            <a href="{{ button.link | link }}" class="Button {{ button | moduleMods('Button', ['contrast', 'outline']) }}" {% if button.blank %}target="_blank"{% endif %}>
+            <a href="{{ button.link | link }}" class="Button {{ button | moduleMods('Button', ['contrast']) }} Button--{{ data['buttonVariant' ~ i] }}" {% if button.blank %}target="_blank"{% endif %}>
                 {{ button.label }}
             </a>
         {% endif %}

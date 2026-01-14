@@ -28,6 +28,10 @@
         width: 100%;
         box-sizing: border-box;
         animation: fadeIn 1s;
+
+        &:not(:has(img)) {
+            display: none;
+        }
     }
 
     &-wrapper {

@@ -17,6 +17,11 @@
         flex: 0 0 100%;
         box-sizing: border-box;
         padding: 0;
+        pointer-events: none;
+
+        &.isActive {
+            pointer-events: all;
+        }
     }
 
     &-dots {
@@ -42,10 +47,6 @@
         &.isActive {
             background-color: var(--color-primary);
         }
-    }
-
-    &-slide {
-        padding: 0;
     }
 }
 
