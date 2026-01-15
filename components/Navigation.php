@@ -2,6 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use Tailor\Models\EntryRecord;
+use CRSCompany\FrameworC\Classes\SettingsHelper;
 
 /**
  * Navigation Component
@@ -24,6 +25,12 @@ class Navigation extends ComponentBase
     public function defineProperties()
     {
         return [];
+    }
+
+    public function onRun() {
+        $navSettings = SettingsHelper::getByPrefix('navigation');
+
+        $this->page['navbarSettings'] = $navSettings;
     }
 
     public function getNav() {

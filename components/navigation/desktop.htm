@@ -1,57 +1,63 @@
 <div class="Navigation-menu Navigation-menu--desktop">
-    <div class="Navigation-underline"></div>
-    {% for item in menu %}
-        {% if not item.parent_id %}
-            {% set isActive = false %}
-            {% set itemLink = item.url | link %}
-            {% if itemLink | link == current | app or (itemLink | link == '/' and current == '/home') %}
-                {% set isActive = true %}
-            {% endif %}
-            <div class="Navigation-itemWrapper">
-                <a
-                    href="{{ itemLink }}"
-                    class="Navigation-item Navigation-item--level1 {{ isActive and not item.anchor ? 'isActive' : '' }} {{ item.anchor ? 'Navigation-item--anchor' : '' }}"
-                    {% if item.blank %}target="_blank"{% endif %}
-                    {% if item.anchor %}data-turbo="false"{% endif %}
-                >
-                    {{ item.title }}
-                    {% if item.children %}
-                        <span class="Navigation-itemIcon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
-                        </span>
-                    {% endif %}
-                </a>
-                {% if item.children %}
-                    <div class="Navigation-subNavWrapper">
-                        <div class="Navigation-subNav">
-                            {% for child in item.children %}
-                                <a
-                                    href="{{ child.url | link }}"
-                                    class="Navigation-item Navigation-item--child {{ child.anchor ? 'Navigation-item--anchor' : '' }}"
-                                    {% if child.blank %}target="_blank"{% endif %}
-                                    {% if child.anchor %}data-turbo="false"{% endif %}
-                                >
-                                    {{ child.title }}
-                                </a>
-                            {% endfor %}
-                        </div>
-                    </div>
+    <div class="Navigation-mainMenuWrapper">
+        <div class="Navigation-underline"></div>
+        {% for item in menu %}
+            {% if not item.parent_id %}
+                {% set isActive = false %}
+                {% set itemLink = item.url | link %}
+                {% if itemLink | link == current | app or (itemLink | link == '/' and current == '/home') %}
+                    {% set isActive = true %}
                 {% endif %}
-            </div>
-        {% endif %}
-    {% endfor %}
+                <div class="Navigation-itemWrapper">
+                    <a
+                        href="{{ itemLink }}"
+                        class="Navigation-item Navigation-item--level1 {{ isActive and not item.anchor ? 'isActive' : '' }} {{ item.anchor ? 'Navigation-item--anchor' : '' }}"
+                        {% if item.blank %}target="_blank"{% endif %}
+                        {% if item.anchor %}data-turbo="false"{% endif %}
+                    >
+                        {{ item.title }}
+                        {% if item.children %}
+                            <span class="Navigation-itemIcon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
+                            </span>
+                        {% endif %}
+                    </a>
+                    {% if item.children %}
+                        <div class="Navigation-subNavWrapper">
+                            <div class="Navigation-subNav">
+                                {% for child in item.children %}
+                                    <a
+                                        href="{{ child.url | link }}"
+                                        class="Navigation-item Navigation-item--child {{ child.anchor ? 'Navigation-item--anchor' : '' }}"
+                                        {% if child.blank %}target="_blank"{% endif %}
+                                        {% if child.anchor %}data-turbo="false"{% endif %}
+                                    >
+                                        {{ child.title }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
 
-    {% if nav.extraNavLabel and nav.extraNavLink %}
-        <div class="Navigation-extraLinkWrapper">
-            <a href="{{ nav.extraNavLink | link }}" class="Navigation-extraLink">{{ nav.extraNavLabel }}</a>
-        </div>
-    {% endif %}
+<div class="Navigation-extraLinksWrapper">
+{#    {% if nav.extraNavLabel and nav.extraNavLink %}#}
+{#        <div class="Navigation-extraLinkWrapper">#}
+{#            <a href="{{ nav.extraNavLink | link }}" class="Navigation-extraLink">{{ nav.extraNavLabel }}</a>#}
+{#        </div>#}
+{#    {% endif %}#}
 
-    {% if nav.extraNavLabel2 and nav.extraNavLink2 %}
-        <div class="Navigation-extraLinkWrapper Navigation-extraLinkWrapper--secondary">
-            <a href="{{ nav.extraNavLink2 | link }}" class="Navigation-extraLink Navigation-extraLink--secondary">{{ nav.extraNavLabel2 }}</a>
-        </div>
-    {% endif %}
+{#    {% if nav.extraNavLabel2 and nav.extraNavLink2 %}#}
+{#        <div class="Navigation-extraLinkWrapper Navigation-extraLinkWrapper--secondary">#}
+{#            <a href="{{ nav.extraNavLink2 | link }}" class="Navigation-extraLink Navigation-extraLink--secondary">{{ nav.extraNavLabel2 }}</a>#}
+{#        </div>#}
+{#    {% endif %}#}
+
+    {% partial "@_buttons" data=nav %}
 
     {% partial '@sitepicker' %}
 </div>

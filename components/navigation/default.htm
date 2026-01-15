@@ -16,7 +16,7 @@
 
 {% set current = code ~ this.param.fullslug %}
 
-<div class="Navigation Navigation--{{ menuStyle }} Navigation--desktop" data-control="navigation" data-options='{ "menuHide": {{ menuHide }} }'>
+<div class="Navigation Navigation--{{ menuStyle }} Navigation--desktop Navigation--{{ navbarSettings.width }} Navigation--{{ navbarSettings.align }} Navigation--extra{{ navbarSettings.mobile_extra_links }}" data-control="navigation" data-options='{ "menuHide": {{ menuHide }} }'>
     {% if nav.showInfobar %}
         {% partial '@infobar' %}
     {% endif %}

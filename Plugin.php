@@ -160,7 +160,7 @@ class Plugin extends PluginBase
     }
 
     public function svgFilter($url) {
-        if (str_contains('.svg', $url)) {
+        if (str_contains($url, '.svg')) {
             $svg = Storage::disk('media')->get($url);
             return $svg;
         }

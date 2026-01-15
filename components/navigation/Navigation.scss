@@ -1,6 +1,11 @@
+body, html {
+    &:has(.Navigation.isOpen) {
+        overflow: hidden;
+    }
+}
+
 @mixin solidNav {
     background-color: var(--color-bg-base);
-    border-bottom: 1px solid var(--color-muted);
 
     .Navigation-item {
         color: var(--color-text-base);
@@ -40,7 +45,6 @@
 @mixin transparentNav {
     background-color: transparent;
     box-shadow: none;
-    border-bottom: 1px solid var(--color-muted);
 
     .Navigation-item {
         color: var(--color-white);
@@ -114,6 +118,14 @@
     z-index: 9998;
     transition: background-color ease .3s, box-shadow ease .3s, transform ease .3s;
 
+    .Flex-container {
+        gap: 1rem;
+    }
+
+    .Buttons {
+        margin: 0;
+    }
+
     &.isOpen {
         background-color: var(--color-bg-base);
 
@@ -131,7 +143,7 @@
     }
 
     &-brand {
-        flex: 0 1 300px;
+        flex: 0 0 20%;
         padding: 1rem 0;
     }
 
@@ -144,6 +156,20 @@
     &-menu {
         display: flex;
         align-items: stretch;
+        justify-content: flex-end;
+        flex: 1 1 100%;
+    }
+
+    &-mainMenuWrapper {
+        display: flex;
+        align-items: stretch;
+    }
+
+    &-extraLinksWrapper {
+        display: flex;
+        align-items: stretch;
+        flex: 0 0 20%;
+        justify-content: flex-end;
     }
 
     .Flex--navbar {
@@ -354,6 +380,56 @@
     }
 }
 
+.Navigation--full {
+    .Flex-container {
+        max-width: 100%;
+    }
+}
+
+.Navigation--center {
+    .Flex-container {
+        justify-content: space-between;
+
+        .Navigation-brand, .Navigation-extraLinksWrapper {
+            flex: 0 0 1fr;
+        }
+
+        .Navigation-menu {
+            flex: 1 1 100%;
+            justify-content: center;
+        }
+    }
+}
+
+.Navigation--right {
+    .Flex-container {
+        .Navigation-extraLinksWrapper {
+            flex: 0 0 auto;
+        }
+    }
+}
+
+.Navigation--left {
+    .Flex-container {
+        .Navigation-brand {
+            flex: 0 0 auto;
+        }
+
+        .Navigation-menu {
+            justify-content: flex-start;
+        }
+
+        .Navigation-extraLinksWrapper {
+            flex: 0 0 1fr;
+            justify-content: flex-end;
+        }
+    }
+}
+
+.Navigation-menu--mobile {
+    justify-content: flex-start;
+}
+
 .Navigation--transparent {
     @include transparentNav;
 
@@ -418,17 +494,53 @@
         }
 
         &-extraLinkWrapper {
-            padding: 15px;
             height: auto;
         }
 
-        &-extraLinkWrapper--secondary {
-            margin-left: 0;
+        .Buttons {
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: center;
+            gap: 1rem;
+            flex: 0 1 auto !important;
+            padding: 0;
         }
 
         &-extraLink {
             width: 100%;
             text-align: center;
+        }
+    }
+
+    .Navigation--extraopen {
+        .Navigation-menu--desktop + .Navigation-extraLinksWrapper {
+            display: none;
+        }
+
+        .Navigation-extraLinksWrapper {
+            padding: 1rem;
+            flex-direction: column;
+            flex: 0 1 auto !important;
+            gap: 1rem;
+        }
+    }
+
+    .Navigation--extranavbar {
+        .Navigation-extraLinksWrapper {
+            flex: 1 1 100% !important;
+            gap: 1rem;
+        }
+
+        .Navigation-menu--mobile {
+            .Navigation-extraLinksWrapper {
+                display: none;
+            }
+        }
+
+        .Navigation-menu--desktop + .Navigation-extraLinksWrapper .Buttons {
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: center;
         }
     }
 }

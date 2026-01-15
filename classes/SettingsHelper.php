@@ -15,6 +15,11 @@ class SettingsHelper {
 
         foreach ($settingsArray['wrapper'] as $key => $value) {
             if (strpos($key, $prefix) === 0) {
+                // Check if last character of prefix is underscore
+                if (substr($prefix, -1) !== '_') {
+                    $prefix .= '_';
+                }
+
                 // Remove prefix and convert to camelCase for array keys
                 $cleanKey = str_replace($prefix, '', $key);
                 $result[$cleanKey] = $value;

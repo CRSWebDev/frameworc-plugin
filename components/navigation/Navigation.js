@@ -164,7 +164,7 @@ oc.registerControl('navigation', class extends oc.ControlBase {
         for (let i = this.scrollSpyBoxes.length - 1; i >= 0; i--) {
             const box = this.scrollSpyBoxes[i];
 
-            if (box.offsetTop > scrollTop - window.innerHeight / 1.3) {
+            if (box && box.offsetTop > scrollTop - window.innerHeight / 1.3) {
                 visibleBox = box;
             }
         }

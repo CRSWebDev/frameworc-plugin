@@ -37,17 +37,9 @@
         {% endif %}
     {% endfor %}
 
-    {% if nav.extraNavLabel and nav.extraNavLink %}
-        <div class="Navigation-extraLinkWrapper">
-            <a href="{{ nav.extraNavLink | link }}" class="Navigation-extraLink">{{ nav.extraNavLabel }}</a>
-        </div>
-    {% endif %}
-
-    {% if nav.extraNavLabel2 and nav.extraNavLink2 %}
-        <div class="Navigation-extraLinkWrapper Navigation-extraLinkWrapper--secondary">
-            <a href="{{ nav.extraNavLink2 | link }}" class="Navigation-extraLink Navigation-extraLink--secondary">{{ nav.extraNavLabel2 }}</a>
-        </div>
-    {% endif %}
+    <div class="Navigation-extraLinksWrapper">
+        {% partial '@_buttons' data=nav %}
+    </div>
 
     {% if sitePicker.sites | length > 1 %}
         <div class="Navigation-sitepicker Navigation-sitePicker--mobile">

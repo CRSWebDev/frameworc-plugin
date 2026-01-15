@@ -13,10 +13,14 @@
             label: data['buttonLabel' ~ i],
             contrast: data['buttonContrast' ~ i],
             blank: data['buttonBlank' ~ i],
+            icon: data['buttonIcon' ~ i],
         } %}
 
         {% if button.link and button.label %}
             <a href="{{ button.link | link }}" class="Button {{ button | moduleMods('Button', ['contrast']) }} Button--{{ data['buttonVariant' ~ i] }}" {% if button.blank %}target="_blank"{% endif %}>
+                {% if button.icon %}
+                    {{ button.icon | svg | raw }}
+                {% endif %}
                 {{ button.label }}
             </a>
         {% endif %}

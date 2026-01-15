@@ -3,47 +3,75 @@
 # ===================================
 
 fields:
-  wrapper:
-    type: nestedform
-    showPanel: false
-    form:
-      tabs:
-        fields:
-          section_variables:
-              label: Barvy
-              type: section
-              tab: Proměnné
+    wrapper:
+        type: nestedform
+        showPanel: false
+        form:
+            tabs:
+                fields:
+                    navigation_width:
+                        label: Šířka navigace
+                        type: dropdown
+                        tab: Navbar
+                        options:
+                            full: Celá šířka
+                            container: V kontejneru
+                        default: container
 
-          variable_variablesScss:
-            label: Vlastní SCSS proměnné
-            type: codeeditor
-            language: scss
-            size: giant
-            tab: Proměnné
-            comment: Zadejte vlastní SCSS proměnné pro přepsání výchozích hodnot rámce.
+                    navigation_align:
+                        label: Zarovnání navigace
+                        type: dropdown
+                        tab: Navbar
+                        options:
+                            left: Vlevo
+                            center: Na střed
+                            right: Vpravo
+                        default: right
+
+                    navigation_mobile_extra_links:
+                        label: Zobrazení extra odkazů v mobilní navigaci
+                        type: dropdown
+                        tab: Navbar
+                        options:
+                            navbar: V navigačním menu
+                            open: V otevřeném stavu pod menu tlačítkem
+                        default: open
+
+                    section_variables:
+                        label: Barvy
+                        type: section
+                        tab: Proměnné
+
+                    variable_variablesScss:
+                        label: Vlastní SCSS proměnné
+                        type: codeeditor
+                        language: scss
+                        size: giant
+                        tab: Proměnné
+                        comment: Zadejte vlastní SCSS proměnné pro přepsání výchozích hodnot rámce.
 
 
-          integration_altcha_secret:
-            label: Altcha secret
-            tab: Integrace
-            type: sensitive
+                    integration_altcha_secret:
+                        label: Altcha secret
+                        tab: Integrace
+                        type: sensitive
 
-          integration_n8n_webhook_url:
-            label: N8N webhook URL
-            tab: Integrace
-            type: text
-            comment: Webhook URL pro N8N
-            placeholder: https://n8n.example.com/webhook/your-webhook-id
+                    integration_n8n_webhook_url:
+                        label: N8N webhook URL
+                        tab: Integrace
+                        type: text
+                        comment: Webhook URL pro N8N
+                        placeholder: https://n8n.example.com/webhook/your-webhook-id
 
-          integration_n8n_newsletter_webhook_url:
-            label: N8N newsletter webhook URL
-            tab: Integrace
-            type: text
-            comment: Webhook URL pro newsletter
-            placeholder: https://n8n.example.com/webhook/your-webhook-id
+                    integration_n8n_newsletter_webhook_url:
+                        label: N8N newsletter webhook URL
+                        tab: Integrace
+                        type: text
+                        comment: Webhook URL pro newsletter
+                        placeholder: https://n8n.example.com/webhook/your-webhook-id
 
-          integration_n8n_auth:
-            label: N8N heslo pro webhook
-            type: sensitive
-            comment: Heslo pro webhook
-            tab: Integrace
+                    integration_n8n_auth:
+                        label: N8N heslo pro webhook
+                        type: sensitive
+                        comment: Heslo pro webhook
+                        tab: Integrace

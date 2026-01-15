@@ -21,8 +21,8 @@ Buttons Wrapper
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
-    padding: 1rem 2rem;
+    gap: 1em;
+    padding: 1em 1.5em;
     text-decoration: none;
     background-color: var(--color-button-bg-base);
     transition: all ease .3s;
@@ -30,11 +30,36 @@ Buttons Wrapper
     font-weight: bold;
     border-radius: var(--border-radius-btn);
     border: 0;
+    font-size: 1rem;
+
+    svg {
+        fill: currentColor !important;
+        width: 1.7em;
+        height: 1.7em;
+        transition: fill ease .3s;
+
+        path {
+            fill: currentColor !important;
+            transition: fill ease .3s;
+        }
+    }
 
     &:hover, &:focus, &:active {
         background-color: var(--color-button-bg-base-hover);
         color: var(--color-text-base);
+
+        svg {
+            fill: currentColor !important;
+
+            path {
+                fill: currentColor !important;
+            }
+        }
     }
+}
+
+.Button:has(svg) {
+    padding: .73em 1.5em;
 }
 
 .Button--contrast {
