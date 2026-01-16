@@ -1,0 +1,53 @@
+uuid: 6d7970c9-2f0e-4e1c-bebf-5abab352f700
+handle: Blocks/Accordion
+type: mixin
+name: Akordeon
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    items:
+                        label: Položky akordeonu
+                        type: repeater
+                        titleFrom: headline
+                        displayMode: builder
+                        tab: Obsah
+                        form:
+                            fields:
+                                headline:
+                                    label: Nadpis
+
+                                text:
+                                    label: Text
+                                    type: richeditor
+
+                    variant:
+                        label: Varianta
+                        type: dropdown
+                        tab: Nastavení
+                        options:
+                            default: Základní
+                            outline: Rámeček okolo
+                            shadow: Se stínem
+
+                    firstItemOpen:
+                        label: Otevřená první položka
+                        type: switch
+                        tab: Nastavení
+
+                    singleMode:
+                        label: Vždy otevřená jen jedna položka
+                        type: switch
+                        tab: Nastavení
+
+                    icon:
+                        label: Vlastní Ikona
+                        comment: Vložte ikonu ve formátu SVG
+                        type: codeeditor
+                        size: small
+                        tab: Nastavení

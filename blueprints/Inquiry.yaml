@@ -1,0 +1,32 @@
+uuid: 3adae7f9-7201-4562-8437-eeee713c3bfd
+handle: Inquiry
+type: entry
+name: Záznamy z formulářů
+drafts: false
+
+navigation:
+    parent: Form
+    label: Záznamy z formulářů
+    order: 50
+
+fields:
+    slug:
+        hidden: true
+        required: false
+        validation: false
+        
+    form:
+        label: Formulář
+        type: entries
+        source: Form
+        maxItems: 1
+        displayMode: recordfinder
+
+    inquiry:
+        label: Záznam
+        type: partial
+        path: crscompany.frameworc::admin.form_inquiry
+
+    files:
+        label: Soubory
+        type: fileupload

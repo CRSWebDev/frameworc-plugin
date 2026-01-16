@@ -1,0 +1,12 @@
+uuid: d0af8c49-712b-4bee-b1a2-a4b3639a2877
+handle: Tags
+type: entry
+name: Tagy
+drafts: false
+
+navigation:
+    parent: BlogPost
+    icon: icon-bookmark
+    order: 15
+
+fields:

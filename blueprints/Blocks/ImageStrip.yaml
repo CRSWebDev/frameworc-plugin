@@ -1,0 +1,45 @@
+uuid: cdd95446-4a66-4421-bb1c-1bb21a2ab319
+handle: Blocks/ImageStrip
+type: mixin
+name: Pruh obrázků
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    images:
+                        label: Obrázky
+                        type: mediafinder
+                        mode: image
+                        tab: Obsah
+
+                    centered:
+                        label: Zarovnat na střed
+                        type: switch
+                        tab: Nastavení
+
+                    _sectionAutoPlay:
+                        label: Automatické posouvání
+                        type: section
+                        tab: Nastavení
+
+                    autoScroll:
+                        label: Automaticky posouvat
+                        type: switch
+                        tab: Nastavení
+
+                    stopOnHover:
+                        label: Pozastavit při najetí
+                        type: switch
+                        tab: Nastavení
+
+                    intervalDelay:
+                        label: Rychlost posouvání
+                        type: number
+                        tab: Nastavení
+                        default: 20
+                        comment: Udává prodlevu mezi posunutím. Menší číslo = větší rychlost (0 = nejrychlejší). 20 je vhodné pro většinu aplikací.

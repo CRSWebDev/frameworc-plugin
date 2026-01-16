@@ -1,0 +1,87 @@
+uuid: 6c36bc7a-9b4f-40e5-aad6-3bfaab252121
+handle: Blocks/Tiles
+type: mixin
+name: Dlaždice
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    tiles:
+                        label: Dlaždice
+                        type: repeater
+                        displayMode: builder
+                        titleFrom: headline
+                        tab: Obsah
+                        form:
+                            fields:
+                                headline:
+                                    label: Nadpis
+
+                                image:
+                                    label: Obrázek/Ikonka
+                                    type: mediafinder
+                                    mode: image
+                                    maxItems: 1
+
+                                text:
+                                    label: Text
+                                    type: richeditor
+
+                                buttons:
+                                    type: mixin
+                                    source: Mixins/Buttons
+                                    tab: Obsah
+
+                    tileLink:
+                        label: Dlaždice jako odkaz
+                        type: switch
+                        tab: Nastavení
+
+                    tileIcon:
+                        label: Zobrazení ikonek
+                        type: switch
+                        tab: Nastavení
+
+                    contrastHover:
+                        label: Kontrastní hover
+                        type: switch
+                        tab: Nastavení
+
+                    contrastBorderHover:
+                        label: Kontrastní rámeček hover
+                        type: switch
+                        tab: Nastavení
+
+                    outline:
+                        label: Dlaždice s rámečkem
+                        type: switch
+                        tab: Nastavení
+
+                    borderless:
+                        label: Bez rámečku a stínu
+                        type: switch
+                        tab: Nastavení
+
+                    buttonStyle:
+                        label: Styl zobrazení tlačítek
+                        tab: Nastavení
+                        type: dropdown
+                        default: "Button--contrast"
+                        options:
+                            "Button--contrast": Základní tlačítko
+                            "Button--outline": Tlačítko v rámečku
+
+                    count:
+                        label: Počet dlaždic v řádku
+                        tab: Nastavení
+                        type: dropdown
+                        default: 3
+                        options:
+                            2: 2
+                            3: 3
+                            4: 4

@@ -1,0 +1,52 @@
+uuid: 6a4f4175-fd60-4ac2-a429-2f0bc411f0be
+handle: Navigation
+type: single
+name: Navbar
+drafts: false
+multisite: true
+
+navigation:
+    parent: Builder
+    icon: icon-add-above
+    order: 210
+
+extraNavigation:
+    _line_static:
+        itemType: section
+        label: Společné prvky
+        order: 200
+
+fields:
+    logo:
+        type: mediafinder
+        label: Logo světlé
+        mode: image
+        maxItems: 1
+    logoDark:
+        type: mediafinder
+        label: Logo tmavé
+        mode: image
+        maxItems: 1
+    nav:
+        type: entries
+        label: Navigace
+        source: Menu
+        displayMode: controller
+        toolbarButtons: add|remove|create
+        validation: 'array|max:1'
+
+    buttons:
+        type: mixin
+        source: Mixins/Buttons
+
+    _sectionInfobar:
+        label: Informační lišta
+        type: section
+
+    showInfobar:
+        label: Zobrazit lištu
+        type: switch
+
+    infobarText:
+        label: Text lišty
+        type: richeditor

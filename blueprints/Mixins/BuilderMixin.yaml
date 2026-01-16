@@ -1,0 +1,235 @@
+uuid: be670d99-6c7b-4902-aa32-173e2a9e8132
+handle: Mixins/Builder
+type: mixin
+name: Builder Mixin
+
+fields:
+    builder:
+        name: Builder
+        type: repeater
+        displayMode: builder
+        groups:
+            Header:
+                name: Hlavička stránky
+                description: Hlavička stránky
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-desktop
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Header
+
+            Section:
+                name: Sekce
+                description: Sekce s textem a obrázkem
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-columns
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Section
+
+            Tiles:
+                name: Dlaždice
+                description: Dlaždice
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-th-large
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Tiles
+
+            Slider:
+                name: Slider
+                description: Slider
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-exchange
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Slider
+
+            Tabs:
+                name: Taby
+                description: Taby
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-window-restore
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Tabs
+
+            Accordion:
+                name: Akordeon
+                description: Akordeon
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-server
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Accordion
+
+            Form:
+                name: Formulář
+                description: Formulář
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-mail-settings
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Form
+
+            Gallery:
+                name: Galerie (masonry)
+                description: Galerie (masonry)
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-photo
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Gallery
+
+            Downloads:
+                name: Soubory ke stažení
+                description: Soubory ke stažení
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-arrow-full-circle-down
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Downloads
+
+            Columns:
+                name: Sloupce
+                description: Sloupce
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-window-split
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Columns
+
+            Prefill:
+                name: Předvyplněný blok
+                description: Předvyplněný blok
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-cubes
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/Prefill
+
+            BlogList:
+                name: Seznam příspěvků
+                description: Seznam příspěvků
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-text-bold
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/BlogList
+
+            MenuBlock:
+                name: Menu
+                description: Menu
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-navicon
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/MenuBlock
+
+            ImageStrip:
+                name: Pruh obrázků
+                description: Pruh obrázků
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-barcode
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/ImageStrip
+
+            InstaFeed:
+                name: Instagram Feed
+                description: Instagram Feed
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-barcode
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/InstaFeed

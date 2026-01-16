@@ -1,0 +1,40 @@
+uuid: 1cc37977-db0d-4882-af6f-5bc12470c2fe
+handle: Blocks/Downloads
+type: mixin
+name: Soubory ke stažení
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    files:
+                        label: Soubory
+                        type: repeater
+                        form:
+                            fields:
+                                name:
+                                    label: Název
+                                    span: left
+
+                                icon:
+                                    label: Ikonka
+                                    type: dropdown
+                                    span: right
+                                    options:
+                                        none: Žádná
+                                        file: Soubor
+                                        pdf: PDF
+                                        dl: Download (šipka dolů)
+
+                                description:
+                                    label: Popisek
+                                    type: richeditor
+                                
+                                file:
+                                    label: Soubor
+                                    type: mediafinder
+                                    maxItems: 1

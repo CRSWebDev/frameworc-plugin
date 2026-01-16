@@ -1,0 +1,23 @@
+uuid: a1b8d1e1-4c0b-4fa3-afb9-a371e64bf7dc
+handle: Prefill
+type: entry
+name: Předvyplněné bloky
+drafts: false
+multisite: true
+
+navigation:
+    parent: Builder
+    icon: icon-cubes
+    order: 430
+
+fields:
+    _hint:
+        type: hint
+        label: UPOZORNĚNÍ
+        comment: Po uložení bloku se aktualizují všechny jeho instance, které jsou vložené do stránek.
+        tab: Obsah
+    Builder:
+        label: Builder
+        type: mixin
+        tab: Obsah
+        source: Mixins/Builder

@@ -1,0 +1,55 @@
+uuid: b340635e-2eea-44de-82a2-ea08c5d48d31
+handle: Builder
+type: structure
+name: Stránky
+drafts: false
+multisite: true
+
+primaryNavigation:
+    label: Obsah webu
+    icon: icon-file
+    order: 110
+
+navigation:
+    parent: Builder
+    icon: icon-file
+    order: 110
+
+fields:
+    Builder:
+        label: Builder
+        type: mixin
+        tab: Obsah
+        source: Mixins/Builder
+
+    metaTitle:
+        label: Meta titulek
+        tab: SEO
+
+    metaDescription:
+        label: Meta popisek
+        type: textarea
+        tab: SEO
+
+    ogImage:
+        label: OG Image
+        type: mediafinder
+        mode: image
+        maxItems: 1
+        tab: SEO
+
+    menuStyle:
+        label: Varianta horního menu
+        type: dropdown
+        tab: Nastavení
+        options:
+            solid: Neprůhledné
+            transparent: Transparentní
+
+    menuHide:
+        label: Skrývání horního menu
+        type: dropdown
+        tab: Nastavení
+        options:
+            yes: Ano
+            no: Ne

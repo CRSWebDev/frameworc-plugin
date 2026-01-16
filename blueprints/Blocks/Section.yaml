@@ -1,0 +1,105 @@
+uuid: d11bd560-b714-4635-901a-14495ce464e8
+handle: Blocks/Section
+type: mixin
+name: Sekce
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    variant:
+                        label: Zobrazení sloupců
+                        tab: Obsah
+                        type: dropdown
+                        default: halfAndHalf
+                        span: left
+                        options:
+                            halfAndHalf: 50 / 50
+                            noText: Pouze obrázek s nadpisem (1 sloupec)
+                            noImage: Pouze text bez obrázku (1 sloupec)
+                            textAndText: 2 sloupce textu
+                            img70: Obrázek 70 / Text 30
+                            text70: Obrázek 30 / Text 70
+                            embedHalfAndHalf: Embed prvek 50 / 50
+                            embed70: Embed prvek 70 / Text 30
+                            embed30: Embed prvek 30 / Text 70
+                            embedOnly: Pouze embed prvek s nadpisem (1 sloupec)
+
+                    reverse:
+                        label: Prohodit strany
+                        type: switch
+                        default: false
+                        tab: Obsah
+                        span: right
+                        trigger:
+                            action: hide
+                            condition: value[noText][noImage][embedOnly]
+                            field: variant
+
+                    image:
+                        label: Obrázek
+                        type: mediafinder
+                        mode: image
+                        tab: Obsah
+                        trigger:
+                            action: hide
+                            field: variant
+                            condition: value[noImage][embedHalfAndHalf][embedOnly][embed30][embed70][textAndText]
+
+                    embed:
+                        label: Embed prvek
+                        comment: Může být YT video, mapa nebo podobně
+                        type: codeeditor
+                        tab: Obsah
+                        trigger:
+                            action: show
+                            field: variant
+                            condition: value[embedHalfAndHalf][embedOnly][embed30][embed70]
+
+                    buttons:
+                        type: mixin
+                        source: Mixins/Buttons
+                        tab: Obsah
+
+                    _section2:
+                        type: section
+                        label: Druhý sloupec
+                        tab: Obsah
+                        trigger:
+                            action: show
+                            field: variant
+                            condition: value[textAndText]
+
+                    headline2:
+                        type: richeditor
+                        label: Druhý sloupec textu
+                        tab: Obsah
+                        trigger:
+                            action: show
+                            field: variant
+                            condition: value[textAndText]
+
+                    buttons2:
+                        type: mixin
+                        source: Mixins/Buttons2
+                        tab: Obsah
+                        trigger:
+                            action: show
+                            field: variant
+                            condition: value[textAndText]
+
+
+                    # Settings #
+                    doubleText:
+                        label: Dva sloupce textu (bez obrázku)
+                        type: switch
+                        default: false
+                        tab: Nastavení
+                        trigger:
+                            action: show
+                            condition: value[halfAndHalf][img70][text70]
+                            field: variant

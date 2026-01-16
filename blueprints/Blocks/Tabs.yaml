@@ -1,0 +1,51 @@
+uuid: efeeb644-3c31-42cb-8695-e4f65bb53210
+handle: Blocks/Tabs
+type: mixin
+name: Tabs
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    slides:
+                        label: Položky
+                        type: repeater
+                        titleFrom: headline
+                        displayMode: builder
+                        tab: Obsah
+                        form:
+                            fields:
+                                image:
+                                    label: Obrázek
+                                    type: mediafinder
+                                    mode: image
+                                    maxItems: 1
+
+                                headline:
+                                    label: Nadpis
+
+                                text:
+                                    label: Text
+                                    type: richeditor
+                                
+                                buttons:
+                                    type: mixin
+                                    source: Mixins/Buttons
+                                    tab: Obsah
+
+                    gallery:
+                        label: Rozkliknutelná galerie
+                        type: switch
+                        tab: Nastavení
+
+                    variant:
+                        label: Varianta
+                        type: dropdown
+                        tab: Nastavení
+                        options:
+                            tabs-horizontal: Horizontální taby
+                            tabs-vertical: Vertikální taby

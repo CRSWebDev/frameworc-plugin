@@ -1,0 +1,25 @@
+uuid: d6d627e3-503f-45a5-97ea-e26cf2cf0b70
+handle: Blocks/Prefill
+type: mixin
+name: Předvyplněný blok
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    _hint:
+                        type: partial
+                        path: crscompany.frameworc::admin.prefill_block_meta
+                        tab: Obsah
+
+                    block:
+                        label: Předvyplněný blok
+                        tab: Obsah
+                        type: entries
+                        source: Prefill
+                        displayMode: recordfinder
+                        maxItems: 1

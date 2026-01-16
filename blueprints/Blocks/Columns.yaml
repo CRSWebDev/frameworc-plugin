@@ -1,0 +1,26 @@
+uuid: 9159341b-f24b-4540-9fb0-c9376fa62fc8
+handle: Blocks/Columns
+type: mixin
+name: Sloupce
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    columns:
+                        label: Sloupce
+                        type: repeater
+                        displayMode: builder
+                        titleFrom: blockId
+                        form:
+                            fields:
+                                blockId:
+                                    label: ID Bloku
+
+                                builder:
+                                    type: mixin
+                                    source: Mixins/Builder

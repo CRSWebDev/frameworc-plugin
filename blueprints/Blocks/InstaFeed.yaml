@@ -1,0 +1,44 @@
+uuid: 75d9d88b-508e-4518-97e5-c0b32611f0de
+handle: Blocks/InstaFeed
+type: mixin
+name: Instagram Feed
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    _description:
+                        type: hint
+                        label: Tento blok zobrazuje feed z Instagramu.
+                        commentHtml: true
+                        tab: Blok
+
+                    token:
+                        label: Instagram token
+                        type: sensitive
+                        comment: Zadejte přístupový token pro Instagram API.
+                        tab: Blok
+
+                    columnCount:
+                        label: Počet sloupců
+                        type: number
+                        default: 3
+                        tab: Blok
+                        span: left
+
+                    imageCount:
+                        label: Počet zobrazených obrázků
+                        comment: Měl by být dělitelný počtem sloupců
+                        type: number
+                        default: 6
+                        tab: Blok
+                        span: right
+
+                    _guide:
+                        type: partial
+                        path: $/crscompany/frameworc/partials/_instafeed_guide.htm
+                        tab: Návod

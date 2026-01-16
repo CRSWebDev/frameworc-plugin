@@ -1,0 +1,73 @@
+uuid: 830522f2-ca0b-40c0-85ba-402ff4bea1b3
+handle: Mixins/Buttons
+type: mixin
+name: Tlačítka
+
+fields:
+    _button1Section:
+        type: section
+        label: Tlačítko 1
+    buttonLabel1:
+        label: Text tlačítka
+        span: left
+    buttonVariant1:
+        label: Varianta tlačítka
+        type: dropdown
+        span: right
+        options:
+            default: Základní
+            outline: Obtažené
+            blurLight: Zamlžené světlé
+            blurDark: Zamlžené tmavé
+            plain: Bez dekorace
+    buttonContrast1:
+        label: Kontrastní varianta
+        type: switch
+        span: right
+    buttonLink1:
+        label: Odkaz tlačítka
+        type: pagefinder
+        span: left
+    buttonIcon1:
+        label: Ikonka v tlačítku
+        type: mediafinder
+        maxItems: 1
+        span: right
+    buttonBlank1:
+        label: Otevřít v novém okně
+        type: switch
+        span: left
+
+    _button2Section:
+        type: section
+        label: Tlačítko 2
+    buttonLabel2:
+        label: Text tlačítka
+        span: left
+    buttonVariant2:
+        label: Varianta tlačítka
+        type: dropdown
+        span: right
+        options:
+            default: Základní
+            outline: Obtažené
+            blurLight: Zamlžené světlé
+            blurDark: Zamlžené tmavé
+            plain: Bez dekorace
+    buttonContrast2:
+        label: Kontrastní varianta
+        type: switch
+        span: right
+    buttonLink2:
+        label: Odkaz tlačítka
+        type: pagefinder
+        span: left
+    buttonIcon2:
+        label: Ikonka v tlačítku
+        type: mediafinder
+        maxItems: 1
+        span: right
+    buttonBlank2:
+        label: Otevřít v novém okně
+        type: switch
+        span: left

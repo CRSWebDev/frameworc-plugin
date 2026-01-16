@@ -1,0 +1,122 @@
+uuid: 5c898df3-b491-4a9e-bf9b-700a81c58a2a
+handle: BaseBlock
+type: mixin
+name: Základní nastavení
+
+fields:
+    blockId:
+        label: ID Bloku
+        comment: Používá se k identifikaci prvku na stránce a ke kotevním odkazům, mělo by být unikátní a deskriptivní "o-nas" nebo "kontaktni-formular"
+        tab: Blok
+
+    headline:
+        label: Nadpis a text
+        comment: Pro nadpis používejte H2, pro podnadpis H3. !Pozor! U bloku "Hlavička" používejte H1 a H2.
+        type: richeditor
+        tab: Blok
+        dependsOn: blockId
+
+    elevated:
+        label: Zvýrazněný blok
+        comment: Zvýraznění bloku - vysunutí nahoru do předchozího bloku
+        type: switch
+        default: 0
+        tab: Vzhled bloku
+
+    containerWidth:
+        label: Šířka zobrazení
+        comment: Šířka zobrazení bloku v rámci stránky
+        type: dropdown
+        default: default
+        tab: Vzhled bloku
+        options:
+            default: Výchozí (1200px)
+            narrow: Zůžené zobrazení (800px)
+            full: Plná šířka stránky
+            pop: Plná šířka s okrajem
+
+    backgroundColor:
+        label: Barva pozadí
+        comment: Barva pozadí bloku
+        type: dropdown
+        default: default
+        tab: Vzhled bloku
+        options:
+            default: Výchozí (průhledná)
+            accent: Akcentní barva (polotmavá)
+            contrast: Kontrastní barva (tmavá)
+            image: Obrázek
+            containerAccent: Kontejner - akcentní barva (polotmavá)
+            containerContrast: Kontejner - kontrastní barva (tmavá)
+            containerImage: Kontejner - obrázek
+
+    backgroundImage:
+        label: Obrázek pozadí
+        comment: Obrázek pozadí bloku
+        type: mediafinder
+        mode: image
+        tab: Vzhled bloku
+        maxItems: 1
+        dependsOn: backgroundColor
+        trigger:
+            action: show
+            field: backgroundColor
+            condition: value[image][containerImage]
+
+    backgroundImageMobile:
+        label: Obrázek pozadí na mobilu
+        comment: Obrázek pozadí bloku na mobilu
+        type: mediafinder
+        mode: image
+        tab: Vzhled bloku
+        span: right
+        maxItems: 1
+        dependsOn: backgroundColor
+        trigger:
+            action: show
+            field: backgroundColor
+            condition: value[image][containerImage]
+
+    customCssClass:
+        label: Vlastní CSS třída
+        commentAbove: 'Krátký název bez diakrity a mezer. Při generování kódu  bude třída vypadat následovně: Builder-container--<myClass>'
+        comment: Můžete zadat více tříd stisknutím klávesy "Enter".
+        type: taglist
+        tab: Pokročilé nastavení
+        customTags: true
+        mode: array
+        useKey: false
+        options:
+            - animate
+            - noSpacing
+            - noSpacingTop
+            - noSpacingBottom
+            - narrowSpacing
+            - centerButtons
+
+    _cssClasses:
+        label: Předpřipravané CSS třídy
+        type: hint
+        comment: "animate: přidá jednoduché animace při scrollování<br>
+            noSpacing: sekce nemá odsazení od ostatních sekcí<br>
+            noSpacingBottom / noSpacingTop: sekce nemá odsazení zdola/shora<br>
+            narrowSpacing: menší odsazení od ostatních sekcí<br>
+            centerButtons: tlačítka jsou umístěné uprostřed"
+        mode: hint
+        commentHtml: true
+        tab: Pokročilé nastavení
+
+    aliasOverride:
+        label: Vlastní alias
+        comment: Přepíše defaultní alias pro blok. Používá se k vytvoření extra šablony v tématu a vlastnímu stylování konkrétního bloku. Pokud nevíte, co "alias pro blok" znamená, nechte prázdné.
+        type: text
+        tab: Pokročilé nastavení
+
+    responsiveHide:
+        label: Skrýt na
+        type: checkboxlist
+        tab: Vzhled bloku
+        options: 
+            desktop: Desktopu
+            tablet: Tabletu
+            mobile: Mobilu

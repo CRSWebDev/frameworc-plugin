@@ -1,0 +1,119 @@
+uuid: 61a4129f-1bf5-4167-b6ab-e80b0c25cf08
+handle: BlogPost
+type: stream
+name: Blog
+drafts: true
+
+primaryNavigation:
+    label: Blog
+    icon: icon-text-bold
+    order: 111
+
+navigation:
+    parent: BlogPost
+    label: Příspěvky
+    icon: icon-text-bold
+    order: 10
+
+fields:
+    image:
+        label: Hlavní obrázek příspěvku
+        tab: Obsah
+        type: mediafinder
+        maxItems: 1
+        span: left
+        mode: image
+        imageWidth: 500
+        imageHeight: 500
+        thumbOptions:
+            width: 500
+            height: 300
+
+    tags:
+        label: Tagy
+        tab: Obsah
+        type: entries
+        displayMode: controller
+        source: Tags
+        span: right
+        toolbarButtons: create|add|remove
+
+    _tagsComment:
+        type: partial
+        tab: Obsah
+        path: crscompany.frameworc::admin.blogpost_tags_hint
+        span: right
+
+    perex:
+        label: Krátké shrnutí
+        type: textarea
+        tab: Obsah
+        comment: Zobrazuje se na výpisu článků
+        size: small
+
+    content:
+        tab: Obsah
+        label: Textový obsah
+        type: richeditor
+        size: giant
+
+    metaTitle:
+        label: Meta titulek
+        tab: Meta
+
+    metaDescription:
+        label: Meta popisek
+        tab: Meta
+        type: textarea
+        size: small
+
+    gallery:
+        type: nestedform
+        showPanel: false
+        tab: Galerie
+        form:
+            fields:
+                images:
+                    label: Obrázky
+                    type: mediafinder
+                    mode: image
+
+                columns:
+                    label: Počet sloupců
+                    type: number
+                    default: 3
+                    comment: Pokud je prázdné, je výchozí hodnota "3"
+
+    downloads:
+        type: nestedform
+        showPanel: false
+        tab: Soubory ke stažení
+        form:
+            fields:
+                files:
+                    label: Soubory
+                    type: repeater
+                    form:
+                        fields:
+                            name:
+                                label: Název
+                                span: left
+
+                            icon:
+                                label: Ikonka
+                                type: dropdown
+                                span: right
+                                options:
+                                    none: Žádná
+                                    file: Soubor
+                                    pdf: PDF
+                                    dl: Download (šipka dolů)
+
+                            description:
+                                label: Popisek
+                                type: richeditor
+                            
+                            file:
+                                label: Soubor
+                                type: mediafinder
+                                maxItems: 1

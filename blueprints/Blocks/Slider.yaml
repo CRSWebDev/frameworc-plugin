@@ -1,0 +1,118 @@
+uuid: b48e5ae2-d31f-4148-a7b4-04f5c14a21e3
+handle: Blocks/Slider
+type: mixin
+name: Slider & Tabs
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    slides:
+                        label: Položky slideru
+                        type: repeater
+                        titleFrom: headline
+                        displayMode: builder
+                        tab: Obsah
+                        form:
+                            fields:
+                                image:
+                                    label: Obrázek
+                                    type: mediafinder
+                                    mode: image
+                                    maxItems: 1
+
+                                headline:
+                                    label: Nadpis
+
+                                text:
+                                    label: Text
+                                    type: richeditor
+
+                                buttons:
+                                    type: mixin
+                                    source: Mixins/Buttons
+                                    tab: Obsah
+
+                    gallery:
+                        label: Rozkliknutelná galerie
+                        type: switch
+                        tab: Nastavení
+                    
+                    loop:
+                        label: Přehrávat ve smyčce
+                        type: switch
+                        tab: Nastavení
+
+                    autoWidth:
+                        label: Šířka slidů přizpůsobená velikosti obrázkům (nepravidelně široké slidy)
+                        type: switch
+                        tab: Nastavení
+
+                    variant:
+                        label: Varianta
+                        type: dropdown
+                        tab: Nastavení
+                        options:
+                            basic: Základní
+                            double: Dvojitý
+                            tabs-horizontal: Horizontální taby
+                            tabs-vertical: Vertikální taby
+
+                    perView:
+                        label: Počet viditelných slidů
+                        type: number
+                        min: 1
+                        default: '1'
+                        tab: Nastavení
+
+                    gap:
+                        label: Mezera mezi slidy (px)
+                        type: number
+                        min: 0
+                        default: '30'
+                        tab: Nastavení
+
+                    focusedSlidePosition:
+                        label: Pozice aktivního slidu
+                        type: dropdown
+                        tab: Nastavení
+                        options:
+                            left: Vlevo
+                            center: Uprostřed
+                            right: Vpravo
+
+                    startIndex:
+                        label: Defaultně aktivní slide
+                        comment: Počítá se od 0 (0 = první slide), neměl by být větší než maximální počet slidů
+                        type: number
+                        min: 0
+                        default: '0'
+                        tab: Nastavení
+
+                    syncWith:
+                        label: ID Synchronizovaného slideru
+                        comment: Slidery by měly mít stejný počet slidů
+                        tab: Nastavení
+                        span: left
+
+                    autoplay:
+                        label: Přehrávat automaticky v intervalu
+                        comment: Zadejte počet milisekund, po kterém se přepne na další slide (3000 == 3s). 0 nebo nic znamená vypnutí automatiky
+                        type: number
+                        tab: Nastavení
+
+                    breakpoints:
+                        type: nestedform
+                        showPanel: false
+                        tab: Responzivita
+                        form:
+                            fields:
+                                tablet:
+                                    label: Počet slidů na tabletu
+
+                                mobile:
+                                    label: Počet slidů na telefonech

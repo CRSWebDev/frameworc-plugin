@@ -1,0 +1,25 @@
+uuid: 9a0eb754-7a5e-4f06-8a10-e4717d8767bb
+handle: Blocks/Gallery
+type: mixin
+name: Galerie (masonry)
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    images:
+                        label: Obrázky
+                        type: mediafinder
+                        mode: image
+                        tab: Obsah
+
+                    columns:
+                        label: Počet sloupců
+                        type: number
+                        default: 3
+                        tab: Obsah
+                        comment: Pokud je prázdné, je výchozí hodnota "3"

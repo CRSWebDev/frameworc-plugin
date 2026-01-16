@@ -1,0 +1,58 @@
+uuid: f5321174-a020-4b8a-a848-7da2e7c6fc2d
+handle: Blocks/Header
+type: mixin
+name: Hlavička stránky
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    image:
+                        label: Obrázek
+                        type: mediafinder
+                        mode: image
+                        maxItems: 1
+                        tab: Obsah
+                        span: left
+
+                    imageMobile:
+                        label: Obrázek na mobilu
+                        type: mediafinder
+                        mode: image
+                        maxItems: 1
+                        tab: Obsah
+                        span: right
+
+                    isVideoBg:
+                        label: Video na pozadí
+                        type: switch
+                        default: false
+                        tab: Obsah
+                        comment: Použijte pole "Obrázek" jako video a "Obrázek na mobilu" jako poster
+
+                    buttons:
+                        tab: Obsah
+                        type: mixin
+                        source: Mixins/Buttons
+
+                    fullHeight:
+                        label: Přes celou výšku
+                        type: switch
+                        default: true
+                        tab: Nastavení
+
+                    contrast:
+                        label: Kontrastní text
+                        type: switch
+                        default: false
+                        tab: Nastavení
+
+                    overlay:
+                        label: Zatmavení pozadí
+                        type: switch
+                        default: false
+                        tab: Nastavení

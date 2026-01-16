@@ -1,0 +1,38 @@
+uuid: edfc7e43-df96-4264-8734-a63bfc2d05fe
+handle: Blocks/Form
+type: mixin
+name: Formulář
+slug: hidden
+
+fields:
+    form:
+        label: Formulář
+        tab: Blok
+        type: entries
+        source: Form
+        maxItems: 1
+        displayMode: controller
+        toolbarButtons: create|add|remove|update
+        controller:
+            columns: [
+                'title'
+            ]
+
+
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    
+
+                    variant:
+                        label: Variante zobrazení
+                        type: dropdown
+                        tab: Nastavení
+                        options:
+                            default: Základní
+                            outline: S rámečkem
+                            card: V kartě

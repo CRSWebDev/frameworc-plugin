@@ -1,0 +1,46 @@
+uuid: 19fec42c-6f0e-443a-80d8-fa7c7809529a
+handle: Blocks/BlogList
+type: mixin
+name: Výpis přípěvků na blogu
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    _description:
+                        type: hint
+                        label: Tento blok zobrazuje výpis článků ze sekce Blog
+                        tab: Nastavení
+                        span: left
+
+                    count:
+                        label: Počet příspěvků v řádku
+                        type: dropdown
+                        tab: Nastavení
+                        span: right
+                        default: 3
+                        options:
+                            1: 1
+                            2: 2
+                            3: 3
+                            4: 4
+
+                    perPage:
+                        label: Počet příspěvků na stránku
+                        type: number
+                        min: 1
+                        tab: Nastavení
+                    
+                    pagination:
+                        label: Stránkování
+                        type: switch
+                        tab: Nastavení
+
+                    categorySwitcher:
+                        label: Menu kategorií
+                        type: switch
+                        tab: Nastavení

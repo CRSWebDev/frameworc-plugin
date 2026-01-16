@@ -1,0 +1,67 @@
+uuid: 41c5539c-ffbb-4e20-b0e8-55bcfab073e1
+handle: Meta
+type: single
+name: Meta & SEO
+drafts: false
+multisite: true
+
+primaryNavigation:
+    label: Meta & SEO
+    icon: icon-google
+    order: 120
+
+fields:
+    _sectionSettings:
+        label: Nastavení webu
+        type: section
+
+    blogBasePath:
+        label: Základ URL blogu a příspěvků
+        type: text
+        default: blog
+
+    _sectionMeta:
+        label: Meta info
+        type: section
+
+    metaTitle:
+        label: Meta titulek
+
+    faviconHtml:
+        label: HTML pro favikonku
+        type: textarea
+        comment: Toto pole je vyplněno při generování favikony pomocí tlačítka níže. Pokud nemusíte, tak ho neupravujte
+
+    faviconGenerator:
+        label: Real Favicon Generator
+        type: partial
+        path: crscompany.frameworc::admin.real_favicon_generator
+
+    description:
+        label: Meta popisek
+        type: textarea
+        size: small
+
+    _sectionOG:
+        label: OG Tagy
+        type: section
+
+    ogTitle:
+        label: OG Title
+        comment: Pokud je nevyplněno, použije se aktuální titulek stránky
+
+    ogDescription:
+        label: OG Description
+        comment: Pokud je nevyplněno, použije se aktuální meta popisek
+        type: textarea
+        size: small
+
+    ogImage:
+        label: OG Image
+        type: mediafinder
+        mode: image
+        maxItems: 1
+
+    headerHtml:
+        label: HTML v hlavičce
+        type: codeeditor

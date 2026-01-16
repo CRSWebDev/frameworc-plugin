@@ -1,0 +1,40 @@
+uuid: 37b361f7-7758-440f-8cb2-e71fb82e6ea9
+handle: Menu
+type: entry
+name: Menu na stránce
+drafts: false
+multisite: true
+
+navigation:
+    parent: Builder
+    icon: icon-bars
+    order: 420
+
+extraNavigation:
+    _line_nav:
+        itemType: section
+        label: Šablony bloků
+        order: 410
+
+fields:
+    navigation:
+        type: nesteditems
+        label: Navigace
+        maxDepth: 2
+        span: adaptive
+        form:
+            fields:
+                title:
+                    label: Title
+                    type: text
+                url:
+                    label: Položka navigace
+                    type: pagefinder
+                anchor:
+                    label: Odkaz je kotva (nepřeměrovává na jinou stránku)
+                    type: switch
+                    span: left
+                blank:
+                    label: Otevřít v novém okně
+                    type: switch
+                    span: right

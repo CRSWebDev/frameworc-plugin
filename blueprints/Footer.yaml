@@ -1,0 +1,67 @@
+uuid: 9090b793-aec8-482e-94b6-8ba8b9ebecb7
+handle: Footer
+type: single
+name: Patička
+drafts: false
+multisite: true
+
+navigation:
+    parent: Builder
+    icon: icon-download
+    order: 250
+
+fields:
+    logo:
+        type: mediafinder
+        label: Logo
+        mode: image
+    
+    nav:
+        type: entries
+        label: Navigace
+        source: Menu
+        displayMode: controller
+        validation: 'array|max:1'
+
+    text:
+        label: Text patičky
+        type: richeditor
+
+    socials:
+        type: repeater
+        label: Sociální sítě
+        form:
+            fields:
+                site:
+                    label: Síť
+                    type: dropdown
+                    span: left
+                    options:
+                        fb: Facebook
+                        ig: Instagram
+                        li: LinkedIN
+                        x: X
+                        yt: YouTube
+                        tt: TikTok
+                        wa: Whatsapp
+
+                url:
+                    type: text
+                    mode: url
+                    label: Odkaz
+                    span: right
+
+    stayInTouch:
+        label: Stay in touch - text
+
+    madeBy:
+        label: Made by - text
+
+    _newsletterSection:
+        label: Newsletter
+        type: section
+
+    showNewsletterForm:
+        label: Zobrazit formulář pro přihlášení k odběru novinek
+        type: switch
+        default: false

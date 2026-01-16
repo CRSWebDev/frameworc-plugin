@@ -1,0 +1,25 @@
+uuid: fc57d04c-e978-483e-9be5-d835f6f20bbb
+handle: Blocks/MenuBlock
+type: mixin
+name: Menu
+
+fields:
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    _hint:
+                        type: partial
+                        path: crscompany.frameworc::admin.menu_block_meta
+                        tab: Obsah
+
+                    menu:
+                        label: Předvyplněný blok
+                        tab: Obsah
+                        type: entries
+                        source: Menu
+                        displayMode: recordfinder
+                        maxItems: 1
