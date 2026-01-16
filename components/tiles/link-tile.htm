@@ -4,7 +4,7 @@
             {{ tile.image | svg | raw }}
         </div>
     {% elseif tile.image %}
-        <div class="Tiles-image" style="background-image: {{ tile.image | imageset }}"></div>
+        <div class="Tiles-image" style="background-image: {{ tile.image | imageset(600,400,fit) }}"></div>
     {% endif %}
     <div class="Tiles-body">
         <h3 class="Headline">{{ tile.headline }}</h3>

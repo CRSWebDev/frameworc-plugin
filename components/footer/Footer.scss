@@ -111,10 +111,18 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
+    .Flex-container--footerNav {
+        margin-bottom: var(--spacing-gap);
+    }
+
     .Footer {
-        &-nav {
+        &-nav, &-navWrapper {
             flex-direction: column;
+        }
+
+        &-navWrapper {
+            gap: 1rem;
         }
 
         &-itemWrapper {

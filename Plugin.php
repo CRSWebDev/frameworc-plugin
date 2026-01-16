@@ -216,7 +216,7 @@ class Plugin extends PluginBase
         return $content;
     }
 
-    public function srcsetFilter($image, $initialWidth = 600, $initialHeight = 400, $mode = 'crop') {
+    public function srcsetFilter($image, $initialWidth = 600, $initialHeight = 400, $mode = 'fit') {
         $sizes = [1.5, 2, 3];
 
         $path = MediaLibrary::url($image);
@@ -231,7 +231,7 @@ class Plugin extends PluginBase
         return $srcset;
     }
 
-    public function imagesetFilter($image, $initialWidth = 600, $initialHeight = 400, $mode = 'crop') {
+    public function imagesetFilter($image, $initialWidth = 600, $initialHeight = 400, $mode = 'fit') {
         $sizes = [1, 1.5, 2, 3];
 
         $path = MediaLibrary::url($image);

@@ -45,19 +45,6 @@
 </div>
 
 <div class="Navigation-extraLinksWrapper">
-{#    {% if nav.extraNavLabel and nav.extraNavLink %}#}
-{#        <div class="Navigation-extraLinkWrapper">#}
-{#            <a href="{{ nav.extraNavLink | link }}" class="Navigation-extraLink">{{ nav.extraNavLabel }}</a>#}
-{#        </div>#}
-{#    {% endif %}#}
-
-{#    {% if nav.extraNavLabel2 and nav.extraNavLink2 %}#}
-{#        <div class="Navigation-extraLinkWrapper Navigation-extraLinkWrapper--secondary">#}
-{#            <a href="{{ nav.extraNavLink2 | link }}" class="Navigation-extraLink Navigation-extraLink--secondary">{{ nav.extraNavLabel2 }}</a>#}
-{#        </div>#}
-{#    {% endif %}#}
-
     {% partial "@_buttons" data=nav %}
-
     {% partial '@sitepicker' %}
 </div>
