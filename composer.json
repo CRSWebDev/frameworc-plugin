@@ -7,9 +7,14 @@
         "composer/installers": "~1.0",
         "october/rain": "~v4.0",
         "ext-zip": "*",
-        "altcha-org/altcha": "v1.1.2",
+        "altcha-org/altcha": "~v1.3",
         "symfony/postmark-mailer": "^7.3",
         "symfony/http-client": "^7.3",
         "yizack/instagram-feed": "^2.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
     }
 }

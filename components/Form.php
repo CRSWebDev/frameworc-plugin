@@ -107,7 +107,8 @@ class Form extends ComponentBase
             '_session_key',
             '_token',
             '_form_id',
-            '_form_true_id'
+            '_form_true_id',
+            'altcha'
         ];
 
         $data = array_filter($data, function($key) use ($ignoredFields) {
@@ -149,13 +150,21 @@ class Form extends ComponentBase
                     $formElement => $this->renderPartial('@success')
                 ];
             }
+            $formItems = [];
+            foreach ($entry->fwcFields as $field) {
+                if (isset($data[$field->name])) {
+                    $formItems[] = [
+                        'label' => $field->label,
+                        'value' => $data[$field->name],
+                    ];
+                }
+            }
 
             $emailVars = [
                 'header' => __('form.email_header'),
                 'footer' => __('form.email_footer'),
-                'formItems' => $data,
+                'formItems' => $formItems,
             ];
-    
 
             Mail::send('crscompany.frameworc::mail.templates.form-backend', $emailVars, function($message) use ($file, $entry) {
                 $isFirstLoop = true;
@@ -212,7 +221,8 @@ class Form extends ComponentBase
     }
 
     public static function onCaptcha() {
-        $secret = SettingsHelper::getByPrefix('integration_')['altcha_secret'];
+        $secret = SettingsHelper::getByPrefix('integration')['altcha_secret'];
+
         $altcha = new Altcha($secret);
 
         $options = new ChallengeOptions(
