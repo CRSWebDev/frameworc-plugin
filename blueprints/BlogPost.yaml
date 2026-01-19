@@ -67,6 +67,15 @@ fields:
         type: textarea
         size: small
 
+    _sitemap:
+        label: sitemap.xml
+        commentHtml: true
+        comment: >
+            <p>Nastavení pro generování sitemap.xml pro tuto stránku můžete upravit ve FrameworcUtils</p>
+            <p><a href="/admin/system/settings/update/crscompany/frameworcutils/settings#primarytab-sitemap" target="_blank" class="btn btn-primary">FrameworcUtils</a></p>
+        type: hint
+        tab: Meta
+
     gallery:
         type: nestedform
         showPanel: false
