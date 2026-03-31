@@ -33,6 +33,37 @@
                     </div>
 
                     <div class="Form-group">
+                        {% if fwcSettings.integration_captcha_variant == 'altcha' %}
+                            <altcha-widget
+                                challengeurl="/api/captcha"
+                                auto="onload"
+                                hidefooter
+                                hidelogo
+                                strings='{
+                                    "ariaLinkLabel": "{{ 'form.captcha.ariaLinkLabel'|_ }}",
+                                    "error": "{{ 'form.captcha.error'|_ }}",
+                                    "expired": "{{ 'form.captcha.expired'|_ }}",
+                                    "footer": "{{ 'form.captcha.footer'|_ }}",
+                                    "label": "{{ 'form.captcha.label'|_ }}",
+                                    "verified": "{{ 'form.captcha.verified'|_ }}",
+                                    "verifying": "{{ 'form.captcha.verifying'|_ }}",
+                                    "waitAlert": "{{ 'form.captcha.waitAlert'|_ }}"
+                                }'
+                            ></altcha-widget>
+                            {% elseif fwcSettings.integration_captcha_variant == 'turnstile' %}
+                            <div
+                                class="cf-turnstile"
+                                data-sitekey="{{ fwcSettings.integration_altcha_key }}"
+                                data-theme="light"
+                                data-size="normal"
+                                data-callback="onSuccess"
+                            ></div>
+
+                            <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+                        {% endif %}
+                    </div>
+
+                    <div class="Form-group">
                         {% if data.variant == 'outline' %}
                             <button type="submit" class="Button Button--outline" data-attach-loading>
                                 {{ 'form.submit'|_ }}
@@ -42,23 +73,6 @@
                                 {{ 'form.submit'|_ }}
                             </button>
                         {% endif %}
-
-                        <altcha-widget
-                            challengeurl="/api/captcha"
-                            auto="onload"
-                            hidefooter
-                            hidelogo
-                            strings='{
-                                "ariaLinkLabel": "{{ 'form.captcha.ariaLinkLabel'|_ }}",
-                                "error": "{{ 'form.captcha.error'|_ }}",
-                                "expired": "{{ 'form.captcha.expired'|_ }}",
-                                "footer": "{{ 'form.captcha.footer'|_ }}",
-                                "label": "{{ 'form.captcha.label'|_ }}",
-                                "verified": "{{ 'form.captcha.verified'|_ }}",
-                                "verifying": "{{ 'form.captcha.verifying'|_ }}",
-                                "waitAlert": "{{ 'form.captcha.waitAlert'|_ }}"
-                            }'
-                        ></altcha-widget>
                     </div>
                 {{ form_close() }}
             </div>

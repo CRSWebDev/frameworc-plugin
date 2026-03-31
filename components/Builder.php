@@ -77,5 +77,6 @@ class Builder extends ComponentBase
             'components/gallery/Gallery.js',
         ]);
 
+        $this->page['fwcSettings'] = SettingsHelper::getAll();
     }
 }

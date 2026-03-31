@@ -51,8 +51,22 @@ fields:
                         comment: Zadejte vlastní SCSS proměnné pro přepsání výchozích hodnot rámce.
 
 
+                    integration_captcha_variant:
+                        label: Captcha varianta
+                        type: dropdown
+                        options:
+                            altcha: Altcha
+                            turnstile: Turnstile
+                        default: altcha
+                        tab: Integrace
+
                     integration_altcha_secret:
-                        label: Altcha secret
+                        label: Captcha secret
+                        tab: Integrace
+                        type: sensitive
+
+                    integration_altcha_key:
+                        label: Captcha key
                         tab: Integrace
                         type: sensitive
 

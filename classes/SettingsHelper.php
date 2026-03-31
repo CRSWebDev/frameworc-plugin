@@ -3,7 +3,7 @@
 use CRSCompany\FrameworC\Models\FrameworcSetting;
 
 class SettingsHelper {
-    public static function getByPrefix($prefix)
+    public static function getByPrefix($prefix): array
     {
         $settings = FrameworcSetting::instance();
         $result = [];
@@ -27,5 +27,13 @@ class SettingsHelper {
         }
 
         return $result;
+    }
+
+    public static function getAll(): array
+    {
+        $settings = FrameworcSetting::instance();
+        $result = $settings->toArray();
+
+        return $result['wrapper'];
     }
 }

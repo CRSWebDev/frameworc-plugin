@@ -47,13 +47,26 @@ class Form extends ComponentBase
     public function onSubmit() {
         $data = Input::all();
 
-        $altcha = new Altcha($this->settings['altcha_secret']);
+        if (!isset($this->settings['captcha_variant']) || $this->settings['captcha_variant'] == 'altcha') {
+            $altcha = new Altcha($this->settings['altcha_secret']);
+            $captchaOk = $altcha->verifySolution($data['altcha'], true);
 
-        $captchaOk = $altcha->verifySolution($data['altcha'], true);
+            if (!$captchaOk) {
+                throw new ValidationException(['altcha' => __('form.captcha.error')]);
+            }
+        } elseif ($this->settings['captcha_variant'] == 'turnstile') {
+            $secret_key = $this->settings['altcha_secret'];
+            $token = $data['cf-turnstile-response'] ?? '';
+            $remoteip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'];
 
-        if (!$captchaOk) {
-            throw new ValidationException(['altcha' => __('form.captcha.error')]);
+            $validation = $this->validateTurnstile($token, $secret_key, $remoteip);
+
+            if (!$validation['success']) {
+                throw new ValidationException(['altcha' => __('form.captcha.error')]);
+            }
         }
+
+
 
         $formId = $data['_form_id'];
         $formTrueId = $data['_form_true_id'];
@@ -108,7 +121,8 @@ class Form extends ComponentBase
             '_token',
             '_form_id',
             '_form_true_id',
-            'altcha'
+            'altcha',
+            'cf-turnstile-response',
         ];
 
         $data = array_filter($data, function($key) use ($ignoredFields) {
@@ -226,7 +240,7 @@ class Form extends ComponentBase
         $altcha = new Altcha($secret);
 
         $options = new ChallengeOptions(
-            maxNumber: 50000,
+            maxNumber: 500000,
             // This sets the 'expires' option to a DateTimeImmutable object representing the current time plus 10 minutes.
             expires: (new \DateTimeImmutable())->add(new \DateInterval('PT10M')),
         );
@@ -234,5 +248,35 @@ class Form extends ComponentBase
         $challenge = $altcha->createChallenge($options);
 
         return json_decode(json_encode($challenge), true);
+    }
+
+    private function validateTurnstile($token, $secret, $remoteip = null) {
+        $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+
+        $data = [
+            'secret' => $secret,
+            'response' => $token
+        ];
+
+        if ($remoteip) {
+            $data['remoteip'] = $remoteip;
+        }
+
+        $options = [
+            'http' => [
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query($data)
+            ]
+        ];
+
+        $context = stream_context_create($options);
+        $response = file_get_contents($url, false, $context);
+
+        if ($response === FALSE) {
+            return ['success' => false, 'error-codes' => ['internal-error']];
+        }
+
+        return json_decode($response, true);
     }
 }
