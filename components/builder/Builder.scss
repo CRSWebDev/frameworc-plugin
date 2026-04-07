@@ -1,5 +1,11 @@
 .Builder {
     &-container {
+        margin: var(--spacing-section) 0;
+
+        &:has(.Header) {
+            margin: 0 auto;
+        }
+
         /* ELEVATED */
         &--elevated {
             .Flex-container {
@@ -35,27 +41,19 @@
 
         /* SPACING */
         &--noSpacing {
-            & > .Section {
-                margin: 0;
-            }
+            margin: 0;
         }
 
         &--noSpacingTop {
-            & > .Section {
-                margin: 0 0 calc(var(--spacing-section)) 0;
-            }
+            margin: 0 0 calc(var(--spacing-section)) 0;
         }
 
         &--noSpacingBottom {
-            & > .Section {
-                margin: calc(var(--spacing-section)) 0 0 0;
-            }
+            margin: calc(var(--spacing-section)) 0 0 0;
         }
 
         &--narrowSpacing {
-            & > .Section {
-                margin: calc(var(--spacing-section) / 2) 0;
-            }
+            margin: calc(var(--spacing-section) / 2) 0;
         }
 
         /* APPEARANCE */

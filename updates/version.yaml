@@ -25,3 +25,4 @@ v1.8.0: Moved blueprints to plugin
 v1.8.1: Fixed buttons, footer, default resize mode to fit
 v1.8.2: Update blueprints
 v1.9.0: Add option to select Cloudflare Turnstile as captcha
+v1.9.2: Fix section missing closing tag. Refactor Section margins.
