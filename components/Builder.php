@@ -38,6 +38,11 @@ class Builder extends ComponentBase
             ->where('fullslug', $slug)
             ->first();
 
+        if (empty($section)) {
+            $this->controller->setStatusCode(404);
+            return;
+        }
+
         $this->page['record'] = $section;
 
         if (!empty($section) && !empty($section->builder)) {
