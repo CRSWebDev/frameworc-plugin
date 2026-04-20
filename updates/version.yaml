@@ -27,3 +27,4 @@ v1.8.2: Update blueprints
 v1.9.0: Add option to select Cloudflare Turnstile as captcha
 v1.9.2: Fix section missing closing tag. Refactor Section margins.
 v1.9.3: Fix proper 404
+v1.9.4: Add Cloudflare connect for Turnstile Captcha

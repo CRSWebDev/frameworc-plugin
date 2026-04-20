@@ -60,15 +60,33 @@ fields:
                         default: altcha
                         tab: Integrace
 
+                    integration_altcha_key:
+                        label: Captcha key
+                        tab: Integrace
+                        type: sensitive
+
                     integration_altcha_secret:
                         label: Captcha secret
                         tab: Integrace
                         type: sensitive
 
-                    integration_altcha_key:
-                        label: Captcha key
+                    integration_turnstile_cloudflare:
+                        label: Cloudflare Turnstile
+                        type: section
                         tab: Integrace
-                        type: sensitive
+                        trigger:
+                            action: show
+                            field: integration_captcha_variant
+                            condition: value[turnstile]
+
+                    integration_turnstile_connect:
+                        tab: Integrace
+                        type: partial
+                        path: ~/plugins/crscompany/frameworc/models/frameworcsetting/_cloudflare_connect_button.htm
+                        trigger:
+                            action: show
+                            field: integration_captcha_variant
+                            condition: value[turnstile]
 
                     integration_n8n_webhook_url:
                         label: N8N webhook URL
