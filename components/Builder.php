@@ -33,6 +33,10 @@ class Builder extends ComponentBase
     {
         $slug = $this->param('fullslug');
 
+        if ($slug == 'home*') {
+            $slug = 'home';
+        }
+
         $section = EntryRecord::inSection('Builder')
             ->where('is_enabled', 1)
             ->where('fullslug', $slug)
@@ -59,6 +63,10 @@ class Builder extends ComponentBase
 
     public function onRun()
     {
+        if (request()->is('home')) {
+            return Redirect::to('/');
+        }
+
         $this->addCss('components/slider/css/splide.min.css');
         $this->addCss(['components/builder/normalize.scss']);
         $this->addCss(['components/builder/base.scss']);

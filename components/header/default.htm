@@ -21,7 +21,7 @@
     {% endput %}
 {% endif %}
 
-<div class="Header {{ data | moduleMods('Header', ['fullHeight', 'contrast', 'isVideoBg']) }} {{ block_identifier }}">
+<div class="Header {{ data | moduleMods('Header', ['fullHeight', 'contrast', 'isVideoBg']) }} {{ block_identifier }} {{ block_unique_class }}">
     {% if data.isVideoBg %}
         <video class="Header-video" src="{{ data.image | media }}" {% if data.imageMobile %}poster="{{ data.imageMobile | media }}"{% endif %} autoplay muted playsinline loop></video>
     {% endif %}
