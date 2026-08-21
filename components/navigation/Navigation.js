@@ -1,6 +1,6 @@
 oc.registerControl('navigation', class extends oc.ControlBase {
     init() {
-        this.options = JSON.parse(this.config.options || '{}');
+        this.options = this.config.options ?? {};
 
         this.offset = 200;
 

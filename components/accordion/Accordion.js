@@ -6,7 +6,7 @@ oc.registerControl('accordion', class extends oc.ControlBase {
         this.options = Object.assign({
             singleMode: false,
             activeItem: 0
-        }, JSON.parse(this.config.options));
+        }, this.config.options ?? {});
 
         this.itemsObj = {};
 

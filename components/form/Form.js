@@ -8,7 +8,7 @@ oc.registerControl('form', class extends oc.ControlBase {
 
         this.options = Object.assign({
             someOptions: 'someValue'
-        }, JSON.parse(this.config.options));
+        }, this.config.options ?? {});
     }
 
     connect() {

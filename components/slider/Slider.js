@@ -32,7 +32,7 @@ oc.registerControl('slider', class extends oc.ControlBase {
                 pagination: 'Slider-dots',
                 page: 'Slider-dot',
             },
-        }, JSON.parse(this.config.options));
+        }, this.config.options ?? {});
 
         if (this.options.autoplay) {
             this.options.type = 'loop';

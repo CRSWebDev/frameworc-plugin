@@ -39,7 +39,7 @@ oc.registerControl('tabs', class extends oc.ControlBase {
 
         this.options = Object.assign({
             mode: 'fade'
-        }, JSON.parse(this.config.options));
+        }, this.config.options ?? {});
 
         this.currentSlide = 0;
         this.totalSlides = this.slides.length;

@@ -4,7 +4,7 @@ oc.registerControl('imageStrip', class extends oc.ControlBase {
             intervalDelay: 20,
             stopOnHover: false,
             direction: 'toLeft'
-        }, JSON.parse(this.config.options));
+        }, this.config.options ?? {});
 
         this.wrapper = this.element.querySelector('.ImageStrip-wrapper');
         this.container = this.element.querySelector('.ImageStrip-container');
