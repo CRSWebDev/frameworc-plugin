@@ -30,7 +30,7 @@
 
             Builder-container--prefill{{ data.id }}{{ block_identifier }}
 
-            {{ block.customCssClass }}
+            {% for item in block.customCssClass %}Builder-container--{{ item }} {% endfor %}
         "
     >
         {% if block.aliasOverride %}
