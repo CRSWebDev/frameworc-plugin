@@ -9,12 +9,24 @@
 {% endif %}
 
 {% if this.site.is_prefixed %}
-    {% set code = '/' ~ this.site.code ~ '/' %}
+    {% set code = '/' ~ this.site.route_prefix | trim('/') ~ '/' %}
 {% else %}
     {% set code = '/' %}
 {% endif %}
 
 {% set current = code ~ this.param.fullslug %}
+
+{# Paths that mark a menu item as the current page. Both the relative and the
+   absolute form are listed because the pagefinder `link` filter returns either,
+   depending on how the item was picked. At the site root the home entry is also
+   reachable under its own slug, which redirects to the root. #}
+{% set currentPaths = [current | trim('/'), current | app | trim('/')] %}
+{% if this.param.fullslug is empty %}
+    {% set currentPaths = currentPaths | merge([
+        (code ~ 'home') | trim('/'),
+        (code ~ 'home') | app | trim('/')
+    ]) %}
+{% endif %}
 
 <div class="Navigation Navigation--{{ menuStyle }} Navigation--desktop Navigation--{{ navbarSettings.width }} Navigation--{{ navbarSettings.align }} Navigation--extra{{ navbarSettings.mobile_extra_links }}" data-control="navigation" data-options='{ "menuHide": {{ menuHide }} }'>
     {% if nav.showInfobar %}

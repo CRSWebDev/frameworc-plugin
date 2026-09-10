@@ -3,11 +3,8 @@
         <div class="Navigation-underline"></div>
         {% for item in menu %}
             {% if not item.parent_id %}
-                {% set isActive = false %}
                 {% set itemLink = item.url | link %}
-                {% if itemLink | link == current | app or (itemLink | link == '/' and current == '/home') %}
-                    {% set isActive = true %}
-                {% endif %}
+                {% set isActive = itemLink | trim('/') in currentPaths %}
                 <div class="Navigation-itemWrapper">
                     <a
                         href="{{ itemLink }}"
