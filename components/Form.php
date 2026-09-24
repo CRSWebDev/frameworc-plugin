@@ -85,6 +85,7 @@ class Form extends ComponentBase
 
         $rules = [];
         $messages = [];
+        $fileFields = [];
 
         foreach ($entry->fwcFields as $field) {
             if ($field->required) {
@@ -105,7 +106,8 @@ class Form extends ComponentBase
                     $file = $data[$field->name];
                 }
 
-                unset($data[$field->name]);
+                // Removed only after validation, so a required file is checked
+                $fileFields[] = $field->name;
             }
 
             if ($field->content_group == 'checkbox' && !empty($data[$field->name])) {
@@ -113,7 +115,11 @@ class Form extends ComponentBase
             }
         }
 
-        $valid = Validator::validate($data, $rules, $messages);
+        Validator::validate($data, $rules, $messages);
+
+        foreach ($fileFields as $fileField) {
+            unset($data[$fileField]);
+        }
 
         $ignoredFields = [
             '_handler',
