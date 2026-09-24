@@ -32,3 +32,4 @@ v1.9.5: Fix builder homepage 404, fix header bg not working
 v1.9.6: Fix component config parsing, larajax now parses data attributes
 v1.9.7: Fix prefill classes
 v1.9.8: Add site picker support for multi-site, fix active navigation item detection
+v1.9.9: Fix blog post 404 and meta tags, RealFaviconGenerator flow, columns aliases, component robustness
