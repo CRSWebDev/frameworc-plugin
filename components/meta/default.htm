@@ -23,12 +23,10 @@
 {% endif %}
 
 {% if record.ogImage %}
-    <meta property="og:image" content="{{ record.metaImage | media }}" />
+    <meta property="og:image" content="{{ record.ogImage | media }}" />
 {% else %}
     <meta property="og:image" content="{{ meta.ogImage | media }}" />
 {% endif %}
-
-{{ meta.headerHtml | raw }}
 
 {# CSS Variables #}
 <style>

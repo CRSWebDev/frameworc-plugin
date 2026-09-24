@@ -26,11 +26,12 @@ class Columns extends ComponentBase
     }
 
     public function init() {
+        $id = $this->properties['block']->content->id;
         $columns = $this->properties['block']->content->columns;
 
         foreach ($columns as $c => $column) {
             foreach ($column->builder as $i => $block) {
-                $alias = !empty($block->aliasOverride) ? $block->aliasOverride : $block->content_group . 'Column' . $c . 'Block' . $i;
+                $alias = !empty($block->aliasOverride) ? $block->aliasOverride : $block->content_group . 'Columns' . $id . 'Column' . $c . 'Block' . $i;
 
                 $this->addComponent("\\CRSCompany\\FrameworC\\Components\\" . $block->content_group, $alias, [
                     'block' => $block,
