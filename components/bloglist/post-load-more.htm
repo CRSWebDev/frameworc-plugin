@@ -5,7 +5,7 @@
         class="Button"
         type="button"
         data-request="{{ __SELF__ }}::onLoadMore"
-        data-request-data='{"perPage": {{ posts.perPage }}, "nextPage": {{ posts.nextPage }}, "uniqueId": "{{ posts.uniqueId }}"}'
+        data-request-data='{"perPage": {{ posts.perPage }}, "nextPage": {{ posts.nextPage }}, "uniqueId": "{{ posts.uniqueId }}", "t": {{ posts.tag | json_encode }}}'
         data-request-before-update="oc.visit('{{ this.request.url }}?{{ posts.tag ? 't=' ~ posts.tag ~ '&' }}p={{ posts.nextPage }}', { action: 'swap', scroll: false });"
     >
         {{ 'blog.load_more'|_ }}

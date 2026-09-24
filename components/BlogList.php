@@ -29,21 +29,17 @@ class BlogList extends ComponentBase
 
     public function posts($perPage = 5, $uniqueId = null, $hasPagination = true)
     {
-        $currentPage = Input::get('p', 1);
+        $perPage = max(1, (int) $perPage);
+        $currentPage = max(1, (int) Input::get('p', 1));
+        $tag = Input::get('t');
 
-        $posts = EntryRecord::inSection('BlogPost')
+        $posts = $this->postsQuery($tag)
             ->orderBy('published_at_date', 'desc');
 
         if ($hasPagination) {
             $posts->limit($perPage * $currentPage);
         } else {
             $posts->limit($perPage);
-        }
-
-        if (Input::get('t')) {
-            $posts->whereHas('tags', function ($query) {
-                $query->where('slug', Input::get('t'));
-            });
         }
 
         $posts = $posts->get();
@@ -53,18 +49,19 @@ class BlogList extends ComponentBase
             'perPage' => $perPage,
             'currentPage' => $currentPage,
             'nextPage' => $currentPage + 1,
-            'tag' => Input::get('t'),
-            'total' => EntryRecord::inSection('BlogPost')->count(),
+            'tag' => $tag,
+            'total' => $this->postsQuery($tag)->count(),
             'items' => $posts,
         ];
     }
 
     public function onLoadMore() {
-        $perPage = Input::get('perPage');
-        $nextPage = Input::get('nextPage');
+        $perPage = max(1, (int) Input::get('perPage'));
+        $nextPage = max(1, (int) Input::get('nextPage'));
         $uniqueId = Input::get('uniqueId');
+        $tag = Input::get('t');
 
-        $posts = EntryRecord::inSection('BlogPost')
+        $posts = $this->postsQuery($tag)
             ->orderBy('published_at_date', 'desc')
             ->skip($perPage * ($nextPage - 1))
             ->take($perPage)
@@ -82,13 +79,29 @@ class BlogList extends ComponentBase
                 'perPage' => $perPage,
                 'currentPage' => $nextPage,
                 'nextPage' => $nextPage + 1,
-                'tag' => Input::get('t'),
-                'total' => EntryRecord::inSection('BlogPost')->count(),
+                'tag' => $tag,
+                'total' => $this->postsQuery($tag)->count(),
                 'items' => $posts,
             ]
         ]);
 
         return $returnArray;
+    }
+
+    /**
+     * postsQuery returns enabled blog posts, optionally limited to a tag slug
+     */
+    protected function postsQuery($tag = null)
+    {
+        $query = EntryRecord::inSection('BlogPost')->where('is_enabled', 1);
+
+        if ($tag) {
+            $query->whereHas('tags', function ($query) use ($tag) {
+                $query->where('slug', $tag);
+            });
+        }
+
+        return $query;
     }
 
     public function getTags() {

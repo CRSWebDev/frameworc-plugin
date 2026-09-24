@@ -34,6 +34,6 @@ class SettingsHelper {
         $settings = FrameworcSetting::instance();
         $result = $settings->toArray();
 
-        return $result['wrapper'];
+        return $result['wrapper'] ?? [];
     }
 }

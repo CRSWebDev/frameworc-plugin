@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="Form-group">
-                        {% if fwcSettings.integration_captcha_variant == 'altcha' %}
+                        {% if not fwcSettings.integration_captcha_variant or fwcSettings.integration_captcha_variant == 'altcha' %}
                             <altcha-widget
                                 challengeurl="/api/captcha"
                                 auto="onload"

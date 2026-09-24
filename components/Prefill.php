@@ -19,7 +19,7 @@ class Prefill extends ComponentBase
 
     public function init() {
         $id = $this->properties['block']->content->id;
-        $blocks = $this->properties['block']->content->block->builder;
+        $blocks = $this->properties['block']->content->block->builder ?? [];
 
         foreach ($blocks as $b => $block) {
             $alias = !empty($block->aliasOverride) ? $block->aliasOverride : $block->content_group . 'Prefill' . $id . 'Block' . $b;

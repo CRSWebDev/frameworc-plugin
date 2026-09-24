@@ -48,28 +48,28 @@ class Form extends ComponentBase
         $data = Input::all();
 
         if (!isset($this->settings['captcha_variant']) || $this->settings['captcha_variant'] == 'altcha') {
-            $altcha = new Altcha($this->settings['altcha_secret']);
-            $captchaOk = $altcha->verifySolution($data['altcha'], true);
+            $altcha = new Altcha($this->settings['altcha_secret'] ?? '');
+            $captchaOk = $altcha->verifySolution($data['altcha'] ?? '', true);
 
             if (!$captchaOk) {
                 throw new ValidationException(['altcha' => __('form.captcha.error')]);
             }
         } elseif ($this->settings['captcha_variant'] == 'turnstile') {
-            $secret_key = $this->settings['altcha_secret'];
+            $secret_key = $this->settings['altcha_secret'] ?? '';
             $token = $data['cf-turnstile-response'] ?? '';
-            $remoteip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'];
+            $remoteip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? null;
 
             $validation = $this->validateTurnstile($token, $secret_key, $remoteip);
 
-            if (!$validation['success']) {
+            if (empty($validation['success'])) {
                 throw new ValidationException(['altcha' => __('form.captcha.error')]);
             }
         }
 
 
 
-        $formId = $data['_form_id'];
-        $formTrueId = $data['_form_true_id'];
+        $formId = $data['_form_id'] ?? '';
+        $formTrueId = $data['_form_true_id'] ?? null;
         $formElement = '#frameworc-form-' . $formId;
         $formErrorElement = '#frameworc-form-error-' . $formId;
 
@@ -136,12 +136,12 @@ class Form extends ComponentBase
         $post->save();
 
         // Check if n8n webhook URL is configured and send request
-        $n8nWebhookUrl = $this->settings['n8n_webhook_url'];
+        $n8nWebhookUrl = $this->settings['n8n_webhook_url'] ?? null;
         if (!empty($n8nWebhookUrl)) {
             try {
                 $response = Http::withHeaders([
                     'Content-Type' => 'application/json',
-                    'X-FWC-Auth' => $this->settings['n8n_auth'],
+                    'X-FWC-Auth' => $this->settings['n8n_auth'] ?? '',
                 ])
                 ->timeout(30)
                 ->post($n8nWebhookUrl, [
@@ -158,7 +158,7 @@ class Form extends ComponentBase
         }
 
         // Skip sending emails if n8n webhook URL is configured
-        if (empty($this->settings['n8n_webhook_url'])) {
+        if (empty($n8nWebhookUrl)) {
             if (empty($entry->recipients)) { // if no recipients, skip sending email
                 return [
                     $formElement => $this->renderPartial('@success')
@@ -235,7 +235,7 @@ class Form extends ComponentBase
     }
 
     public static function onCaptcha() {
-        $secret = SettingsHelper::getByPrefix('integration')['altcha_secret'];
+        $secret = SettingsHelper::getByPrefix('integration')['altcha_secret'] ?? '';
 
         $altcha = new Altcha($secret);
 

@@ -30,11 +30,11 @@ class MenuBlock extends ComponentBase
         $block = $this->properties['block']->content->menu;
 
         $menu = EntryRecord::inSection('Menu')
-            ->where('id', $block->id)
+            ->where('id', $block->id ?? null)
             ->first();
 
         $menuItems = [];
-        foreach ($menu->navigation as $item) {
+        foreach ($menu->navigation ?? [] as $item) {
             if ($item['parent_id'] == null) {
                 $menuItems[$item->id] = [
                     'title' => $item->title,

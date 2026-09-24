@@ -19,7 +19,7 @@ oc.registerControl('tabs', class extends oc.ControlBase {
         removeEventListener('resize', this.proxy(this.resize));
 
         this.images.forEach((image) => {
-            removeEventListener('load', this.proxy(this.checkLoadedImage));
+            image.removeEventListener('load', this.proxy(this.checkLoadedImage));
         });
     }
 
@@ -86,14 +86,14 @@ oc.registerControl('tabs', class extends oc.ControlBase {
 
         this.slides[this.currentSlide].classList.add('isActive');
 
-        const slideHeight = `${this.slides[this.currentSlide].offsetHeight}px`;
-        if (this.track.style.height > slideHeight) {
+        const slideHeight = this.slides[this.currentSlide].offsetHeight;
+        if (parseFloat(this.track.style.height) > slideHeight) {
             this.track.style.transitionDelay = this.options.transitionDuration;
         } else {
             this.track.style.transitionDelay = '0s';
         }
 
-        this.track.style.height = slideHeight;
+        this.track.style.height = `${slideHeight}px`;
 
         this.dots.forEach((dot) => {
             dot.classList.remove('isActive');

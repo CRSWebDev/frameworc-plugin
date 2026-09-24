@@ -1,10 +1,14 @@
 {% set block = __SELF__.property('data') %}
 {% set data = block.content %}
 
-{% set options = {
-    intervalDelay: data.intervalDelay,
-    stopOnHover: data.stopOnHover,
-} | json_encode %}
+{% set options = { stopOnHover: data.stopOnHover ? true : false } %}
+
+{# An emptied field would override the JS default with null (a ~0 ms interval) #}
+{% if data.intervalDelay is not same as(null) and data.intervalDelay is not same as('') %}
+    {% set options = options | merge({ intervalDelay: data.intervalDelay }) %}
+{% endif %}
+
+{% set options = options | json_encode %}
 
 <div class="Section" {% if data.autoScroll %}data-control="imageStrip" data-options='{{ options | escape() | raw }}'{% endif %}>
     <div class="Flex">

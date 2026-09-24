@@ -42,7 +42,7 @@ class Navigation extends ComponentBase
 
     public function getMenu($nav) {
         $menu = [];
-        foreach ($nav as $item) {
+        foreach ($nav ?? [] as $item) {
             if ($item['parent_id'] == null) {
                 $menu[$item->id] = [
                     'title' => $item->title,
