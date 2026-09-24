@@ -1,13 +1,15 @@
 <?php namespace CRSCompany\FrameworC\Components;
 
+use Backend;
 use BackendAuth;
 use Cms\Classes\ComponentBase;
 use CRSCompany\FrameworC\Classes\SettingsHelper;
 use CRSCompany\FrameworC\Models\FrameworcSetting;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
-use October\Rain\Filesystem\Filesystem;
+use File;
+use Flash;
 use October\Rain\Support\Facades\Input;
+use Site;
 use Tailor\Models\EntryRecord;
 
 /**
@@ -49,34 +51,94 @@ class Meta extends ComponentBase
         return $meta;
     }
 
-    public function onFaviconGenerated() {
-        $faviconUrl = Input::get('json_result_url');
+    /**
+     * onFaviconGenerated handles the RealFaviconGenerator callback (theme page
+     * /api/rfg): downloads the generated package into media/favicon and saves
+     * its HTML markup to the Meta entry of the site that started the request.
+     * Returns the backend URL to redirect to.
+     */
+    public function onFaviconGenerated()
+    {
+        $backendUrl = Backend::url('tailor/entries/meta');
 
-        $resp = Http::get('https://realfavicongenerator.net' . $faviconUrl);
-
-        $result = json_decode($resp->body())->favicon_generation_result;
-
-        if ($result->custom_parameter != 'ref=as2d584jz8d25sg8s3af8h') {
-            throw new \Exception('Invalid favicon generation result');
+        if (!BackendAuth::check()) {
+            return $backendUrl;
         }
 
-        $loggedIn = BackendAuth::check();
-        if (empty($loggedIn)) {
-            throw new \Exception('Not logged in');
+        try {
+            $this->installFaviconPackage(Input::get('json_result_url'));
+            Flash::success('Favikona byla vygenerována a uložena.');
+        } catch (\Exception $e) {
+            Flash::error('Generování favikony selhalo: ' . $e->getMessage());
         }
 
-        $dir = new Filesystem;
-        $dir->cleanDirectory(storage_path('app/media/favicon'));
+        return $backendUrl;
+    }
 
-        $file = file_get_contents($result->favicon->package_url);
-        Storage::put('media/favicon/package.zip', $file);
-        // Unzip the file
-        $zip = new \ZipArchive;
-        $zip->open(storage_path('app/media/favicon/package.zip'));
-        $zip->extractTo(storage_path('app/media/favicon'));
-        $zip->close();
+    private function installFaviconPackage($resultPath)
+    {
+        // The request asks for short_url + path_only, so only a path arrives here.
+        if (!is_string($resultPath) || !str_starts_with($resultPath, '/')) {
+            throw new \Exception('Chybí odkaz na výsledek generování.');
+        }
 
-        return '/admin/tailor/entries/meta?html_code=' . urlencode($result->favicon->html_code);
+        $response = Http::get('https://realfavicongenerator.net' . $resultPath);
+        $result = $response->ok() ? ($response->json('favicon_generation_result') ?? []) : [];
+
+        if (($result['result']['status'] ?? null) !== 'success') {
+            throw new \Exception('RealFaviconGenerator nevrátil úspěšný výsledek.');
+        }
+
+        parse_str((string) ($result['custom_parameter'] ?? ''), $custom);
+
+        if (($custom['ref'] ?? null) !== 'as2d584jz8d25sg8s3af8h') {
+            throw new \Exception('Neplatná odpověď generátoru.');
+        }
+
+        $packageUrl = $result['favicon']['package_url'] ?? null;
+        $htmlCode = $result['favicon']['html_code'] ?? null;
+
+        if (!$packageUrl || !$htmlCode) {
+            throw new \Exception('Odpověď neobsahuje balíček ikon.');
+        }
+
+        $package = Http::get($packageUrl);
+
+        if (!$package->ok()) {
+            throw new \Exception('Balíček ikon se nepodařilo stáhnout.');
+        }
+
+        $zipPath = temp_path('favicon-' . uniqid() . '.zip');
+        File::put($zipPath, $package->body());
+
+        try {
+            $zip = new \ZipArchive;
+
+            if ($zip->open($zipPath) !== true) {
+                throw new \Exception('Balíček ikon není platný ZIP.');
+            }
+
+            // Old icons are only removed once the new package is known to be good.
+            $faviconDir = storage_path('app/media/favicon');
+            File::makeDirectory($faviconDir, 0755, true, true);
+            File::cleanDirectory($faviconDir);
+
+            $zip->extractTo($faviconDir);
+            $zip->close();
+        } finally {
+            File::delete($zipPath);
+        }
+
+        Site::withContext((int) ($custom['site'] ?? 0) ?: null, function () use ($htmlCode) {
+            $meta = EntryRecord::inSection('Meta')->first();
+
+            if (!$meta) {
+                throw new \Exception('Záznam Meta pro tento web neexistuje.');
+            }
+
+            $meta->faviconHtml = $htmlCode;
+            $meta->save();
+        });
     }
 
     private function getCssVariables()
