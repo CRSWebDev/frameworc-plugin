@@ -13,7 +13,7 @@ class Columns extends ComponentBase
     {
         return [
             'name' => 'Columns Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Blok se sloupci, do kterých lze vkládat další bloky'
         ];
     }
 

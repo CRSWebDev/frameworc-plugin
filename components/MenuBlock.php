@@ -14,7 +14,7 @@ class MenuBlock extends ComponentBase
     {
         return [
             'name' => 'MenuBlock Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Blok s vybraným menu'
         ];
     }
 

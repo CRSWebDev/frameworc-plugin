@@ -12,7 +12,7 @@
             <div class="Gallery-wrapper">
                 <div class="Gallery-imageHolder">
                     {% for item in data.images %}
-                        <img src="{{ item | media | resize(resizeWidth) }}" srcset="{{ item | srcset(resizeWidth, null, 'auto') }}" data-lightbox="{{ item | media | resize(null, 1500) }}" class="Gallery-image">
+                        <img src="{{ item | media | resize(resizeWidth) }}" srcset="{{ item | srcset(resizeWidth, null, 'auto') }}" data-lightbox="{{ item | media | resize(null, 1500) }}" alt="" class="Gallery-image">
                     {% endfor %}
                 </div>
                 <div class="Gallery-container" data-gallery>
@@ -24,7 +24,7 @@
 
             <div class="Gallery-button">
                 <button type="button" class="Button Button--icon Gallery-buttonPrev" data-gallery-prev>
-                    {{ 'Načíst další'|_ }}
+                    {{ 'gallery.load_more'|_ }}
                 </button>
             </div>
         </div>

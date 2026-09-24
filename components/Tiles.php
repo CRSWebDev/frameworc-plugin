@@ -13,7 +13,7 @@ class Tiles extends ComponentBase
     {
         return [
             'name' => 'Tiles Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Dlaždice s obsahem'
         ];
     }
 

@@ -13,7 +13,7 @@ class Gallery extends ComponentBase
     {
         return [
             'name' => 'Gallery Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Galerie obrázků'
         ];
     }
 

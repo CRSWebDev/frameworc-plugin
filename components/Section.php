@@ -13,7 +13,7 @@ class Section extends ComponentBase
     {
         return [
             'name' => 'Section Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Textová sekce s obrázkem nebo vloženým obsahem'
         ];
     }
 

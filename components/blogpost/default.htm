@@ -8,7 +8,7 @@
             <div class="Flex-container">
                 <div class="BlogPost">
                     <div class="BlogPost-header">
-                        <img src="{{ post.image | media | resize(1200,600, {mode: 'crop'}) }}" srcset="{{ post.image | srcset(1200,600) }}" alt="">
+                        <img src="{{ post.image | media | resize(1200,600, {mode: 'crop'}) }}" srcset="{{ post.image | srcset(1200,600) }}" alt="{{ post.title }}">
                         <h1 class="Headline">{{ post.title }}</h1>
                         <p class="BlogPost-date">{{ post.published_at|date('M d, Y') }}</p>
                     </div>

@@ -15,7 +15,7 @@ class InstaFeed extends ComponentBase
     {
         return [
             'name' => 'InstaFeed Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Příspěvky z Instagramu'
         ];
     }
 

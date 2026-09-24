@@ -13,7 +13,7 @@ class Accordion extends ComponentBase
     {
         return [
             'name' => 'Accordion Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Blok s rozbalovacími položkami'
         ];
     }
 

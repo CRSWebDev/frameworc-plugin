@@ -15,7 +15,7 @@ class BlogPost extends ComponentBase
     {
         return [
             'name' => 'BlogPost Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Detail příspěvku blogu'
         ];
     }
 

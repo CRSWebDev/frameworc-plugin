@@ -35,8 +35,8 @@
     <div class="Flex Flex--navbar">
         <div class="Flex-container Flex-container--justifyBetween Flex-container--stretch">
             <a href="{{ code }}" class="Navigation-brand">
-                <img src="{{ nav.logoDark | media }}" alt="" class="Navigation-logo Navigation-logo--dark">
-                <img src="{{ nav.logo | media }}" alt="" class="Navigation-logo Navigation-logo--light">
+                <img src="{{ nav.logoDark | media }}" alt="{{ meta.metaTitle }}" class="Navigation-logo Navigation-logo--dark">
+                <img src="{{ nav.logo | media }}" alt="{{ meta.metaTitle }}" class="Navigation-logo Navigation-logo--light">
             </a>
             {% partial '@desktop' %}
             {% partial '@hamburger' %}

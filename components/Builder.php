@@ -2,7 +2,6 @@
 
 use Cms\Classes\ComponentBase;
 use CRSCompany\FrameworC\Classes\SettingsHelper;
-use CRSCompany\FrameworC\Models\FrameworcSetting;
 use Event;
 use Redirect;
 use Tailor\Models\EntryRecord;
@@ -18,7 +17,7 @@ class Builder extends ComponentBase
     {
         return [
             'name' => 'Builder Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Vykreslí stránku poskládanou z bloků'
         ];
     }
 

@@ -13,7 +13,7 @@ class ImageStrip extends ComponentBase
     {
         return [
             'name' => 'ImageStrip Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Pás obrázků (např. log partnerů) s automatickým posunem'
         ];
     }
 

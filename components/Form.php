@@ -1,9 +1,6 @@
 <?php namespace CRSCompany\FrameworC\Components;
 
 use Cms\Classes\ComponentBase;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Support\Facades\Log;
-use October\Rain\Exception\AjaxException;
 use October\Rain\Exception\ValidationException;
 use October\Rain\Support\Facades\Input;
 use October\Rain\Support\Facades\Mail;
@@ -11,7 +8,6 @@ use Tailor\Models\EntryRecord;
 use Validator;
 use AltchaOrg\Altcha\ChallengeOptions;
 use AltchaOrg\Altcha\Altcha;
-use CRSCompany\FrameworC\Models\FrameworcSetting;
 use Illuminate\Support\Facades\Http;
 use CRSCompany\FrameworC\Classes\SettingsHelper;
 
@@ -28,7 +24,7 @@ class Form extends ComponentBase
     {
         return [
             'name' => 'Form Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Formulář s odesláním poptávky'
         ];
     }
 

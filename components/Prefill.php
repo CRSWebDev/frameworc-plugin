@@ -13,7 +13,7 @@ class Prefill extends ComponentBase
     {
         return [
             'name' => 'Prefill Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Vloží předvyplněný blok'
         ];
     }
 

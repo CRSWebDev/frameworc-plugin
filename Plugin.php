@@ -1,6 +1,5 @@
 <?php namespace CRSCompany\FrameworC;
 
-use Backend;
 use Cms\Classes\Page;
 use CRSCompany\FrameworC\Classes\Spacer;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +25,7 @@ class Plugin extends PluginBase
     {
         return [
             'name' => 'FrameworC',
-            'description' => 'No description provided yet...',
+            'description' => 'Stavebnice stránek FrameworC',
             'author' => 'CRS',
             'icon' => 'icon-leaf'
         ];
@@ -93,39 +92,6 @@ class Plugin extends PluginBase
                 'icon' => 'icon-cog',
                 'class' => \CRSCompany\FrameworC\Models\FrameworcSetting::class,
             ]
-        ];
-    }
-
-    /**
-     * registerPermissions used by the backend.
-     */
-    public function registerPermissions()
-    {
-        return []; // Remove this line to activate
-
-        return [
-            'crs.frameworc.some_permission' => [
-                'tab' => 'FrameworC',
-                'label' => 'Some permission'
-            ],
-        ];
-    }
-
-    /**
-     * registerNavigation used by the backend.
-     */
-    public function registerNavigation()
-    {
-        return []; // Remove this line to activate
-
-        return [
-            'frameworc' => [
-                'label' => 'FrameworC',
-                'url' => Backend::url('crs/frameworc/mycontroller'),
-                'icon' => 'icon-leaf',
-                'permissions' => ['crs.frameworc.*'],
-                'order' => 500,
-            ],
         ];
     }
 

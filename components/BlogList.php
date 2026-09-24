@@ -15,7 +15,7 @@ class BlogList extends ComponentBase
     {
         return [
             'name' => 'BlogList Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Výpis příspěvků blogu s filtrem podle štítků'
         ];
     }
 

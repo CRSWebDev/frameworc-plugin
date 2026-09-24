@@ -27,7 +27,7 @@ class Footer extends ComponentBase
     {
         return [
             'name' => 'Footer Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Patička webu s navigací a přihlášením k newsletteru'
         ];
     }
 
@@ -101,7 +101,7 @@ class Footer extends ComponentBase
                 'success' => true
             ];
         } else {
-            return throw new AjaxException('Something went wrong. Please try again.');
+            throw new AjaxException('Something went wrong. Please try again.');
         }
     }
 }

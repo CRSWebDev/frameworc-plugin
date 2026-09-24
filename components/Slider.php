@@ -13,7 +13,7 @@ class Slider extends ComponentBase
     {
         return [
             'name' => 'Slider Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Posuvník obrázků'
         ];
     }
 

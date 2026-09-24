@@ -15,7 +15,7 @@ class Navigation extends ComponentBase
     {
         return [
             'name' => 'Navigation Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Hlavní navigace webu'
         ];
     }
 

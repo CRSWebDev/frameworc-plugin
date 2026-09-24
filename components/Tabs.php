@@ -13,7 +13,7 @@ class Tabs extends ComponentBase
     {
         return [
             'name' => 'Tabs Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Záložky s obsahem'
         ];
     }
 

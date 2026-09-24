@@ -13,7 +13,7 @@ class Downloads extends ComponentBase
     {
         return [
             'name' => 'Downloads Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Seznam souborů ke stažení'
         ];
     }
 

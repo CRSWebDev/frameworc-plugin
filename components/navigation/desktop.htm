@@ -2,41 +2,39 @@
     <div class="Navigation-mainMenuWrapper">
         <div class="Navigation-underline"></div>
         {% for item in menu %}
-            {% if not item.parent_id %}
-                {% set itemLink = item.url | link %}
-                {% set isActive = itemLink | trim('/') in currentPaths %}
-                <div class="Navigation-itemWrapper">
-                    <a
-                        href="{{ itemLink }}"
-                        class="Navigation-item Navigation-item--level1 {{ isActive and not item.anchor ? 'isActive' : '' }} {{ item.anchor ? 'Navigation-item--anchor' : '' }}"
-                        {% if item.blank %}target="_blank"{% endif %}
-                        {% if item.anchor %}data-turbo="false"{% endif %}
-                    >
-                        {{ item.title }}
-                        {% if item.children %}
-                            <span class="Navigation-itemIcon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
-                            </span>
-                        {% endif %}
-                    </a>
+            {% set itemLink = item.url | link %}
+            {% set isActive = itemLink | trim('/') in currentPaths %}
+            <div class="Navigation-itemWrapper">
+                <a
+                    href="{{ itemLink }}"
+                    class="Navigation-item Navigation-item--level1 {{ isActive and not item.anchor ? 'isActive' : '' }} {{ item.anchor ? 'Navigation-item--anchor' : '' }}"
+                    {% if item.blank %}target="_blank"{% endif %}
+                    {% if item.anchor %}data-turbo="false"{% endif %}
+                >
+                    {{ item.title }}
                     {% if item.children %}
-                        <div class="Navigation-subNavWrapper">
-                            <div class="Navigation-subNav">
-                                {% for child in item.children %}
-                                    <a
-                                        href="{{ child.url | link }}"
-                                        class="Navigation-item Navigation-item--child {{ child.anchor ? 'Navigation-item--anchor' : '' }}"
-                                        {% if child.blank %}target="_blank"{% endif %}
-                                        {% if child.anchor %}data-turbo="false"{% endif %}
-                                    >
-                                        {{ child.title }}
-                                    </a>
-                                {% endfor %}
-                            </div>
-                        </div>
+                        <span class="Navigation-itemIcon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
+                        </span>
                     {% endif %}
-                </div>
-            {% endif %}
+                </a>
+                {% if item.children %}
+                    <div class="Navigation-subNavWrapper">
+                        <div class="Navigation-subNav">
+                            {% for child in item.children %}
+                                <a
+                                    href="{{ child.url | link }}"
+                                    class="Navigation-item Navigation-item--child {{ child.anchor ? 'Navigation-item--anchor' : '' }}"
+                                    {% if child.blank %}target="_blank"{% endif %}
+                                    {% if child.anchor %}data-turbo="false"{% endif %}
+                                >
+                                    {{ child.title }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
         {% endfor %}
     </div>
 </div>

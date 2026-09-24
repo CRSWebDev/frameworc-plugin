@@ -4,7 +4,6 @@ use Backend;
 use BackendAuth;
 use Cms\Classes\ComponentBase;
 use CRSCompany\FrameworC\Classes\SettingsHelper;
-use CRSCompany\FrameworC\Models\FrameworcSetting;
 use Illuminate\Support\Facades\Http;
 use File;
 use Flash;
@@ -23,7 +22,7 @@ class Meta extends ComponentBase
     {
         return [
             'name' => 'Meta Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Meta tagy, favikona a CSS proměnné'
         ];
     }
 
@@ -143,9 +142,7 @@ class Meta extends ComponentBase
 
     private function getCssVariables()
     {
-        $settings = FrameworcSetting::instance();
-
-        $settingCss = SettingsHelper::getByPrefix('variable_', $settings);
+        $settingCss = SettingsHelper::getByPrefix('variable_');
 
         $css = $settingCss['variablesScss'] ?? '';
 

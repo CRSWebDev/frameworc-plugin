@@ -14,7 +14,7 @@
             </div>
 
             <div class="Flex-col">
-                <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'crop'}) }}" srcset="{{ data.image | srcset(imgDimensions.w, imgDimensions.h, 'crop') }}" alt="{{ data.headline }}" />
+                <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'crop'}) }}" srcset="{{ data.image | srcset(imgDimensions.w, imgDimensions.h, 'crop') }}" alt="{{ block.headline | striptags | trim }}" />
             </div>
         </div>
     </div>

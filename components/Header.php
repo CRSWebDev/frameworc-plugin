@@ -13,7 +13,7 @@ class Header extends ComponentBase
     {
         return [
             'name' => 'Header Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Úvodní hlavička stránky s obrázkem nebo videem'
         ];
     }
 

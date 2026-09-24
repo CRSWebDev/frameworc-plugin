@@ -25,21 +25,19 @@
     <div class="Flex">
         <div class="Flex-container Flex-container--footerNav">
             <div class="Flex-col">
-                <img src="{{ nav.logo | media }}" class="Footer-logo">
+                <img src="{{ nav.logo | media }}" alt="{{ meta.metaTitle }}" class="Footer-logo">
             </div>
             <div class="Flex-col">
                 <div class="Footer-navWrapper">
                     {% for item in menu %}
-                        {% if not item.parent_id %}
-                            <div class="Footer-nav">
-                                <a href="{{ item.url | link }}" class="Footer-item">{{ item.title }}</a>
-                                {% if item.children | length > 0 %}
-                                    {% for child in item.children %}
-                                        <a href="{{ child.url | link }}" class="Footer-item Footer-item--child">{{ child.title }}</a>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                        {% endif %}
+                        <div class="Footer-nav">
+                            <a href="{{ item.url | link }}" class="Footer-item" {% if item.blank %}target="_blank" rel="noopener"{% endif %}>{{ item.title }}</a>
+                            {% if item.children | length > 0 %}
+                                {% for child in item.children %}
+                                    <a href="{{ child.url | link }}" class="Footer-item Footer-item--child" {% if child.blank %}target="_blank" rel="noopener"{% endif %}>{{ child.title }}</a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     {% endfor %}
                 </div>
             </div>
