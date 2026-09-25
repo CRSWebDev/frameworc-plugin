@@ -1,5 +1,6 @@
 <?php namespace CRSCompany\FrameworC\Models;
 
+use CRSCompany\FrameworC\Classes\CustomScss;
 use Model;
 
 /**
@@ -12,4 +13,9 @@ class FrameworcSetting extends \System\Models\SettingModel
     public $settingsCode = 'frameworc_settings';
 
     public $settingsFields = 'fields.yaml';
-} 
+
+    public function beforeSave()
+    {
+        CustomScss::validate((string) ($this->wrapper['styles_globalScss'] ?? ''), 'wrapper[styles_globalScss]');
+    }
+} 

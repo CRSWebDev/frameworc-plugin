@@ -1,0 +1,11 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    siteScss:
+        label: SCSS tohoto webu
+        type: codeeditor
+        language: scss
+        size: giant
+        comment: Platí jen pro web aktuálně vybraný v administraci. Kompiluje se až za globálním SCSS z FrameworC Settings, takže lze použít tamní proměnné a mixiny.

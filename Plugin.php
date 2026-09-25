@@ -91,6 +91,13 @@ class Plugin extends PluginBase
                 'category' => 'FrameworC',
                 'icon' => 'icon-cog',
                 'class' => \CRSCompany\FrameworC\Models\FrameworcSetting::class,
+            ],
+            'site_settings' => [
+                'label' => 'FrameworC – nastavení webu',
+                'description' => 'Nastavení specifická pro aktuální web',
+                'category' => 'FrameworC',
+                'icon' => 'icon-globe',
+                'class' => \CRSCompany\FrameworC\Models\FrameworcSiteSetting::class,
             ]
         ];
     }

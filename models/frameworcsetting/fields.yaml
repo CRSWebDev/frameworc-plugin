@@ -37,19 +37,13 @@ fields:
                             open: V otevřeném stavu pod menu tlačítkem
                         default: open
 
-                    section_variables:
-                        label: Barvy
-                        type: section
-                        tab: Proměnné
-
-                    variable_variablesScss:
-                        label: Vlastní SCSS proměnné
+                    styles_globalScss:
+                        label: Globální SCSS
                         type: codeeditor
                         language: scss
                         size: giant
-                        tab: Proměnné
-                        comment: Zadejte vlastní SCSS proměnné pro přepsání výchozích hodnot rámce.
-
+                        tab: Styly
+                        comment: SCSS společné pro všechny weby. Kompiluje se před SCSS jednotlivých webů, takže tam lze použít zde definované proměnné a mixiny.
 
                     integration_captcha_variant:
                         label: Captcha varianta

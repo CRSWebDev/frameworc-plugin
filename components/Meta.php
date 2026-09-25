@@ -3,7 +3,7 @@
 use Backend;
 use BackendAuth;
 use Cms\Classes\ComponentBase;
-use CRSCompany\FrameworC\Classes\SettingsHelper;
+use CRSCompany\FrameworC\Classes\CustomScss;
 use Illuminate\Support\Facades\Http;
 use File;
 use Flash;
@@ -35,12 +35,11 @@ class Meta extends ComponentBase
     }
 
     public function init() {
-        $cssVariables = $this->getCssVariables();
         $section = EntryRecord::inSection('Meta')
             ->first();
 
         $this->page['meta'] = $section;
-        $this->page['cssVars'] = $cssVariables;
+        $this->page['customCss'] = CustomScss::forActiveSite();
     }
 
     static function getMeta() {
@@ -138,14 +137,5 @@ class Meta extends ComponentBase
             $meta->faviconHtml = $htmlCode;
             $meta->save();
         });
-    }
-
-    private function getCssVariables()
-    {
-        $settingCss = SettingsHelper::getByPrefix('variable_');
-
-        $css = $settingCss['variablesScss'] ?? '';
-
-        return $css;
     }
 }
