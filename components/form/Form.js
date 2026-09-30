@@ -1,9 +1,6 @@
 oc.registerControl('form', class extends oc.ControlBase {
     init() {
         this.$form = this.element.querySelector('form');
-        this.resetFileButton = this.element.querySelector('.Form-fileReset');
-        this.inputEl = this.element.querySelector('input[type="file"]');
-        this.fileNamesContainer = this.element.querySelector('.Form-fileName');
         this.formControls = this.element.querySelectorAll('.Form-control');
 
         this.options = Object.assign({
@@ -23,6 +20,9 @@ oc.registerControl('form', class extends oc.ControlBase {
     }
 
     handleFileSelect(e) {
+        const container = e.target.closest('.Form-fileContainer');
+        const fileNamesContainer = container.querySelector('.Form-fileName');
+        const resetFileButton = container.querySelector('.Form-fileReset');
         const files = e.target.files;
         const fileNames = [];
 
@@ -31,21 +31,23 @@ oc.registerControl('form', class extends oc.ControlBase {
                 fileNames.push(files[i].name);
             }
 
-            this.fileNamesContainer.innerHTML = fileNames.join(', ');
+            fileNamesContainer.innerHTML = fileNames.join(', ');
 
-            this.resetFileButton.classList.add('isActive');
+            resetFileButton.classList.add('isActive');
         } else {
-            this.fileNamesContainer.innerHTML = '';
-            this.resetFileButton.classList.remove('isActive');
+            fileNamesContainer.innerHTML = '';
+            resetFileButton.classList.remove('isActive');
         }
     }
 
     handleFileReset(e) {
         e.preventDefault();
 
-        this.fileNamesContainer.innerHTML = '';
-        this.inputEl.value = '';
-        this.resetFileButton.classList.remove('isActive');
+        const container = e.target.closest('.Form-fileContainer');
+
+        container.querySelector('.Form-fileName').innerHTML = '';
+        container.querySelector('input[type="file"]').value = '';
+        container.querySelector('.Form-fileReset').classList.remove('isActive');
     }
 
     handleMoreInfo(e) {
@@ -69,7 +71,12 @@ oc.registerControl('form', class extends oc.ControlBase {
             el.classList.remove('hasError');
         });
 
-        Object.keys(e.detail.message.X_OCTOBER_ERROR_FIELDS).forEach((key) => {
+        const errorFields = e.detail.message?.X_OCTOBER_ERROR_FIELDS ?? {};
+
+        Object.keys(errorFields).forEach((errorKey) => {
+            // Checkbox option errors are keyed as "name.0"
+            const key = errorKey.split('.')[0];
+
             if (key === 'altcha') {
                 oc.flashMsg({
                     message: e.detail.message.X_OCTOBER_ERROR_MESSAGE,

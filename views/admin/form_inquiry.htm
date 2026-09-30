@@ -1,6 +1,4 @@
 <div>
-    {% set data = value | json_decode %}
-
     <div class="control-list">
         <table class="table data">
             <thead>
@@ -10,15 +8,19 @@
             </tr>
             </thead>
             <tbody>
-            {% for key, val in data %}
-                {% if val is iterable %}
-                    {{ val | json_encode }}
-                {% else %}
-                    <tr>
-                        <td>{{ key }}</td>
-                        <td>{{ val }}</td>
-                    </tr>
-                {% endif %}
+            {% for answer in model.answers %}
+                <tr>
+                    <td>{{ answer.label ?: answer.name }}</td>
+                    <td>
+                        {% if answer.content_group == 'file' %}
+                            {% for file in answer.files %}
+                                <a href="{{ file.path }}" target="_blank">{{ file.file_name }}</a>{% if not loop.last %}<br>{% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {{ answer.value | nl2br }}
+                        {% endif %}
+                    </td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>

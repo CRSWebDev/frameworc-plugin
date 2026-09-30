@@ -4,8 +4,11 @@ use Cms\Classes\ComponentBase;
 use October\Rain\Exception\ValidationException;
 use October\Rain\Support\Facades\Input;
 use October\Rain\Support\Facades\Mail;
+use Tailor\Components\SubmissionComponent;
+use Tailor\Classes\ContentDecoder\SubmissionDecoder;
 use Tailor\Models\EntryRecord;
 use Validator;
+use Illuminate\Validation\Rule;
 use AltchaOrg\Altcha\ChallengeOptions;
 use AltchaOrg\Altcha\Altcha;
 use Illuminate\Support\Facades\Http;
@@ -14,11 +17,30 @@ use CRSCompany\FrameworC\Classes\SettingsHelper;
 /**
  * Form Component
  *
- * @link https://docs.octobercms.com/3.x/extend/cms-components.html
+ * Renders an editor-defined Form entry and stores each submission as an
+ * October submission record (Inquiry blueprint), which provides the honeypot,
+ * rate limiting, visitor metadata and moderation statuses.
+ *
+ * @link https://docs.octobercms.com/4.x/cms/components/submission.html
  */
-class Form extends ComponentBase
+class Form extends SubmissionComponent
 {
     private $settings;
+
+    /**
+     * @var \Tailor\Models\EntryRecord|null formEntry is the Form definition being submitted
+     */
+    protected $formEntry;
+
+    /**
+     * @var array formData is the validated submission data, keyed by field name
+     */
+    protected $formData = [];
+
+    /**
+     * @var array formFiles are the validated uploads, keyed by field name
+     */
+    protected $formFiles = [];
 
     public function componentDetails()
     {
@@ -37,10 +59,37 @@ class Form extends ComponentBase
     }
 
     public function init() {
+        $this->setProperty('handle', 'Inquiry');
+
+        parent::init();
+
         $this->settings = SettingsHelper::getByPrefix('integration_');
     }
 
+    /**
+     * getPath restores the plugin path, SubmissionComponent resolves partials from modules
+     */
+    public function getPath()
+    {
+        return ComponentBase::getPath();
+    }
+
+    /**
+     * getComponentAssetUrlPath restores the plugin asset path
+     */
+    protected function getComponentAssetUrlPath(): string
+    {
+        return ComponentBase::getComponentAssetUrlPath();
+    }
+
     public function onSubmit() {
+        return $this->onFormSubmit();
+    }
+
+    /**
+     * onFormSubmit is also reachable directly, so every check runs here
+     */
+    public function onFormSubmit() {
         $data = Input::all();
 
         if (!isset($this->settings['captcha_variant']) || $this->settings['captcha_variant'] == 'altcha') {
@@ -69,10 +118,6 @@ class Form extends ComponentBase
         $formElement = '#frameworc-form-' . $formId;
         $formErrorElement = '#frameworc-form-error-' . $formId;
 
-        $post = EntryRecord::inSection('Inquiry');
-        $file = null;
-
-
         $entry = EntryRecord::inSection('Form')->where('id', $formTrueId)->first();
 
         if (!$entry) {
@@ -82,6 +127,7 @@ class Form extends ComponentBase
         $rules = [];
         $messages = [];
         $fileFields = [];
+        $files = [];
 
         foreach ($entry->fwcFields as $field) {
             if ($field->required) {
@@ -96,22 +142,34 @@ class Form extends ComponentBase
                 }
             }
 
+            if (in_array($field->content_group, ['select', 'radio', 'checkbox'])) {
+                $allowedValues = collect($field->options)->pluck('value')->all();
+                $key = $field->content_group == 'checkbox' ? $field->name . '.*' : $field->name;
+
+                $rules[$key] = array_merge((array) ($rules[$key] ?? []), ['nullable', Rule::in($allowedValues)]);
+            }
+
             if ($field->content_group == 'file') {
                 if (!empty($data[$field->name])) {
-                    $post->files = files($field->name);
-                    $file = $data[$field->name];
+                    $files[$field->name] = array_filter((array) files($field->name));
+
+                    foreach ($files[$field->name] as $file) {
+                        $this->formValidateFile($field->name, $file, []);
+                    }
                 }
 
                 // Removed only after validation, so a required file is checked
                 $fileFields[] = $field->name;
             }
+        }
 
+        Validator::validate($data, $rules, $messages);
+
+        foreach ($entry->fwcFields as $field) {
             if ($field->content_group == 'checkbox' && !empty($data[$field->name])) {
                 $data[$field->name] = implode(', ', $data[$field->name]);
             }
         }
-
-        Validator::validate($data, $rules, $messages);
 
         foreach ($fileFields as $fileField) {
             unset($data[$fileField]);
@@ -123,6 +181,7 @@ class Form extends ComponentBase
             '_token',
             '_form_id',
             '_form_true_id',
+            '_oc_hp',
             'altcha',
             'cf-turnstile-response',
         ];
@@ -131,11 +190,14 @@ class Form extends ComponentBase
             return (!in_array($key, $ignoredFields));
         }, ARRAY_FILTER_USE_KEY);
 
+        $this->formEntry = $entry;
+        $this->formData = $data;
+        $this->formFiles = $files;
 
-        $post->form = $formTrueId;
-        $post->title = $this->getInquiryTitle($data);
-        $post->inquiry = json_encode($data);
-        $post->save();
+        // Honeypot, rate limit, save and cms.form.submit event
+        parent::onFormSubmit();
+
+        $post = $this->controller->vars['formModel'];
 
         // Check if n8n webhook URL is configured and send request
         $n8nWebhookUrl = $this->settings['n8n_webhook_url'] ?? null;
@@ -182,7 +244,7 @@ class Form extends ComponentBase
                 'formItems' => $formItems,
             ];
 
-            Mail::send('crscompany.frameworc::mail.templates.form-backend', $emailVars, function($message) use ($file, $entry) {
+            Mail::send('crscompany.frameworc::mail.templates.form-backend', $emailVars, function($message) use ($files, $entry) {
                 $isFirstLoop = true;
                 foreach ($entry->recipients as $recipient) {
                     if ($isFirstLoop) {
@@ -195,7 +257,7 @@ class Form extends ComponentBase
 
                 $message->subject(__('form.email_backend_subject'));
 
-                if (!empty($file)) {
+                foreach (array_merge(...array_values($files)) as $file) {
                     $message->attach($file, [
                         'as' => $file->getClientOriginalName(),
                         'mime' => $file->getClientMimeType(),
@@ -214,6 +276,61 @@ class Form extends ComponentBase
         return [
             $formElement => $this->renderPartial('@success')
         ];
+    }
+
+    /**
+     * formGetFieldConfig limits visitor input to the answers repeater, which is built server-side
+     */
+    public function formGetFieldConfig(): array
+    {
+        return [
+            'answers' => ['type' => 'repeater'],
+        ];
+    }
+
+    /**
+     * formCoerceRelationValues ignores posted values and builds the answers from the Form definition
+     */
+    public function formCoerceRelationValues($model, array $data, array $allowedFields): array
+    {
+        $rows = [];
+        $answerGroups = (array) $model->getFieldsetDefinition()->getField('answers')?->getConfig('groups');
+
+        foreach ($this->formEntry->fwcFields as $field) {
+            if ($field->content_group == 'section') {
+                continue;
+            }
+
+            // Field types missing from the Inquiry answers groups are stored as text
+            $row = [
+                'content_group' => array_key_exists($field->content_group, $answerGroups) ? $field->content_group : 'text',
+                'name' => $field->name,
+                'label' => $field->label,
+            ];
+
+            if ($field->content_group == 'file') {
+                if (empty($this->formFiles[$field->name])) {
+                    continue;
+                }
+
+                $row['files'] = $this->formFiles[$field->name];
+            } else {
+                if (!isset($this->formData[$field->name]) || $this->formData[$field->name] === '') {
+                    continue;
+                }
+
+                $row['value'] = (string) $this->formData[$field->name];
+            }
+
+            $rows[] = $row;
+        }
+
+        $model->form = $this->formEntry->id;
+        $model->title = $this->getInquiryTitle($this->formData);
+
+        (new SubmissionDecoder($this))->decode($model, ['answers' => $rows]);
+
+        return [];
     }
 
     private function getInquiryTitle($data) {

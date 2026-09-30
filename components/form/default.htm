@@ -21,6 +21,10 @@
                     <input type="hidden" name="_form_id" value="{{ data.id }}">
                     <input type="hidden" name="_form_true_id" value="{{ block.form.id }}">
 
+                    <div style="display:none">
+                        <input type="text" name="_oc_hp" value="" autocomplete="off" tabindex="-1">
+                    </div>
+
                     <div class="Form-group">
                         {% for field in block.form.fwcFields %}
                             {% set template = '@fields/' ~ field.content_group %}

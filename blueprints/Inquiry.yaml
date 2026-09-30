@@ -1,6 +1,6 @@
 uuid: 3adae7f9-7201-4562-8437-eeee713c3bfd
 handle: Inquiry
-type: entry
+type: submission
 name: Záznamy z formulářů
 drafts: false
 
@@ -9,12 +9,16 @@ navigation:
     label: Záznamy z formulářů
     order: 50
 
+submission:
+    spamSweepDays: 30
+    purgeRejectedDays: 30
+
 fields:
     slug:
         hidden: true
         required: false
         validation: false
-        
+
     form:
         label: Formulář
         type: entries
@@ -22,11 +26,73 @@ fields:
         maxItems: 1
         displayMode: recordfinder
 
-    inquiry:
-        label: Záznam
+    _answers:
+        label: Odpovědi
         type: partial
         path: crscompany.frameworc::admin.form_inquiry
 
-    files:
-        label: Soubory
-        type: fileupload
+    answers:
+        label: Odpovědi
+        hidden: true
+        type: repeater
+        titleFrom: label
+        groups:
+            text:
+                name: Textové pole
+                fields: &answerValueFields
+                    label:
+                        label: Jméno pole
+                        span: left
+                    name:
+                        label: Název pole
+                        span: right
+                    value:
+                        label: Hodnota
+                        type: textarea
+                        size: small
+
+            number:
+                name: Číselné pole
+                fields: *answerValueFields
+
+            email:
+                name: Emailové pole
+                fields: *answerValueFields
+
+            phone:
+                name: Pole pro Telefon
+                fields: *answerValueFields
+
+            textarea:
+                name: Pole pro dlouhý text (textarea)
+                fields: *answerValueFields
+
+            select:
+                name: Roletka (select)
+                fields: *answerValueFields
+
+            checkbox:
+                name: Checkboxy (více možností)
+                fields: *answerValueFields
+
+            radio:
+                name: Radio (jedna možnost)
+                fields: *answerValueFields
+
+            agreement:
+                name: Souhlas se zpracováním údajů
+                fields: *answerValueFields
+
+            file:
+                name: Pole pro nahrávání souborů
+                fields:
+                    label:
+                        label: Jméno pole
+                        span: left
+                    name:
+                        label: Název pole
+                        span: right
+                    files:
+                        label: Soubory
+                        type: fileupload
+
