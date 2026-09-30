@@ -90,6 +90,13 @@
         }
     }
 
+    /* Independent of the desktop Flex--reverse, which the column layout above already overrides */
+    .Section--reverseMobile {
+        .Flex-container {
+            flex-direction: column-reverse;
+        }
+    }
+
     .Section--bleed {
         .Flex-container {
             gap: var(--spacing-gap);

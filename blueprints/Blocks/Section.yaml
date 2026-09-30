@@ -41,6 +41,18 @@ fields:
                             condition: value[noText][noImage][embedOnly]
                             field: variant
 
+                    reverseMobile:
+                        label: Prohodit pořadí na mobilu
+                        comment: Na mobilu se sloupce řadí pod sebe, tento přepínač otočí jejich pořadí.
+                        type: switch
+                        default: false
+                        tab: Obsah
+                        span: right
+                        trigger:
+                            action: hide
+                            condition: value[noText][noImage][embedOnly]
+                            field: variant
+
                     image:
                         label: Obrázek
                         type: mediafinder

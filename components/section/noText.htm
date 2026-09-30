@@ -1,4 +1,4 @@
-<div class="Section {{ data | moduleMods('Section', ['accent', 'contrast', 'narrow', 'backgroundImage']) }}">
+<div class="Section {{ data | moduleMods('Section', ['accent', 'contrast', 'narrow', 'backgroundImage', 'reverseMobile']) }}">
     <div class="Flex {{ data.reverse ? 'Flex--reverse' : '' }}">
         <div class="Flex-container">
             <div class="Flex-col" {% if data.backgroundImage %}style="background-image: {{ data.image | imageset(imgDimensions.w, imgDimensions.h, 'landscape') }}"{% endif %}>
