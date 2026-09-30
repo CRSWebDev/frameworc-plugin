@@ -35,6 +35,19 @@
             </div>
 
             {% partial '@_buttons' %}
+
+            {% if data.fullVideo %}
+                <button type="button" class="Header-play" data-lightbox-video="{{ data.fullVideo | media }}">
+                    <span class="Header-playIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="8 5 19 12 8 19 8 5"></polygon>
+                        </svg>
+                    </span>
+                    {% if data.fullVideoLabel %}
+                        <span class="Header-playLabel">{{ data.fullVideoLabel }}</span>
+                    {% endif %}
+                </button>
+            {% endif %}
         </div>
     </div>
 </div>

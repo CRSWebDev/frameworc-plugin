@@ -5,6 +5,7 @@ oc.registerControl('global', class extends oc.ControlBase {
         this.lightboxImage = this.lightbox.querySelector('.Lightbox-image');
         this.lightboxGallery = [];
         this.lightboxLoader = this.lightbox.querySelector('.Lightbox-loader');
+        this.lightboxVideo = this.lightbox.querySelector('.Lightbox-video');
         this.activeIndex = 0;
         this.dragThreshold = 30;
         this.dragStart = 0;
@@ -13,6 +14,7 @@ oc.registerControl('global', class extends oc.ControlBase {
     connect() {
         this.listen('mousedown', '[data-lightbox]', this.mouseDown);
         this.listen('mouseup', '[data-lightbox]', this.mouseUp);
+        this.listen('click', '[data-lightbox-video]', this.showVideo);
         this.listen('click', '.Lightbox-close', this.hideLightbox);
         this.listen('click', '.Lightbox-prev', this.prevImage);
         this.listen('click', '.Lightbox-next', this.nextImage);
@@ -47,6 +49,14 @@ oc.registerControl('global', class extends oc.ControlBase {
 
     keydownHandler(e) {
         if (this.lightbox.classList.contains('isActive')) {
+            if (this.lightbox.classList.contains('Lightbox--video')) {
+                if (e.key === 'Escape') {
+                    this.hideLightbox();
+                }
+
+                return;
+            }
+
             e.preventDefault();
 
             switch (e.key) {
@@ -78,10 +88,24 @@ oc.registerControl('global', class extends oc.ControlBase {
         this.lightbox.classList.add('isActive');
     }
 
+    showVideo(e) {
+        e.preventDefault();
+
+        document.body.style.overflow = 'hidden';
+
+        this.lightboxVideo.src = e.target.closest('[data-lightbox-video]').getAttribute('data-lightbox-video');
+        this.lightbox.classList.add('isActive', 'Lightbox--video');
+        this.lightboxVideo.play();
+    }
+
     hideLightbox() {
         document.body.style.overflow = '';
 
-        this.lightbox.classList.remove('isActive');
+        this.lightbox.classList.remove('isActive', 'Lightbox--video');
+
+        this.lightboxVideo.pause();
+        this.lightboxVideo.removeAttribute('src');
+        this.lightboxVideo.load();
     }
 
     prevImage() {

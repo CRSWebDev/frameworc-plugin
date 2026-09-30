@@ -39,6 +39,26 @@
         }
     }
 
+    &-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90%;
+        max-height: 90%;
+        display: none;
+    }
+
+    &--video {
+        .Lightbox-video {
+            display: block;
+        }
+
+        .Lightbox-image, .Lightbox-prev, .Lightbox-next {
+            display: none;
+        }
+    }
+
     &-close {
         position: absolute;
         top: 10px;

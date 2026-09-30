@@ -34,6 +34,20 @@ fields:
                         tab: Obsah
                         comment: Použijte pole "Obrázek" jako video a "Obrázek na mobilu" jako poster
 
+                    fullVideo:
+                        label: Celé video (popup)
+                        type: mediafinder
+                        mode: file
+                        maxItems: 1
+                        tab: Obsah
+                        span: left
+                        comment: Po kliknutí na tlačítko přehrávání se video otevře v okně přes stránku
+
+                    fullVideoLabel:
+                        label: Text tlačítka videa
+                        tab: Obsah
+                        span: right
+
                     buttons:
                         tab: Obsah
                         type: mixin
