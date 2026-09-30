@@ -35,3 +35,4 @@ v1.9.8: Add site picker support for multi-site, fix active navigation item detec
 v1.9.9: Fix blog post 404 and meta tags, RealFaviconGenerator flow, columns aliases, component robustness
 v1.10.0: Dedicated global and per-site SCSS settings, remove obsolete SCSS variables field
 v1.10.1: Add settings switch for client confirmation email
+v1.11.0: Form submissions stored as October 4.4 submissions (honeypot, rate limit, moderation, multiple files per field)
