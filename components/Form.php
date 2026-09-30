@@ -203,7 +203,7 @@ class Form extends ComponentBase
                 }
             });
 
-            if (!empty($data['email'])) {
+            if (!empty($this->settings['send_client_email']) && !empty($data['email'])) {
                 Mail::send('crscompany.frameworc::mail.templates.form-client', $emailVars, function($message) use ($data) {
                     $message->to($data['email']);
                     $message->subject(__('form.email_client_subject'));

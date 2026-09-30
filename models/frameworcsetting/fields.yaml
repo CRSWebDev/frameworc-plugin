@@ -82,6 +82,13 @@ fields:
                             field: integration_captcha_variant
                             condition: value[turnstile]
 
+                    integration_send_client_email:
+                        label: Posílat e-mail zákazníkovi
+                        type: switch
+                        default: false
+                        tab: Integrace
+                        comment: Po odeslání formuláře se kromě backoffice pošle potvrzovací e-mail i zákazníkovi.
+
                     integration_n8n_webhook_url:
                         label: N8N webhook URL
                         tab: Integrace
