@@ -19,6 +19,7 @@ fields:
                         span: left
                         options:
                             halfAndHalf: 50 / 50
+                            imgBleed: Obrázek až do kraje / Text 50
                             noText: Pouze obrázek s nadpisem (1 sloupec)
                             noImage: Pouze text bez obrázku (1 sloupec)
                             textAndText: 2 sloupce textu

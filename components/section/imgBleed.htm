@@ -1,0 +1,19 @@
+<div class="Section Section--bleed {{ data | moduleMods('Section', ['accent', 'contrast']) }}">
+    <div class="Flex {{ data.reverse ? 'Flex--reverse' : '' }}">
+        <div class="Flex-container">
+            <div class="Flex-col Section-bleedText">
+                {% if block.headline %}
+                    <div class="Headline">
+                        {{ block.headline | spacer | content }}
+                    </div>
+                {% endif %}
+
+                {% partial '@_buttons' %}
+            </div>
+
+            <div class="Flex-col Section-bleedImage">
+                <img src="{{ data.image | media | resize(imgDimensions.w, imgDimensions.h, {mode: 'crop'}) }}" srcset="{{ data.image | srcset(imgDimensions.w, imgDimensions.h, 'crop') }}" alt="{{ block.headline | striptags | trim }}" />
+            </div>
+        </div>
+    </div>
+</div>
