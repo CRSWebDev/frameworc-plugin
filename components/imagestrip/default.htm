@@ -12,6 +12,15 @@
 
 <div class="Section" {% if data.autoScroll %}data-control="imageStrip" data-options='{{ options | escape() | raw }}'{% endif %}>
     <div class="Flex">
+        {% if block.headline %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="Headline">
+                        {{ block.headline | spacer | content }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div class="Flex-container">
             <div class="Flex-col">
                 <div class="ImageStrip-wrapper">
