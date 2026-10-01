@@ -8,4 +8,4 @@ fields:
         type: codeeditor
         language: scss
         size: giant
-        comment: Platí jen pro web aktuálně vybraný v administraci. Kompiluje se až za globálním SCSS z FrameworC Settings, takže lze použít tamní proměnné a mixiny.
+        comment: Platí jen pro web aktuálně vybraný v administraci. Kompiluje se až za globálním SCSS z Nastavení Fwc, takže lze použít tamní proměnné a mixiny.

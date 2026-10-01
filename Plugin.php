@@ -86,15 +86,15 @@ class Plugin extends PluginBase
     {
         return [
             'settings' => [
-                'label' => 'FrameworC Settings',
+                'label' => 'Nastavení Fwc',
                 'description' => 'Obecná nastavení pro FrameworC plugin',
                 'category' => 'FrameworC',
                 'icon' => 'icon-cog',
                 'class' => \CRSCompany\FrameworC\Models\FrameworcSetting::class,
             ],
             'site_settings' => [
-                'label' => 'FrameworC – nastavení webu',
-                'description' => 'Nastavení specifická pro aktuální web',
+                'label' => 'Vlastní CSS webu',
+                'description' => 'SCSS platné jen pro aktuálně vybraný web',
                 'category' => 'FrameworC',
                 'icon' => 'icon-globe',
                 'class' => \CRSCompany\FrameworC\Models\FrameworcSiteSetting::class,

@@ -42,8 +42,13 @@ fields:
                         type: codeeditor
                         language: scss
                         size: giant
-                        tab: Styly
+                        tab: Globální CSS
                         comment: SCSS společné pro všechny weby. Kompiluje se před SCSS jednotlivých webů, takže tam lze použít zde definované proměnné a mixiny.
+
+                    integration_captcha_section:
+                        label: Captcha
+                        type: section
+                        tab: Captcha
 
                     integration_captcha_variant:
                         label: Captcha varianta
@@ -52,35 +57,42 @@ fields:
                             altcha: Altcha
                             turnstile: Turnstile
                         default: altcha
-                        tab: Integrace
+                        tab: Captcha
 
                     integration_altcha_key:
                         label: Captcha key
-                        tab: Integrace
+                        tab: Captcha
                         type: sensitive
+                        commentHtml: true
+                        comment: Pro Turnstile najdete site key a secret v <a href="https://dash.cloudflare.com/?to=/:account/turnstile" target="_blank" rel="noopener noreferrer">Cloudflare dashboardu → Turnstile</a>.
 
                     integration_altcha_secret:
                         label: Captcha secret
-                        tab: Integrace
+                        tab: Captcha
                         type: sensitive
 
                     integration_send_client_email:
                         label: Posílat e-mail zákazníkovi
                         type: switch
                         default: false
-                        tab: Integrace
+                        tab: Formuláře a emaily
                         comment: Po odeslání formuláře se kromě backoffice pošle potvrzovací e-mail i zákazníkovi.
+
+                    integration_n8n_section:
+                        label: N8N
+                        type: section
+                        tab: Formuláře a emaily
 
                     integration_n8n_webhook_url:
                         label: N8N webhook URL
-                        tab: Integrace
+                        tab: Formuláře a emaily
                         type: text
                         comment: Webhook URL pro N8N
                         placeholder: https://n8n.example.com/webhook/your-webhook-id
 
                     integration_n8n_newsletter_webhook_url:
                         label: N8N newsletter webhook URL
-                        tab: Integrace
+                        tab: Formuláře a emaily
                         type: text
                         comment: Webhook URL pro newsletter
                         placeholder: https://n8n.example.com/webhook/your-webhook-id
@@ -89,4 +101,4 @@ fields:
                         label: N8N heslo pro webhook
                         type: sensitive
                         comment: Heslo pro webhook
-                        tab: Integrace
+                        tab: Formuláře a emaily
