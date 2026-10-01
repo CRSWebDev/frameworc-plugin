@@ -32,37 +32,16 @@
         z-index: 5;
     }
 
-    &-play {
-        display: inline-flex;
-        align-items: center;
-        gap: 1rem;
+    &-play.Button {
         margin-top: 2rem;
-        padding: 0;
-        border: 0;
-        background: transparent;
-        color: inherit;
-        font: inherit;
+        padding: 1em 1.5em;
+        gap: .6em;
+        font-family: inherit;
         cursor: pointer;
 
-        &:hover .Header-playIcon {
-            transform: scale(1.1);
-        }
-    }
-
-    &-playIcon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 64px;
-        height: 64px;
-        border: 2px solid currentColor;
-        border-radius: 50%;
-        transition: transform ease .2s;
-
         svg {
-            width: 24px;
-            height: 24px;
-            margin-left: 4px;
+            width: .8em;
+            height: .8em;
         }
     }
 
