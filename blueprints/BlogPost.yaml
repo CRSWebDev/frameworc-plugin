@@ -67,6 +67,33 @@ fields:
         type: textarea
         size: small
 
+    authorName:
+        label: Autor
+        comment: Pokud je nevyplněno, jako autor se uvede firma z Meta & SEO
+        tab: Meta
+        span: left
+
+    authorUrl:
+        label: Odkaz na autora
+        type: text
+        mode: url
+        tab: Meta
+        span: right
+
+    jsonLdDisable:
+        label: Vypnout automatická strukturovaná data
+        comment: Údaje o firmě a článku se u tohoto příspěvku nevygenerují. Vlastní JSON-LD se vloží i tak.
+        type: switch
+        tab: Meta
+
+    jsonLdCustom:
+        label: Vlastní JSON-LD
+        comment: Vloží se jako samostatný blok jen k tomuto příspěvku. Pouze platný JSON, bez značky script.
+        type: codeeditor
+        language: json
+        size: small
+        tab: Meta
+
     _sitemap:
         label: sitemap.xml
         commentHtml: true

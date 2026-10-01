@@ -4,6 +4,7 @@ use Backend;
 use BackendAuth;
 use Cms\Classes\ComponentBase;
 use CRSCompany\FrameworC\Classes\CustomScss;
+use CRSCompany\FrameworC\Classes\JsonLd;
 use Illuminate\Support\Facades\Http;
 use File;
 use Flash;
@@ -40,6 +41,19 @@ class Meta extends ComponentBase
 
         $this->page['meta'] = $section;
         $this->page['customCss'] = CustomScss::forActiveSite();
+    }
+
+    /**
+     * onRender builds the JSON-LD once the page has run, so the Builder page or
+     * blog post is already in `record` (BlogPost also sets `post`).
+     */
+    public function onRender()
+    {
+        $record = $this->page['record'];
+        $post = $this->page['post'];
+        $isBlogPost = $post && $record && $post->id === $record->id;
+
+        $this->page['jsonLd'] = JsonLd::forPage($this->page['meta'], $record, $isBlogPost);
     }
 
     static function getMeta() {

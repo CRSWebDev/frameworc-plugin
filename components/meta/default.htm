@@ -28,6 +28,10 @@
     <meta property="og:image" content="{{ meta.ogImage | media }}" />
 {% endif %}
 
+{% for item in jsonLd %}
+    <script type="application/ld+json">{{ item|raw }}</script>
+{% endfor %}
+
 {% if customCss %}
     {% put addStyles %}
         {{ customCss | raw }}

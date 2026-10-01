@@ -38,6 +38,32 @@ fields:
         maxItems: 1
         tab: SEO
 
+    jsonLdPageType:
+        label: Typ stránky pro strukturovaná data
+        type: dropdown
+        default: WebPage
+        tab: SEO
+        options:
+            WebPage: Běžná stránka
+            AboutPage: O nás
+            ContactPage: Kontakt
+            CollectionPage: Výpis (rozcestník)
+            FAQPage: Časté dotazy
+
+    jsonLdDisable:
+        label: Vypnout automatická strukturovaná data
+        comment: Údaje o firmě, stránce a drobečková navigace se na této stránce nevygenerují. Vlastní JSON-LD se vloží i tak.
+        type: switch
+        tab: SEO
+
+    jsonLdCustom:
+        label: Vlastní JSON-LD
+        comment: Vloží se jako samostatný blok jen na tuto stránku (např. Product, Event, Service). Pouze platný JSON, bez značky script.
+        type: codeeditor
+        language: json
+        size: small
+        tab: SEO
+
     _sitemap:
         label: sitemap.xml
         commentHtml: true

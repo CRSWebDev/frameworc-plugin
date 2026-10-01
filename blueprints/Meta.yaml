@@ -65,3 +65,128 @@ fields:
     headerHtml:
         label: HTML v hlavičce
         type: codeeditor
+
+    _sectionJsonLd:
+        label: Strukturovaná data (JSON-LD)
+        type: section
+        comment: Údaje o firmě se automaticky vkládají do strukturovaných dat každé stránky. Prázdná pole se vynechají.
+
+    orgType:
+        label: Typ subjektu
+        type: dropdown
+        default: Organization
+        span: left
+        options:
+            Organization: Organizace
+            LocalBusiness: Místní podnik
+            Store: Obchod
+            Restaurant: Restaurace
+            ProfessionalService: Profesionální služby
+            MedicalBusiness: Zdravotnictví
+            EducationalOrganization: Vzdělávací instituce
+
+    orgName:
+        label: Název
+        comment: Pokud je nevyplněno, použije se meta titulek
+        span: right
+
+    orgLegalName:
+        label: Obchodní název
+        span: left
+
+    orgIco:
+        label: IČO
+        span: right
+
+    orgLogo:
+        label: Logo
+        comment: Pokud je nevyplněno, použije se logo z patičky
+        type: mediafinder
+        mode: image
+        maxItems: 1
+
+    orgPhone:
+        label: Telefon
+        span: left
+
+    orgEmail:
+        label: E-mail
+        span: right
+
+    orgStreet:
+        label: Ulice a číslo popisné
+        span: left
+
+    orgCity:
+        label: Město
+        span: right
+
+    orgZip:
+        label: PSČ
+        span: left
+
+    orgCountry:
+        label: Země
+        comment: Dvoupísmenný kód země, např. CZ
+        default: CZ
+        span: right
+
+    orgLat:
+        label: Zeměpisná šířka
+        span: left
+        dependsOn: orgType
+        trigger:
+            action: hide
+            field: orgType
+            condition: value[Organization]
+
+    orgLng:
+        label: Zeměpisná délka
+        span: right
+        dependsOn: orgType
+        trigger:
+            action: hide
+            field: orgType
+            condition: value[Organization]
+
+    orgOpeningHours:
+        label: Otevírací doba
+        type: repeater
+        dependsOn: orgType
+        trigger:
+            action: hide
+            field: orgType
+            condition: value[Organization]
+        form:
+            fields:
+                days:
+                    label: Dny
+                    type: checkboxlist
+                    inlineOptions: true
+                    options:
+                        Monday: Po
+                        Tuesday: Út
+                        Wednesday: St
+                        Thursday: Čt
+                        Friday: Pá
+                        Saturday: So
+                        Sunday: Ne
+
+                opens:
+                    label: Otevírá
+                    type: datepicker
+                    mode: time
+                    span: left
+
+                closes:
+                    label: Zavírá
+                    type: datepicker
+                    mode: time
+                    span: right
+
+    jsonLdCustom:
+        label: Vlastní JSON-LD pro celý web
+        comment: Vloží se na každou stránku jako samostatný blok. Pouze platný JSON, bez značky script.
+        type: codeeditor
+        language: json
+        size: small
