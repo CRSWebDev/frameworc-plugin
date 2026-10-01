@@ -42,11 +42,19 @@ fields:
                         tab: Obsah
                         span: left
                         comment: Po kliknutí na tlačítko přehrávání se video otevře v okně přes stránku
+                        trigger:
+                            action: show
+                            field: isVideoBg
+                            condition: checked
 
                     fullVideoLabel:
                         label: Text tlačítka videa
                         tab: Obsah
                         span: right
+                        trigger:
+                            action: show
+                            field: isVideoBg
+                            condition: checked
 
                     buttons:
                         tab: Obsah

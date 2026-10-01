@@ -36,7 +36,7 @@
 
             {% partial '@_buttons' %}
 
-            {% if data.fullVideo %}
+            {% if data.isVideoBg and data.fullVideo %}
                 <button type="button" class="Button Header-play" data-lightbox-video="{{ data.fullVideo | media }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <polygon points="6 4 20 12 6 20 6 4"></polygon>
