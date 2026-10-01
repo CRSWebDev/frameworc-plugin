@@ -64,24 +64,6 @@ fields:
                         tab: Integrace
                         type: sensitive
 
-                    integration_turnstile_cloudflare:
-                        label: Cloudflare Turnstile
-                        type: section
-                        tab: Integrace
-                        trigger:
-                            action: show
-                            field: integration_captcha_variant
-                            condition: value[turnstile]
-
-                    integration_turnstile_connect:
-                        tab: Integrace
-                        type: partial
-                        path: ~/plugins/crscompany/frameworc/models/frameworcsetting/_cloudflare_connect_button.htm
-                        trigger:
-                            action: show
-                            field: integration_captcha_variant
-                            condition: value[turnstile]
-
                     integration_send_client_email:
                         label: Posílat e-mail zákazníkovi
                         type: switch
