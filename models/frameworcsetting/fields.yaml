@@ -102,3 +102,10 @@ fields:
                         type: sensitive
                         comment: Heslo pro webhook
                         tab: Formuláře a emaily
+
+                    integration_google_places_api_key:
+                        label: Google Places API klíč
+                        type: sensitive
+                        tab: Google recenze
+                        commentHtml: true
+                        comment: Klíč s povoleným <a href="https://console.cloud.google.com/apis/library/places.googleapis.com" target="_blank" rel="noopener noreferrer">Places API (New)</a>. Místa a stažené recenze spravujete v Builder → Google recenze.

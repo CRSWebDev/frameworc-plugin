@@ -1,0 +1,117 @@
+uuid: 828c49ee-e6dc-4146-9382-2499bf910df3
+handle: GooglePlace
+type: entry
+name: Google recenze
+drafts: false
+multisite: false
+
+navigation:
+    parent: Builder
+    icon: icon-star
+    order: 440
+
+fields:
+    _hint:
+        type: hint
+        label: Jak to funguje
+        comment: Recenze se stahují automaticky jednou denně přes Google Places API (klíč se nastavuje v Nastavení Fwc → Google recenze). Google vrací při každém stažení nejvýše 5 recenzí; stažené recenze se ukládají a postupně přibývají. Ručně lze stažení spustit příkazem php artisan frameworc:google-reviews.
+        tab: Místo
+
+    placeId:
+        label: Google Place ID
+        type: text
+        commentHtml: true
+        comment: ID firmy na Googlu, např. ChIJ… Najdete ho přes <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank" rel="noopener noreferrer">Place ID Finder</a>.
+        validation: required
+        tab: Místo
+
+    languageCode:
+        label: Jazyk recenzí
+        type: text
+        default: cs
+        comment: Kód jazyka, do kterého Google recenze přeloží (cs, en, de…).
+        span: left
+        tab: Místo
+
+    rating:
+        label: Průměrné hodnocení
+        type: number
+        step: 0.1
+        readOnly: true
+        span: left
+        tab: Místo
+
+    userRatingCount:
+        label: Počet hodnocení
+        type: number
+        readOnly: true
+        span: right
+        tab: Místo
+
+    googleMapsUri:
+        label: Odkaz na Google Mapy
+        type: text
+        readOnly: true
+        tab: Místo
+
+    syncedAt:
+        label: Naposledy staženo
+        type: datepicker
+        mode: datetime
+        readOnly: true
+        span: left
+        tab: Místo
+
+    syncError:
+        label: Chyba posledního stažení
+        type: textarea
+        size: tiny
+        readOnly: true
+        span: right
+        tab: Místo
+
+    reviews:
+        label: Recenze
+        type: repeater
+        titleFrom: authorName
+        tab: Recenze
+        form:
+            fields:
+                hidden:
+                    label: Skrýt na webu
+                    type: switch
+
+                authorName:
+                    label: Autor
+                    span: left
+
+                rating:
+                    label: Hodnocení
+                    type: number
+                    min: 1
+                    max: 5
+                    span: right
+
+                text:
+                    label: Text recenze
+                    type: textarea
+                    size: small
+
+                publishTime:
+                    label: Datum
+                    type: datepicker
+                    mode: datetime
+                    span: left
+
+                authorUri:
+                    label: Profil autora
+                    span: right
+
+                authorPhotoUri:
+                    label: Fotka autora (URL)
+                    span: left
+
+                reviewName:
+                    label: Google ID recenze
+                    comment: Podle něj se recenze při dalším stažení páruje. Prázdné u ručně přidaných recenzí.
+                    span: right

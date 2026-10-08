@@ -1,0 +1,71 @@
+uuid: 1c2056ed-f426-48e5-983a-f028aaed8e0d
+handle: Blocks/GoogleReviews
+type: mixin
+name: Google recenze
+
+fields:
+    place:
+        label: Místo
+        comment: Záznam z Builder → Google recenze. Když nevyberete žádné, použije se první záznam.
+        tab: Blok
+        type: entries
+        source: GooglePlace
+        maxItems: 1
+        displayMode: controller
+        toolbarButtons: add|remove
+        controller:
+            columns: [
+                'title'
+            ]
+
+    content:
+        type: nestedform
+        showPanel: false
+        tab: Blok
+        form:
+            tabs:
+                fields:
+                    reviewCount:
+                        label: Počet zobrazených recenzí
+                        type: number
+                        default: 6
+                        span: left
+                        tab: Nastavení
+
+                    columnCount:
+                        label: Počet sloupců
+                        type: dropdown
+                        default: 3
+                        options:
+                            2: 2
+                            3: 3
+                            4: 4
+                        span: right
+                        tab: Nastavení
+
+                    minRating:
+                        label: Minimální hodnocení
+                        type: dropdown
+                        default: 4
+                        options:
+                            1: 1 hvězdička
+                            2: 2 hvězdičky
+                            3: 3 hvězdičky
+                            4: 4 hvězdičky
+                            5: 5 hvězdiček
+                        span: left
+                        tab: Nastavení
+
+                    showSummary:
+                        label: Zobrazit průměrné hodnocení
+                        type: switch
+                        default: true
+                        span: right
+                        tab: Nastavení
+
+                    showLink:
+                        label: Zobrazit odkaz na všechny recenze na Googlu
+                        type: switch
+                        default: true
+                        span: right
+                        tab: Nastavení

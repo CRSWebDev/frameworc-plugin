@@ -1,0 +1,110 @@
+.GoogleReviews {
+    &-summary {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: .5rem 1rem;
+        margin-bottom: 2rem;
+    }
+
+    &-summaryRating {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    &-summaryCount {
+        color: var(--color-muted);
+    }
+
+    &-summaryLink {
+        margin-left: auto;
+    }
+
+    // Five stars filled to --rating by a gradient, so fractional averages render too
+    &-stars {
+        --star-fill: #fbbc04;
+        display: inline-block;
+        font-size: 1.25rem;
+        line-height: 1;
+        letter-spacing: 2px;
+
+        &::before {
+            content: "\2605\2605\2605\2605\2605";
+            background: linear-gradient(90deg, var(--star-fill) calc(var(--rating) / 5 * 100%), var(--color-placeholder) calc(var(--rating) / 5 * 100%));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    &-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: var(--spacing-grid-gap);
+
+        @for $i from 2 through 4 {
+            &.isColumns-#{$i} {
+                grid-template-columns: repeat(#{$i}, 1fr);
+            }
+        }
+    }
+
+    &-item {
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+        padding: 1.5rem;
+        border-radius: var(--border-radius-img);
+        background-color: var(--color-bg-accent);
+    }
+
+    &-author {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+    }
+
+    &-photo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    &-name {
+        display: block;
+        font-weight: 600;
+        color: var(--color-text-base);
+    }
+
+    &-date {
+        display: block;
+        font-size: .875rem;
+        color: var(--color-muted);
+    }
+
+    &-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 1024px) {
+    .GoogleReviews-grid.isColumns-3,
+    .GoogleReviews-grid.isColumns-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .GoogleReviews-grid[class*="isColumns-"] {
+        grid-template-columns: 1fr;
+    }
+
+    .GoogleReviews-summaryLink {
+        margin-left: 0;
+    }
+}

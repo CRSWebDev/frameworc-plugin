@@ -1,0 +1,70 @@
+{% set block = __SELF__.property('data') %}
+{% set data = block.content %}
+
+{% set place = __SELF__.getPlace(block) %}
+{% set reviews = __SELF__.getReviews(place, data) %}
+
+<div class="Section">
+    <div class="Flex">
+        {% if block.headline %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="Headline">
+                        {{ block.headline | spacer | content }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if place and ((data.showSummary and place.rating) or (data.showLink and place.googleMapsUri)) %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="GoogleReviews-summary">
+                        {% if data.showSummary and place.rating %}
+                            <span class="GoogleReviews-summaryRating">{{ place.rating | number_format(1, ',') }}</span>
+                            <span class="GoogleReviews-stars" style="--rating: {{ place.rating }}" role="img" aria-label="{{ place.rating }} / 5"></span>
+                            {% if place.userRatingCount %}
+                                <span class="GoogleReviews-summaryCount">{{ place.userRatingCount }} hodnocení na Googlu</span>
+                            {% endif %}
+                        {% endif %}
+                        {% if data.showLink and place.googleMapsUri %}
+                            <a href="{{ place.googleMapsUri }}" class="GoogleReviews-summaryLink" target="_blank" rel="noopener">Všechny recenze na Googlu</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if reviews | length > 0 %}
+            <div class="Flex-container">
+                <div class="Flex-col">
+                    <div class="GoogleReviews-grid isColumns-{{ data.columnCount ?: 3 }}">
+                        {% for review in reviews %}
+                            <div class="GoogleReviews-item">
+                                <div class="GoogleReviews-author">
+                                    {% if review.authorPhotoUri %}
+                                        <img src="{{ review.authorPhotoUri }}" alt="" class="GoogleReviews-photo" loading="lazy" referrerpolicy="no-referrer">
+                                    {% endif %}
+                                    <div>
+                                        {% if review.authorUri %}
+                                            <a href="{{ review.authorUri }}" class="GoogleReviews-name" target="_blank" rel="noopener nofollow">{{ review.authorName }}</a>
+                                        {% else %}
+                                            <span class="GoogleReviews-name">{{ review.authorName }}</span>
+                                        {% endif %}
+                                        {% if review.publishTime %}
+                                            <span class="GoogleReviews-date">{{ review.publishTime | date('j. n. Y') }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <span class="GoogleReviews-stars" style="--rating: {{ review.rating }}" role="img" aria-label="{{ review.rating }} / 5"></span>
+                                {% if review.text %}
+                                    <div class="GoogleReviews-text">{{ review.text | nl2br }}</div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

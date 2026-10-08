@@ -233,3 +233,18 @@ fields:
                     content:
                         type: mixin
                         source: Blocks/InstaFeed
+
+            GoogleReviews:
+                name: Google recenze
+                description: Recenze firmy stažené z Googlu
+                titleFrom: blockId
+                useTabs: true
+                icon: icon-star
+                fields:
+                    base:
+                        type: mixin
+                        source: BaseBlock
+
+                    content:
+                        type: mixin
+                        source: Blocks/GoogleReviews

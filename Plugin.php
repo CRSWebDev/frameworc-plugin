@@ -36,7 +36,7 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-        //
+        $this->registerConsoleCommand('frameworc.google-reviews', \CRSCompany\FrameworC\Console\SyncGoogleReviews::class);
     }
 
     /**
@@ -79,7 +79,16 @@ class Plugin extends PluginBase
             'CRSCompany\FrameworC\Components\Downloads' => 'Downloads',
             'CRSCompany\FrameworC\Components\Tabs' => 'Tabs',
             'CRSCompany\FrameworC\Components\InstaFeed' => 'InstaFeed',
+            'CRSCompany\FrameworC\Components\GoogleReviews' => 'GoogleReviews',
         ];
+    }
+
+    /**
+     * registerSchedule downloads Google reviews once a day.
+     */
+    public function registerSchedule($schedule)
+    {
+        $schedule->command('frameworc:google-reviews')->dailyAt('4:00');
     }
 
     public function registerSettings()
